@@ -1,13 +1,13 @@
 function ReserveNowSection() {
   return (
     <>
-      <div className='flex  justify-center'>
-        <div className='lg:w-max  min-h-[500px] pt-10 pb-20 flex flex-col-reverse lg:flex-row items-center justify-center'>
+      <div className='flex justify-center'>
+        <div className='lg:w-max min-h-[500px] pt-10 pb-20 flex flex-col-reverse lg:flex-row items-center justify-center'>
           <div className='lg:w-[40svw] w-[80svw] flex flex-col justify-between items-start pl-5 max-lg:rounded-b-xl lg:rounded-l-xl h-full bg-red-500 p-5 '>
             <h4 className='text-3xl font-bold text-white tracking-wide'>
               Reserve Now!
             </h4>
-            <p className='text-white text-md '>
+            <p className='text-white text-start text-md '>
               Secure your spot at the most anticipated events of the year. Don't
               miss out!
             </p>

@@ -4,3 +4,17 @@
 .subtitle {
   @apply text-2xl font-bold;
 }
+
+body {
+  @apply text-center font-[Outfit] relative;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  @apply !text-red-500 font-black;
+}
+
+.swiper-pagination-bullet-active {
+  @apply !bg-red-500 border-1 border-white;
+  scale: 1.5;
+}

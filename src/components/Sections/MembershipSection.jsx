@@ -6,7 +6,7 @@ function MembershipSection() {
     <div className='flex flex-col items-center justify-center'>
       <h2 className='subtitle'>Membership Plans</h2>
       <p>Choose the best plan for your game slot bookings.</p>
-      <div className='flex lg:flex-row flex-col gap-4 justify-evenly py-10 px-20 max-md:px-1 items-center'>
+      <div className='flex lg:flex-row flex-col w-[80vw] gap-4 justify-evenly py-10 items-center'>
         <MembershipCard rate={"$0"} popular={false} onlineAccess={true}>
           NORMAL
         </MembershipCard>
