@@ -4,12 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlaystation } from "@fortawesome/free-brands-svg-icons";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [showNav, setShowNav] = useState(false);
   return (
     <>
-      <div className="relative flex w-full max-sm:px-1 py-1 items-center justify-between border-b-1 border-gray-200">
+      <div className="sticky top-0 z-30 bg-white h-[60px] flex w-full max-sm:px-1 py-1 items-center justify-between border-b-1 border-gray-200">
         <div className="flex items-center text-2xl mx-2 z-20">
           <FontAwesomeIcon icon={faPlaystation} className="text-red-500" />
           <h1 className="mx-2 font-semibold">GetInPlay</h1>
@@ -21,16 +22,16 @@ function Navbar() {
           <div className="bg-gray-50 lg:bg-white flex max-lg:w-[70%] lg:flex-row flex-col items-center lg:gap-2 border-gray-200 border-2 lg:border-none lg:m-0 rounded-lg">
             <NavBarLink toLink="/">Home</NavBarLink>
             <NavBarLink toLink="/games">Games</NavBarLink>
-            <NavBarLink toLink="#">Membership</NavBarLink>
-            <NavBarLink toLink="#">Contact Us</NavBarLink>
-            <NavBarLink toLink="#">About Us</NavBarLink>
+            <NavBarLink toLink="/membership">Membership</NavBarLink>
+            <NavBarLink toLink="/contact-us">Contact Us</NavBarLink>
+            <NavBarLink toLink="/about-us">About Us</NavBarLink>
           </div>
         </div>
         <div className="flex items-center text-md font-semibold z-20 ">
-          <button className="select-none bg-red-500 text-white hover:bg-red-400 flex items-center gap-2 py-1 px-2 md:px-6 h-min shadow-gray-400 shadow-md my-2 m-2 cursor-pointer rounded-xl active:translate-y-1 active:shadow-none duration-300">
+          <Link to="/login" target="_blank" className="select-none bg-red-500 text-white hover:bg-red-400 flex items-center gap-2 py-1 px-2 md:px-6 h-min shadow-gray-400 shadow-md my-2 m-2 cursor-pointer rounded-xl active:translate-y-1 active:shadow-none duration-300">
             <FontAwesomeIcon icon={faRightToBracket} />
             <div>Login</div>
-          </button>
+          </Link>
           <button
             onClick={() => {
               setShowNav(!showNav);

@@ -35,7 +35,7 @@ import axios from "axios";
 // export default PostRequestComponent;
 
 function LoginPage() {
-  return <div>LoginPage</div>;
+  return <div className="text-5xl font-bold">LoginPage</div>;
 }
 
 export default LoginPage;

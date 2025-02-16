@@ -12,7 +12,7 @@ import {
 
 function GamesCarousel({ games }) {
   return (
-    <div className="relative w-full bg-gray-200 p-3 lg:h-[80vh] h-[50vh] py-5 justify-center ">
+    <div className="w-full p-3 lg:h-[80vh] h-[50vh] py-5 justify-center ">
       <div className="rounded-xl overflow-hidden h-full">
         <Swiper
           className="h-full"
