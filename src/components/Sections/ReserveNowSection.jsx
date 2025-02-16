@@ -7,9 +7,9 @@ function ReserveNowSection() {
             <h4 className='text-3xl font-bold text-white tracking-wide'>
               Reserve Now!
             </h4>
-            <p className='text-white text-start text-md '>
+            <p className='text-white text-start text-lg font-semibold'>
               Secure your spot at the most anticipated events of the year. Don't
-              miss out!
+              miss out! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque, officia.
             </p>
             <button className='hover:bg-gray-200 duration-300 active:translate-y-2 active:shadow-none shadow-lg shadow-red-300 cursor-pointer text-lg text-red-500 bg-white font-semibold rounded-lg px-5 py-2'>
               Join for free

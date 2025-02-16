@@ -1,10 +1,10 @@
 module.exports = {
-  purge: [],
-  darkMode: false, // or 'media' or 'class'
+  content: ["./src/**/*.{js,jsx,ts,tsx,html}"],
+  darkMode: "class",
   theme: {
     extend: {
       fontFamily: {
-        outfit: ["Outfit"],
+        outfit: ["Outfit", "sans-serif"],
       },
     },
   },
