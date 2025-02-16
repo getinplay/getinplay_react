@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import TimeSlot from "../TimeSlot";
+import TimeSlot from "../Cards/TimeSlotCard";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { Mousewheel, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -43,7 +43,7 @@ function SlotsSection() {
         </button>
         <div className="min-w-[70%] flex items-center justify-center">
           <Swiper
-            modules={[Navigation]}
+            modules={[Navigation, Mousewheel]}
             breakpoints={{
               320: { slidesPerView: 1 },
               425: { slidesPerView: 2 },
@@ -54,7 +54,8 @@ function SlotsSection() {
             navigation={{
               nextEl: ".custom-next-2",
               prevEl: ".custom-prev-2",
-            }}>
+            }}
+            mousewheel={{ forceToAxis: true }}>
             {slots.map((slot) => (
               <SwiperSlide key={slot.id}>
                 <TimeSlot>{slot.time}</TimeSlot>

@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { API_URL } from "./config";
 import axios from "axios";
-import Navbar from "./components/Sections/Navbar";
-import ReserveNowSection from "./components/Sections/ReserveNowSection";
-import LoginPage from "./components/Pages/LoginPage";
-import MembershipSection from "./components/Sections/MembershipSection";
-import SlotsSection from "./components/Sections/SlotsSection";
-import GamesCarousel from "./components/Sections/GamesCarousel";
-import FooterSection from "./components/Sections/FooterSection";
-import GamesPage from "./components/Pages/GamesPage";
+import { Outlet } from "react-router-dom";
+import Navbar from "./components/Header/Navbar";
+import HomePage from "./components/Pages/Home/HomePage";
+import GamesPage from "./components/Pages/Games/GamesPage";
+import LoginPage from "./components/Pages/Login/LoginPage";
+
+import FooterSection from "./components/Footer/FooterSection";
 
 function App() {
   const [games, setGames] = useState([
@@ -62,15 +61,13 @@ function App() {
   // }, []); // empty dependency array, so this runs once when the component mounts
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-between items-center min-h-[100vh]">
       <Navbar />
-      <GamesCarousel games={games} />
-      <SlotsSection />
-      <MembershipSection />
-      <ReserveNowSection />
-      <FooterSection />
+      <Outlet />
+      {/* <HomePage games={games} /> */}
+      {/* <GamesPage games={games} /> */}
       {/* <LoginPage /> */}
-      {/* <GamesPage /> */}
+      <FooterSection />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import MembershipCard from "../MembershipCard";
+import MembershipCard from "../Cards/MembershipCard";
 
 function MembershipSection() {
   return (

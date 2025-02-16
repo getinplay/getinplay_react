@@ -1,9 +1,9 @@
-import Navlink from "../Navlink";
-import LoginButton from "../LoginButton";
+import NavBarLink from "./NavBarLink";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlaystation } from "@fortawesome/free-brands-svg-icons";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 
 function Navbar() {
   const [showNav, setShowNav] = useState(false);
@@ -19,15 +19,18 @@ function Navbar() {
             showNav ? "" : "max-lg:hidden"
           } lg:relative max-lg:flex justify-center left-0 absolute max-lg:top-15 h-max w-full z-10`}>
           <div className="bg-gray-50 lg:bg-white flex max-lg:w-[70%] lg:flex-row flex-col items-center lg:gap-2 border-gray-200 border-2 lg:border-none lg:m-0 rounded-lg">
-            <Navlink>Home</Navlink>
-            <Navlink>Games</Navlink>
-            <Navlink>Membership</Navlink>
-            <Navlink>Contact Us</Navlink>
-            <Navlink>About Us</Navlink>
+            <NavBarLink toLink="/">Home</NavBarLink>
+            <NavBarLink toLink="/games">Games</NavBarLink>
+            <NavBarLink toLink="#">Membership</NavBarLink>
+            <NavBarLink toLink="#">Contact Us</NavBarLink>
+            <NavBarLink toLink="#">About Us</NavBarLink>
           </div>
         </div>
         <div className="flex items-center text-md font-semibold z-20 ">
-          <LoginButton />
+          <button className="select-none bg-red-500 text-white hover:bg-red-400 flex items-center gap-2 py-1 px-2 md:px-6 h-min shadow-gray-400 shadow-md my-2 m-2 cursor-pointer rounded-xl active:translate-y-1 active:shadow-none duration-300">
+            <FontAwesomeIcon icon={faRightToBracket} />
+            <div>Login</div>
+          </button>
           <button
             onClick={() => {
               setShowNav(!showNav);

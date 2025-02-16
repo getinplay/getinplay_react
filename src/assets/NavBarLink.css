@@ -1,16 +1,16 @@
-.navlink-wrapper:hover .navlink,
-.navlink-wrapper:focus .navlink {
+.navbarlink-wrapper:hover .navbarlink,
+.navbarlink-wrapper:focus .navbarlink {
   color: #fb2c36;
 }
 
-.navlink-wrapper::before {
+.navbarlink-wrapper::before {
   content: "";
   height: 4px;
   display: block;
   position: relative;
 }
 
-.navlink-wrapper::after {
+.navbarlink-wrapper::after {
   content: "";
   width: 100%;
   height: 4px;
@@ -23,8 +23,8 @@
   opacity: 0;
 }
 
-.navlink-wrapper:hover::after,
-.navlink-wrapper:focus::after {
+.navbarlink-wrapper:hover::after,
+.navbarlink-wrapper:focus::after {
   color: #fb2c36;
   opacity: 1;
 }
