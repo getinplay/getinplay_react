@@ -3,13 +3,6 @@
   color: #fb2c36;
 }
 
-.navbarlink-wrapper::before {
-  content: "";
-  height: 4px;
-  display: block;
-  position: relative;
-}
-
 .navbarlink-wrapper::after {
   content: "";
   width: 100%;

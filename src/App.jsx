@@ -3,9 +3,6 @@ import { API_URL } from "./config";
 import axios from "axios";
 import { Outlet } from "react-router-dom";
 import Navbar from "./components/Header/Navbar";
-import HomePage from "./components/Pages/Home/HomePage";
-import GamesPage from "./components/Pages/Games/GamesPage";
-import LoginPage from "./components/Pages/Login/LoginPage";
 
 import FooterSection from "./components/Footer/FooterSection";
 
@@ -61,12 +58,9 @@ function App() {
   // }, []); // empty dependency array, so this runs once when the component mounts
 
   return (
-    <div className="flex flex-col justify-between items-center min-h-[100vh]">
+    <div className='flex flex-col justify-between items-center min-h-[100vh]'>
       <Navbar />
       <Outlet />
-      {/* <HomePage games={games} /> */}
-      {/* <GamesPage games={games} /> */}
-      {/* <LoginPage /> */}
       <FooterSection />
     </div>
   );
