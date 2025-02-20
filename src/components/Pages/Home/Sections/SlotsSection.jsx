@@ -30,18 +30,15 @@ function SlotsSection() {
   ]);
 
   return (
-    <div className="flex flex-col items-center justify-center w-[80vw]">
-      <h2 className="subtitle">
-        <span className="text-red-500">Basketball</span> slots available for
-        Today
-      </h2>
-      <div className="flex items-center justify-center gap-2 w-full py-3">
+    <div className='flex flex-col items-center justify-center w-[80vw]'>
+      <h2 className='subtitle'>Slots available for Today</h2>
+      <div className='flex items-center justify-center gap-2 w-full py-3'>
         <button
-          type="button"
-          className="flex items-center justify-center cursor-pointer active:text-gray-200 duration-200 text-red-500 z-20 custom-prev-2">
-          <FontAwesomeIcon size="2xl" icon={faSquareCaretLeft} />
+          type='button'
+          className='flex items-center justify-center cursor-pointer active:text-gray-200 duration-200 text-red-500 z-20 custom-prev-2'>
+          <FontAwesomeIcon size='2xl' icon={faSquareCaretLeft} />
         </button>
-        <div className="min-w-[70%] flex items-center justify-center">
+        <div className='min-w-[70%] flex items-center justify-center'>
           <Swiper
             modules={[Navigation, Mousewheel]}
             breakpoints={{
@@ -64,9 +61,9 @@ function SlotsSection() {
           </Swiper>
         </div>
         <button
-          type="button"
-          className="flex items-center justify-center cursor-pointer active:text-gray-200 duration-200 text-red-500 z-20 custom-next-2">
-          <FontAwesomeIcon size="2xl" icon={faSquareCaretRight} />
+          type='button'
+          className='flex items-center justify-center cursor-pointer active:text-gray-200 duration-200 text-red-500 z-20 custom-next-2'>
+          <FontAwesomeIcon size='2xl' icon={faSquareCaretRight} />
         </button>
       </div>
     </div>
