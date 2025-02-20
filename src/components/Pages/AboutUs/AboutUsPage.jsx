@@ -11,34 +11,46 @@ import {
 
 function AboutUsPage() {
   return (
-    <div className='flex flex-col justify-between font-semibold'>
-      <h1 className='text-5xl p-3 pb-5 font-bold text-gray-800'>About Us</h1>
-      <div className='text-gray-600 text-3xl sm:px-10 max-w-[1000px] px-5 grow flex flex-col gap-5 justify-center items-start'>
-        <Link
-          to='https://maps.app.goo.gl/GxYPGCMzoLDwKCb39'
-          target='__blank'
-          className='hover:underline underline-offset-3 decoration-3 flex gap-3 items-center text-justify'>
-          <span>
-            <FontAwesomeIcon icon={faMapLocationDot} />
-          </span>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab similique
-          harum ipsa dolor doloremque molestiae quis in. Esse, totam maxime.
-        </Link>
-        <div className='flex flex-wrap justify-between w-full'>
-          <p className='flex gap-3 items-center'>
-            <span>
-              <FontAwesomeIcon icon={faPhone} />
-            </span>
-            +91 912345678
-          </p>
+    <div className='flex flex-col gap-3 justify-between p-5 font-semibold'>
+      <h1 className='sm:text-5xl text-4xl p-3 font-bold text-gray-800'>
+        About Us
+      </h1>
+      <div className='border-4 border-gray-700 rounded-xl text-gray-600 text-xl p-5 max-w-[1000px] grow flex sm:flex-row flex-col gap-5 justify-center items-center'>
+        <div className="flex-1/2 w-full">
+          <img
+            src='assets/images/chess.jpeg'
+            alt='about-us'
+            className='h-[250px] w-full object-cover rounded-xl'
+          />
+        </div>
+        <div className="flex-1/2 flex flex-col gap-3">
           <Link
-            to='/contact-us'
-            className='flex gap-3 items-center hover:underline decoration-3 underline-offset-3'>
+            to='https://maps.app.goo.gl/GxYPGCMzoLDwKCb39'
+            target='__blank'
+            className='hover:underline underline-offset-3 decoration-2 flex gap-3 items-center text-start'>
             <span>
-              <FontAwesomeIcon icon={faEnvelope} />
+              <FontAwesomeIcon icon={faMapLocationDot} />
             </span>
-            tempmail@gmail.com
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab
+            similique harum ipsa dolor doloremque molestiae quis in. Esse, totam
+            maxime.
           </Link>
+          <div className='flex flex-wrap gap-3 justify-between w-full'>
+            <p className='flex gap-3 items-center'>
+              <span>
+                <FontAwesomeIcon icon={faPhone} />
+              </span>
+              +91 912345678
+            </p>
+            <Link
+              to='/contact-us'
+              className='flex gap-3 items-center hover:underline decoration-2 underline-offset-3'>
+              <span>
+                <FontAwesomeIcon icon={faEnvelope} />
+              </span>
+              tempmail@gmail.com
+            </Link>
+          </div>
         </div>
       </div>
     </div>
