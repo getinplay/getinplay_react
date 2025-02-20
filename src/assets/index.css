@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 @import "tailwindcss";
 
+@theme {
+  --breakpoint-xs: 30rem;
+}
+
 @layer utilities {
   .custom-text-outline {
     text-shadow: 2px 2px 4px rgb(0, 0, 0);

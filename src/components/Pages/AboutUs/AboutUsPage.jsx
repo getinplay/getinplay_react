@@ -16,14 +16,14 @@ function AboutUsPage() {
         About Us
       </h1>
       <div className='border-4 border-gray-700 rounded-xl text-gray-600 text-xl p-5 max-w-[1000px] grow flex sm:flex-row flex-col gap-5 justify-center items-center'>
-        <div className="flex-1/2 w-full">
+        <div className='flex-1/2 w-full'>
           <img
             src='assets/images/chess.jpeg'
             alt='about-us'
             className='h-[250px] w-full object-cover rounded-xl'
           />
         </div>
-        <div className="flex-1/2 flex flex-col gap-3">
+        <div className='flex-1/2 flex flex-col gap-3'>
           <Link
             to='https://maps.app.goo.gl/GxYPGCMzoLDwKCb39'
             target='__blank'
@@ -36,12 +36,12 @@ function AboutUsPage() {
             maxime.
           </Link>
           <div className='flex flex-wrap gap-3 justify-between w-full'>
-            <p className='flex gap-3 items-center'>
+            <Link className='flex gap-3 items-center hover:underline decoration-2 underline-offset-3'>
               <span>
                 <FontAwesomeIcon icon={faPhone} />
               </span>
               +91 912345678
-            </p>
+            </Link>
             <Link
               to='/contact-us'
               className='flex gap-3 items-center hover:underline decoration-2 underline-offset-3'>
