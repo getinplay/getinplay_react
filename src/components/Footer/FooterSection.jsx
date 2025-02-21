@@ -21,7 +21,7 @@ import {
 
 function FooterSection() {
   return (
-    <div className='w-full bg-gray-100 text-white flex max-md:flex-col items-center md:items-stretch p-3'>
+    <div className='w-full mt-10 bg-gray-100 text-white flex max-md:flex-col items-center md:items-stretch p-3'>
       <div className='text-3xl font-bold text-gray-700 flex items-center p-4 gap-2'>
         <FontAwesomeIcon icon={faPlaystation} /> GetInPlay
       </div>
@@ -62,8 +62,7 @@ function FooterSection() {
           </div>
           <div className='text-lg text-gray-500 font-semibold p-1 rounded-md'>
             <Link
-              to='https://maps.app.goo.gl/GxYPGCMzoLDwKCb39'
-              target='__blank'
+              to='#'
               className='hover:text-gray-700 hover:underline underline-offset-2 cursor-pointer'>
               <span className='px-3'>
                 <FontAwesomeIcon icon={faPhone} />
@@ -73,8 +72,7 @@ function FooterSection() {
           </div>
           <div className='text-lg text-gray-500 font-semibold p-1 rounded-md'>
             <Link
-              to='https://maps.app.goo.gl/GxYPGCMzoLDwKCb39'
-              target='__blank'
+              to='/contact-us'
               className='hover:text-gray-700 hover:underline underline-offset-2 cursor-pointer'>
               <span className='px-3'>
                 <FontAwesomeIcon icon={faEnvelope} />
@@ -90,22 +88,22 @@ function FooterSection() {
           <FontAwesomeIcon
             icon={faFacebook}
             size='2xl'
-            className='cursor-pointer hover:text-gray-700 duration-300 hover:scale-[1.1]'
+            className='cursor-pointer hover:text-[#1877F2] active:text-[#1877F2] duration-300 active:scale-[1.1] hover:scale-[1.1]'
           />
           <FontAwesomeIcon
             icon={faTwitter}
             size='2xl'
-            className='cursor-pointer hover:text-gray-700 duration-300 hover:scale-[1.1]'
+            className='cursor-pointer hover:text-[#1DA1F2] active:text-[#1DA1F2] duration-300 active:scale-[1.1] hover:scale-[1.1]'
           />
           <FontAwesomeIcon
             icon={faYoutube}
             size='2xl'
-            className='cursor-pointer hover:text-gray-700 duration-300 hover:scale-[1.1]'
+            className='cursor-pointer hover:text-[#FF0000] active:text-[#FF0000] duration-300 active:scale-[1.1] hover:scale-[1.1]'
           />
           <FontAwesomeIcon
             icon={faInstagram}
             size='2xl'
-            className='cursor-pointer hover:text-gray-700 duration-300 hover:scale-[1.1]'
+            className='cursor-pointer hover:text-[#c92bb7] active:text-[#c92bb7] duration-300 active:scale-[1.1] hover:scale-[1.1]'
           />
         </div>
       </div>

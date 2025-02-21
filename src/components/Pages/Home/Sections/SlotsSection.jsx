@@ -51,6 +51,7 @@ function SlotsSection() {
             navigation={{
               nextEl: ".custom-next-2",
               prevEl: ".custom-prev-2",
+              disabledClass: "!text-gray-300 !cursor-default",
             }}
             mousewheel={{ forceToAxis: true }}>
             {slots.map((slot) => (

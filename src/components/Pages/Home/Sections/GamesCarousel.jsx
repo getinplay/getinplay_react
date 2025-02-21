@@ -12,10 +12,10 @@ import {
 
 function GamesCarousel({ games }) {
   return (
-    <div className="w-full p-3 lg:h-[80vh] h-[50vh] py-5 justify-center ">
-      <div className="rounded-xl overflow-hidden h-full">
+    <div className='w-full p-3 lg:h-[70vh] h-[50vh] py-5 justify-center '>
+      <div className='rounded-xl overflow-hidden h-full'>
         <Swiper
-          className="h-full"
+          className='h-full'
           modules={[Autoplay, Navigation, Pagination, Mousewheel]}
           slidesPerView={1.5}
           spaceBetween={10}
@@ -32,12 +32,12 @@ function GamesCarousel({ games }) {
           }}
           mousewheel={{ forceToAxis: true }}>
           <button
-            type="button"
-            className="absolute top-1/2 -translate-y-1/2 left-2 flex items-center justify-center cursor-pointer hover:text-gray-200 duration-200 text-white z-20 custom-prev">
-            <FontAwesomeIcon size="2xl" icon={faSquareCaretLeft} />
+            type='button'
+            className='absolute top-1/2 -translate-y-1/2 left-2 flex items-center justify-center cursor-pointer hover:text-gray-200 duration-200 text-white z-20 custom-prev'>
+            <FontAwesomeIcon size='2xl' icon={faSquareCaretLeft} />
           </button>
           {games.map((game) => (
-            <SwiperSlide key={game.id} className="rounded-xl overflow-hidden">
+            <SwiperSlide key={game.id} className='rounded-xl overflow-hidden'>
               <GamesCarouselCard
                 // src={`http://192.168.0.130/getinplay/${game.image}`}
                 src={game.image}
@@ -46,9 +46,9 @@ function GamesCarousel({ games }) {
             </SwiperSlide>
           ))}
           <button
-            type="button"
-            className="absolute top-1/2 -translate-y-1/2 right-2 flex items-center justify-center cursor-pointer hover:text-gray-200 duration-200 text-white z-20 custom-next">
-            <FontAwesomeIcon size="2xl" icon={faSquareCaretRight} />
+            type='button'
+            className='absolute top-1/2 -translate-y-1/2 right-2 flex items-center justify-center cursor-pointer hover:text-gray-200 duration-200 text-white z-20 custom-next'>
+            <FontAwesomeIcon size='2xl' icon={faSquareCaretRight} />
           </button>
         </Swiper>
       </div>

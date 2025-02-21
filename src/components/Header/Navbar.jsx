@@ -18,13 +18,13 @@ function Navbar() {
         <div
           className={`${
             showNav ? "" : "max-lg:hidden"
-          } lg:relative max-lg:flex justify-center left-0 absolute max-lg:top-15 h-max w-full z-10`}>
+          } lg:relative max-lg:flex justify-center left-0 absolute max-lg:top-17 h-max w-full z-10`}>
           <div className="bg-gray-50 lg:bg-white flex max-lg:w-[70%] lg:flex-row flex-col items-center lg:gap-2 border-gray-200 border-2 lg:border-none lg:m-0 rounded-lg">
-            <NavBarLink toLink="/">Home</NavBarLink>
-            <NavBarLink toLink="/games">Games</NavBarLink>
-            <NavBarLink toLink="/membership">Membership</NavBarLink>
-            <NavBarLink toLink="/contact-us">Contact Us</NavBarLink>
-            <NavBarLink toLink="/about-us">About Us</NavBarLink>
+            <NavBarLink onClick={()=>setShowNav(false)} toLink="/" >Home</NavBarLink>
+            <NavBarLink onClick={()=>setShowNav(false)} toLink="/games">Games</NavBarLink>
+            <NavBarLink onClick={()=>setShowNav(false)} toLink="/membership">Membership</NavBarLink>
+            <NavBarLink onClick={()=>setShowNav(false)} toLink="/contact-us">Contact Us</NavBarLink>
+            <NavBarLink onClick={()=>setShowNav(false)} toLink="/about-us">About Us</NavBarLink>
           </div>
         </div>
         <div className="flex items-center text-md font-semibold z-20 ">
