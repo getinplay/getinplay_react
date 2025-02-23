@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle,faChevronCircleDown } from "@fortawesome/free-solid-svg-icons";
 
 function MembershipCard({ children, rate, popular, onlineAccess }) {
   return (
@@ -19,7 +19,7 @@ function MembershipCard({ children, rate, popular, onlineAccess }) {
           <div>Access to all online booking</div>
         </div>
         <div className="flex w-full items-center gap-2 justify-start">
-          <FontAwesomeIcon icon={faCheckCircle} className="text-red-500" />
+          <FontAwesomeIcon icon={faChevronCircleDown} className="text-gray-400" />
           <div>View More</div>
         </div>
         {popular ? (

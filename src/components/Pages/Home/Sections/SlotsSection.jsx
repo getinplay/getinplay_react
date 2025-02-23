@@ -30,22 +30,25 @@ function SlotsSection() {
   ]);
 
   return (
-    <div className='flex flex-col items-center justify-center w-[80vw]'>
-      <h2 className='subtitle'>Slots available for Today</h2>
-      <div className='flex items-center justify-center gap-2 w-full py-3'>
+    <div className="flex flex-col items-center justify-center w-[80vw]">
+      <h2 className="subtitle">Slots available for Today</h2>
+      <div className="flex items-center justify-center gap-2 w-full py-3">
         <button
-          type='button'
-          className='flex items-center justify-center cursor-pointer active:text-gray-200 duration-200 text-red-500 z-20 custom-prev-2'>
-          <FontAwesomeIcon size='2xl' icon={faSquareCaretLeft} />
+          type="button"
+          className="flex items-center justify-center cursor-pointer active:text-gray-200 duration-200 text-red-500 z-20 custom-prev-2">
+          <FontAwesomeIcon size="2xl" icon={faSquareCaretLeft} />
         </button>
-        <div className='min-w-[70%] flex items-center justify-center'>
+        <div className="min-w-[70%] flex items-center justify-center">
           <Swiper
             modules={[Navigation, Mousewheel]}
             breakpoints={{
               320: { slidesPerView: 1 },
               425: { slidesPerView: 2 },
               640: { slidesPerView: 3 },
+              768: { slidesPerView: 4 },
               1024: { slidesPerView: 5 },
+              1440: { slidesPerView: 6 },
+              2560: { slidesPerView: 7 },
             }}
             spaceBetween={10}
             navigation={{
@@ -62,9 +65,9 @@ function SlotsSection() {
           </Swiper>
         </div>
         <button
-          type='button'
-          className='flex items-center justify-center cursor-pointer active:text-gray-200 duration-200 text-red-500 z-20 custom-next-2'>
-          <FontAwesomeIcon size='2xl' icon={faSquareCaretRight} />
+          type="button"
+          className="flex items-center justify-center cursor-pointer active:text-gray-200 duration-200 text-red-500 z-20 custom-next-2">
+          <FontAwesomeIcon size="2xl" icon={faSquareCaretRight} />
         </button>
       </div>
     </div>

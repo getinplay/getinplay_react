@@ -1,4 +1,4 @@
-import "../../assets/NavBarLink.css";
+import "./NavBarLink.css";
 import { NavLink } from "react-router-dom";
 
 function NavBarLink({ children,toLink,onClick }) {
