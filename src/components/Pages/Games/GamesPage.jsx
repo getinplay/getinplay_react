@@ -5,11 +5,23 @@ import {
   faSquareCaretLeft,
   faSquareCaretRight,
 } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/scrollbar";
 import GamesCard from "./GamesCard";
 
-function GamesPage({ games }) {
+function GamesPage() {
+  const [games, setGames] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get(
+        "http://192.168.0.130/final_project/final_project/Api's/game_data.php"
+      );
+      setGames(res.data);
+    };
+    fetchData();
+  }, []);
   return (
     <div className='flex flex-wrap gap-5 justify-center items-center py-10 w-[80vw]'>
       <div className='relative w-full bg-[rgb(250,250,250)] flex items-center justify-center p-5 shadow-xl rounded-xl '>
@@ -33,7 +45,10 @@ function GamesPage({ games }) {
             slidesOffsetBefore={15}>
             {games.map((game) => (
               <SwiperSlide key={game.id} className='!w-max -z-10'>
-                <GamesCard src={game.image} price={"$2.5"}>
+                <GamesCard
+                  half={game.half_hour}
+                  full={game.hour}
+                  src={`http://192.168.0.130/final_project/final_project/admin/${game.slot_image}`}>
                   {game.name}
                 </GamesCard>
               </SwiperSlide>

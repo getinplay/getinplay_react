@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 function Navbar() {
   const [showNav, setShowNav] = useState(false);
   return (
-    <nav className="sticky top-0 z-30 bg-white h-[60px] flex w-full max-sm:px-1 py-1 items-center justify-between border-b-1 border-gray-200">
+    <nav className="sticky md:px-15 top-0 z-30 bg-white h-[60px] flex w-full max-sm:px-1 py-1 items-center justify-between border-b-1 border-gray-200">
       <div className="flex items-center text-2xl mx-2 z-20">
         <FontAwesomeIcon icon={faPlaystation} className="text-red-500" />
         <h1 className="mx-2 font-semibold">GetInPlay</h1>

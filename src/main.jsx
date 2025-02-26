@@ -11,39 +11,6 @@ import AboutUsPage from "./components/Pages/AboutUs/AboutUsPage";
 import ContactUsPage from "./components/Pages/ContactUs/ContactUsPage";
 import LoginPage from "./components/Pages/Login/LoginPage";
 
-const games = [
-  {
-    id: "2",
-    name: "BOWLING",
-    image: "assets/images/bowling.jpeg",
-  },
-  {
-    id: "3",
-    name: "CHESS",
-    image: "assets/images/chess.jpeg",
-  },
-  {
-    id: "7",
-    name: "BASKETBALL",
-    image: "assets/images/basketball.jpeg",
-  },
-  {
-    id: "9",
-    name: "POOL",
-    image: "assets/images/pool.jpeg",
-  },
-  {
-    id: "10",
-    name: "CRICKET",
-    image: "assets/images/cricket.jpeg",
-  },
-  {
-    id: "11",
-    name: "SNOOKER",
-    image: "assets/images/snooker.jpeg",
-  },
-];
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -51,11 +18,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <HomePage games={games} />,
+        element: <HomePage/>,
       },
       {
         path: "games",
-        element: <GamesPage games={games} />,
+        element: <GamesPage/>,
       },
       {
         path: "membership",
@@ -78,7 +45,5 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
+  <RouterProvider router={router} />
 );

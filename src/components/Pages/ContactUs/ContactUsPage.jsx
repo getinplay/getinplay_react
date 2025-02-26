@@ -3,10 +3,12 @@ import React from "react";
 function ContactUsPage() {
   return (
     <div className='flex flex-col justify-between items-center gap-3 p-5 w-full font-semibold'>
-      <h1 className='sm:text-5xl text-4xl p-3 font-bold text-gray-800'>Contact Us</h1>
-      <div className='flex grow lg:w-[1000px]'>
+      <h1 className='sm:text-5xl text-4xl p-3 font-bold text-red-500'>
+        Contact Us
+      </h1>
+      <div className='flex grow lg:w-[900px]'>
         <form
-          className='flex flex-col grow h-max gap-3 border-4 border-gray-700 rounded-xl p-5 justify-center overflow-auto text-xl'
+          className='flex flex-col grow h-max gap-3 shadow-gray-500 shadow-lg rounded-xl p-5 justify-center overflow-auto text-xl'
           onSubmit={(e) => e.preventDefault()}>
           <div className='flex max-sm:flex-col gap-3 w-full justify-between sm:items-center'>
             <p className='text-gray-700 min-w-30 text-start'>Email:</p>

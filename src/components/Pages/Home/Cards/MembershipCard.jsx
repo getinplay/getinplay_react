@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle,faChevronCircleDown } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 function MembershipCard({ children, rate, popular, onlineAccess }) {
   return (
@@ -27,9 +28,9 @@ function MembershipCard({ children, rate, popular, onlineAccess }) {
             Popular
           </div>
         ) : null}
-        <button className="duration-200 active:bg-red-500 bg-white active:text-white hover:bg-red-500 hover:text-white border-1 border-gray-300 my-3 px-3 py-1 rounded-md cursor-pointer">
+        <Link to={"/membership"} viewTransition className="duration-200 active:bg-red-500 bg-white active:text-white hover:bg-red-500 hover:text-white border-1 border-gray-300 my-3 px-3 py-1 rounded-md cursor-pointer">
           View Plans
-        </button>
+        </Link>
       </div>
     </>
   );

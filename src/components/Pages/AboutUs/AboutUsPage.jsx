@@ -12,10 +12,10 @@ import {
 function AboutUsPage() {
   return (
     <div className='flex flex-col gap-3 justify-between p-5 font-semibold'>
-      <h1 className='sm:text-5xl text-4xl p-3 font-bold text-gray-800'>
+      <h1 className='sm:text-5xl text-4xl p-3 font-bold text-red-500'>
         About Us
       </h1>
-      <div className='border-4 border-gray-700 rounded-xl text-gray-600 text-xl p-5 max-w-[1000px] grow flex sm:flex-row flex-col gap-5 justify-center items-center'>
+      <div className='rounded-xl text-gray-600 text-xl p-5 max-w-[1000px] grow flex sm:flex-row flex-col gap-5 justify-center items-center'>
         <div className='flex-1/2 w-full'>
           <img
             src='assets/images/chess.jpeg'
@@ -27,7 +27,7 @@ function AboutUsPage() {
           <Link
             to='https://maps.app.goo.gl/GxYPGCMzoLDwKCb39'
             target='__blank'
-            className='hover:underline underline-offset-3 decoration-2 flex gap-3 items-center text-start'>
+            className='hover:underline underline-offset-3 decoration-2 flex gap-3 text-start'>
             <span>
               <FontAwesomeIcon icon={faMapLocationDot} />
             </span>

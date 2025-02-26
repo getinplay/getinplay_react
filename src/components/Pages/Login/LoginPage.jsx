@@ -42,28 +42,32 @@ function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!username) {
       setError("Username cannot be empty!");
     } else if (!password) {
       setError("Password cannot be empty!");
-    } else if (username.length < 8) {
-      setError("Username cannot be less than 8 characters!");
     } else if (password.length < 8) {
       setError("Password cannot be less than 8 characters!");
     } else {
-      setError(null);
+      const url =
+        "http://192.168.0.130/final_project/final_project/Api's/check_login.php";
+      const data = {
+        username: username,
+        password: password,
+      };
+      const res = await axios.post(url, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      alert(res.data.message)
     }
-  }
+  };
 
   return (
     <div className='w-full h-[100vh] py-10 flex items-center justify-center'>
-      <img
-        src='/assets/images/cricket.jpeg'
-        alt='Background'
-        className='absolute inset-0 w-full h-full object-cover blur-sm -z-10'
-      />
       <form
         onSubmit={handleSubmit}
         noValidate
