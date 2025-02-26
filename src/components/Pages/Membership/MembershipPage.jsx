@@ -7,7 +7,7 @@ function MembershipPage() {
       <h1 className="text-red-500 sm:text-5xl text-4xl font-bold p-3">
         Compare our plans and find yours
       </h1>
-      <p className="text-lg font-[400] text-gray-400">
+      <p className="sm:text-lg font-[400] text-gray-400">
         We offer exciting plan that makes you play hustle-free and enjoy the
         time.
       </p>

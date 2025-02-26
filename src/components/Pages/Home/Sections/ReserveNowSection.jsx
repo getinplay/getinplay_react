@@ -4,14 +4,14 @@ function ReserveNowSection() {
       <div className='flex justify-center'>
         <div className='lg:w-max min-h-[500px] pt-10 pb-20 flex flex-col-reverse lg:flex-row items-center justify-center'>
           <div className='lg:w-[40svw] w-[80svw] flex flex-col justify-between items-start pl-5 max-lg:rounded-b-xl lg:rounded-l-xl h-full bg-red-500 p-5 '>
-            <h4 className='text-3xl font-bold text-white tracking-wide'>
+            <h4 className='text-2xl sm:text-3xl font-bold text-white tracking-wide'>
               Reserve Now!
             </h4>
-            <p className='text-white text-start text-lg font-semibold'>
+            <p className='text-white text-start sm:text-lg font-semibold'>
               Secure your spot at the most anticipated events of the year. Don't
               miss out!
             </p>
-            <button className='hover:bg-gray-200 duration-300 active:translate-y-2 active:shadow-none shadow-lg shadow-red-300 cursor-pointer text-lg text-red-500 bg-white font-semibold rounded-lg px-5 py-2'>
+            <button className='hover:bg-gray-200 duration-300 active:translate-y-2 active:shadow-none shadow-lg shadow-red-300 cursor-pointer text-base sm:text-lg text-red-500 bg-white font-semibold rounded-lg px-3 sm:px-5 py-1 sm:py-2'>
               Join for free
             </button>
           </div>

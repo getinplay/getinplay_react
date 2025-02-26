@@ -13,7 +13,7 @@
 }
 
 .subtitle {
-  @apply text-2xl font-bold;
+  @apply sm:text-2xl font-bold text-xl;
 }
 
 body {

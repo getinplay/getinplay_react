@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEnvelope,
-  faMailBulk,
-  faMailForward,
   faMapLocationDot,
   faPhone,
 } from "@fortawesome/free-solid-svg-icons";
@@ -15,7 +13,7 @@ function AboutUsPage() {
       <h1 className='sm:text-5xl text-4xl p-3 font-bold text-red-500'>
         About Us
       </h1>
-      <div className='rounded-xl text-gray-600 text-xl p-5 max-w-[1000px] grow flex sm:flex-row flex-col gap-5 justify-center items-center'>
+      <div className='rounded-xl text-gray-600 text-lg sm:text-xl p-5 max-w-[1000px] grow flex sm:flex-row flex-col gap-5 justify-center items-center'>
         <div className='flex-1/2 w-full'>
           <img
             src='assets/images/chess.jpeg'

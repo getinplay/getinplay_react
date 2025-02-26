@@ -10,7 +10,7 @@ function Navbar() {
   const [showNav, setShowNav] = useState(false);
   return (
     <nav className="sticky md:px-15 top-0 z-30 bg-white h-[60px] flex w-full max-sm:px-1 py-1 items-center justify-between border-b-1 border-gray-200">
-      <div className="flex items-center text-2xl mx-2 z-20">
+      <div className="flex items-center text-xl sm:text-2xl mx-2 z-20">
         <FontAwesomeIcon icon={faPlaystation} className="text-red-500" />
         <h1 className="mx-2 font-semibold">GetInPlay</h1>
       </div>
@@ -18,7 +18,7 @@ function Navbar() {
         className={`${
           showNav ? "" : "max-lg:hidden"
         } lg:relative max-lg:flex justify-center left-0 absolute max-lg:top-17 h-max w-full z-10`}>
-        <div className="bg-gray-50 lg:bg-white flex max-lg:w-[70%] lg:flex-row flex-col items-center lg:gap-2 border-gray-200 border-2 lg:border-none lg:m-0 rounded-lg">
+        <div className="bg-gray-50 text-sm sm:text-base lg:bg-white flex max-lg:w-[70%] lg:flex-row flex-col items-center lg:gap-2 border-gray-200 border-2 lg:border-none lg:m-0 rounded-lg">
           <NavBarLink onClick={() => setShowNav(false)} toLink="/">
             Home
           </NavBarLink>
@@ -36,7 +36,7 @@ function Navbar() {
           </NavBarLink>
         </div>
       </div>
-      <div className="flex items-center text-md font-semibold z-20 ">
+      <div className="flex items-center text-sm sm:text-base font-semibold z-20 ">
         <Link
           to="/login"
           target="_blank"
