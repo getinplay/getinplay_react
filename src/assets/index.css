@@ -21,6 +21,5 @@ body {
 }
 
 .swiper-pagination-bullet-active {
-  @apply !bg-red-500 border-1 border-white;
-  scale: 1.5;
+  @apply !bg-red-500 shadow-[0px_0px_5px_rgb(255,255,255)] scale-[1.2];
 }

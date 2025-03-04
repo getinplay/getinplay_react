@@ -1,7 +1,12 @@
-.navbarlink-wrapper:hover .navbarlink{
+.navbarlink-wrapper:hover .navbarlink,
+.navbarlink-wrapper:focus .navbarlink {
   color: #ff5058;
 }
 
+.navbarlink-wrapper:focus{
+  outline: none;
+  border: none;
+}
 .active.navbarlink-wrapper {
   color: #fb2c36 !important;
 }
@@ -19,7 +24,7 @@
   opacity: 0;
 }
 
-.active.navbarlink-wrapper::after{
-  color: #fb2c36 ;
-  opacity: 1 ;
+.active.navbarlink-wrapper::after {
+  color: #fb2c36;
+  opacity: 1;
 }

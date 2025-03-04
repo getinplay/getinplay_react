@@ -25,29 +25,28 @@ function AboutUsPage() {
           <Link
             to='https://maps.app.goo.gl/GxYPGCMzoLDwKCb39'
             target='__blank'
-            className='hover:underline underline-offset-3 decoration-2 flex gap-3 text-start'>
+            className='hover:underline underline-offset-3 decoration-2 flex gap-3 text-justify'>
             <span>
               <FontAwesomeIcon icon={faMapLocationDot} />
             </span>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab
-            similique harum ipsa dolor doloremque molestiae quis in. Esse, totam
-            maxime.
+            National Plaza, S7, RC Dutt Rd, Aradhana Society, Vishwas Colony,
+            Alkapuri, Vadodara, Gujarat 390007
           </Link>
           <div className='flex flex-wrap gap-3 justify-between w-full'>
             <Link className='flex gap-3 items-center hover:underline decoration-2 underline-offset-3'>
               <span>
                 <FontAwesomeIcon icon={faPhone} />
               </span>
-              +91 912345678
+              +91 9123456789
             </Link>
-            <Link
-              to='/contact-us'
+            <a
+              href='mailto:tempmail@gmail.com'
               className='flex gap-3 items-center hover:underline decoration-2 underline-offset-3'>
               <span>
                 <FontAwesomeIcon icon={faEnvelope} />
               </span>
               tempmail@gmail.com
-            </Link>
+            </a>
           </div>
         </div>
       </div>

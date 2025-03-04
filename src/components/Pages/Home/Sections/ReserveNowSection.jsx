@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function ReserveNowSection() {
   return (
     <>
@@ -11,9 +13,11 @@ function ReserveNowSection() {
               Secure your spot at the most anticipated events of the year. Don't
               miss out!
             </p>
-            <button className='hover:bg-gray-200 duration-300 active:translate-y-2 active:shadow-none shadow-lg shadow-red-300 cursor-pointer text-base sm:text-lg text-red-500 bg-white font-semibold rounded-lg px-3 sm:px-5 py-1 sm:py-2'>
+            <Link
+              to='/login'
+              className='hover:bg-gray-200 duration-300 active:translate-y-2 active:shadow-none shadow-lg shadow-red-300 cursor-pointer text-base sm:text-lg text-red-500 bg-white font-semibold rounded-lg px-3 sm:px-5 py-1 sm:py-2'>
               Join for free
-            </button>
+            </Link>
           </div>
           <div className='lg:w-[40svw] w-[80svw] lg:rounded-r-xl max-lg:rounded-t-xl h-full overflow-hidden bg-amber-400'>
             <img
