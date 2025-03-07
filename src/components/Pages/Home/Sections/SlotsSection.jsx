@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TimeSlot from "../Cards/TimeSlotCard";
+import TimeSlotCard from "../Cards/TimeSlotCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Navigation } from "swiper/modules";
 import "swiper/css";
@@ -10,8 +10,10 @@ import {
   faSquareCaretLeft,
   faSquareCaretRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 function SlotsSection() {
+  const navigate = useNavigate();
   const [slots, setSlots] = useState([
     { id: 1, time: "10:00-10:30AM" },
     { id: 2, time: "10:30-11:30AM" },
@@ -30,15 +32,15 @@ function SlotsSection() {
   ]);
 
   return (
-    <div className="flex flex-col items-center justify-center w-[80vw]">
-      <h2 className="subtitle">Slots Available For Today</h2>
-      <div className="flex items-center justify-center gap-2 w-full py-3">
+    <div className='flex flex-col items-center justify-center w-[80vw]'>
+      <h2 className='subtitle'>Slots Available For Today</h2>
+      <div className='flex items-center justify-center gap-2 w-full py-3'>
         <button
-          type="button"
-          className="flex items-center justify-center cursor-pointer active:text-gray-200 duration-200 text-red-500 z-20 custom-prev-2">
-          <FontAwesomeIcon size="2xl" icon={faSquareCaretLeft} />
+          type='button'
+          className='flex items-center justify-center cursor-pointer active:text-gray-200 duration-200 text-red-500 z-20 custom-prev-2'>
+          <FontAwesomeIcon size='2xl' icon={faSquareCaretLeft} />
         </button>
-        <div className="min-w-[70%] flex items-center justify-center">
+        <div className='min-w-[70%] flex items-center justify-center'>
           <Swiper
             modules={[Navigation, Mousewheel]}
             breakpoints={{
@@ -59,15 +61,20 @@ function SlotsSection() {
             mousewheel={{ forceToAxis: true }}>
             {slots.map((slot) => (
               <SwiperSlide key={slot.id}>
-                <TimeSlot>{slot.time}</TimeSlot>
+                <TimeSlotCard
+                  onClick={() => {
+                    navigate("/games");
+                  }}>
+                  {slot.time}
+                </TimeSlotCard>
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
         <button
-          type="button"
-          className="flex items-center justify-center cursor-pointer active:text-gray-200 duration-200 text-red-500 z-20 custom-next-2">
-          <FontAwesomeIcon size="2xl" icon={faSquareCaretRight} />
+          type='button'
+          className='flex items-center justify-center cursor-pointer active:text-gray-200 duration-200 text-red-500 z-20 custom-next-2'>
+          <FontAwesomeIcon size='2xl' icon={faSquareCaretRight} />
         </button>
       </div>
     </div>

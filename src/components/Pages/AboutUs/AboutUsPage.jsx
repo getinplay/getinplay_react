@@ -21,7 +21,7 @@ function AboutUsPage() {
             className='h-[250px] w-full object-cover rounded-xl'
           />
         </div>
-        <div className='flex-1/2 flex flex-col gap-3'>
+        <div className=' flex-1/2 flex flex-col gap-3'>
           <Link
             to='https://maps.app.goo.gl/GxYPGCMzoLDwKCb39'
             target='__blank'
@@ -30,10 +30,12 @@ function AboutUsPage() {
               <FontAwesomeIcon icon={faMapLocationDot} />
             </span>
             National Plaza, S7, RC Dutt Rd, Aradhana Society, Vishwas Colony,
-            Alkapuri, Vadodara, Gujarat 390007
+            Alkapuri Vadodara, Gujarat 390007
           </Link>
-          <div className='flex flex-wrap gap-3 justify-between w-full'>
-            <Link className='flex gap-3 items-center hover:underline decoration-2 underline-offset-3'>
+          <div className='flex flex-col gap-3 justify-between w-full'>
+            <Link
+              to='tel:9123456789'
+              className='flex gap-3 items-center hover:underline decoration-2 underline-offset-3'>
               <span>
                 <FontAwesomeIcon icon={faPhone} />
               </span>

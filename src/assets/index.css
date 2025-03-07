@@ -12,6 +12,12 @@
   }
 }
 
+@layer base{
+  ul, ol{
+    list-style: revert;
+  }
+}
+
 .subtitle {
   @apply sm:text-2xl font-bold text-xl;
 }

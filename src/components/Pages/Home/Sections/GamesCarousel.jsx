@@ -9,13 +9,19 @@ import {
   faSquareCaretLeft,
   faSquareCaretRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
 
 function GamesCarousel({ games }) {
+  const [swiperKey, setSwiperKey] = useState(0);
+  useEffect(() => {
+    setSwiperKey((prev) => prev + 1);
+  }, [games]);
   return (
-    <div className="w-[90vw] md:w-[80vw] lg:h-[70vh] h-[50vh] min-h-[300px] py-3 justify-center ">
-      <div className="rounded-xl overflow-hidden h-full">
+    <div className='w-[90vw] md:w-[80vw] lg:h-[70vh] h-[50vh] min-h-[300px] py-3 justify-center '>
+      <div className='rounded-xl overflow-hidden h-full'>
         <Swiper
-          className="h-full"
+          key={swiperKey}
+          className='h-full'
           modules={[Autoplay, Navigation, Pagination, Mousewheel]}
           slidesPerView={1}
           spaceBetween={10}
@@ -39,13 +45,9 @@ function GamesCarousel({ games }) {
           {games.map((game) => (
             <SwiperSlide key={game.id} className="rounded-xl overflow-hidden">
               <GamesCarouselCard
-                // src={`http://192.168.0.130/final_project/final_project/admin/${game.card_image}`}
-                src={
-                  game.card_image.includes("uploads")
-                    ? `http://192.168.0.130/final_project/final_project/admin/${game.card_image}`
-                    : game.card_image
-                }
+                src={`http://192.168.0.130/final_project/final_project/admin/${game.slot_image}`}
                 name={game.name}
+                gameId={game.id}
               />
             </SwiperSlide>
           ))}

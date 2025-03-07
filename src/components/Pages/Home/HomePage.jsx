@@ -62,6 +62,7 @@ function HomePage() {
       const res = await axios.get(
         "http://192.168.0.130/final_project/final_project/Api's/game_data.php"
       );
+
       setGames(res.data);
     };
     fetchData();

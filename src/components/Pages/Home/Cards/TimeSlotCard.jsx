@@ -1,8 +1,9 @@
 import React from "react";
 
-function TimeSlotCard({ children, isBooked }) {
+function TimeSlotCard({ children, isBooked, onClick }) {
   return (
     <div
+      onClick={onClick}
       className={`sm:px-3 duration-300 ${
         isBooked
           ? "bg-gray-300 text-gray-100 border-gray-300"

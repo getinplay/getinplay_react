@@ -63,7 +63,7 @@ function FooterSection() {
           <div className='flex flex-col xl:flex-row justify-between'>
             <div className='text-gray-500 font-semibold p-1 rounded-md'>
               <Link
-                to='#'
+                to='tel:9123456789'
                 className='hover:text-gray-700 hover:underline underline-offset-2 cursor-pointer'>
                 <span className='pr-1'>
                   <FontAwesomeIcon icon={faPhone} />

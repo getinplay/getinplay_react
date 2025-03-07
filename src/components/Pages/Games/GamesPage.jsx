@@ -62,6 +62,7 @@ function GamesPage() {
       );
       setGames(res.data);
     };
+
     fetchData();
   }, []);
   return (
@@ -72,12 +73,7 @@ function GamesPage() {
           half={game.half_hour}
           full={game.hour}
           gameId={game.id}
-          // src={`http://192.168.0.130/final_project/final_project/admin/${game.slot_image}`}
-          src={
-            game.card_image.includes("uploads")
-              ? `http://192.168.0.130/final_project/final_project/admin/${game.card_image}`
-              : game.card_image
-          }>
+          src={`http://192.168.0.130/final_project/final_project/admin/${game.card_image}`}>
           {game.name}
         </GamesCard>
       ))}

@@ -1,40 +1,68 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import TimeSlotCard from "../Home/Cards/TimeSlotCard";
 import ButtonGroupBtn from "./ButtonGroupBtn";
 import DatePicker from "./DatePicker";
 import axios from "axios";
 
 function GameSlots() {
+  const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState(false);
   const [selected, setSelected] = useState(0);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [refreshPage, setRefreshPage] = useState(false);
   const { id } = useParams();
   const [name, setName] = useState("");
   const [originalSlots, setOriginalSlots] = useState([]);
-  const [timeSlots, setTimeSlots] = useState([
-    // { time: "10:00-10:30AM", isBooked: false },
-    // { time: "10:30-11:30AM", isBooked: false },
-    // { time: "11:30-12:30PM", isBooked: false },
-    // { time: "12:30-01:30PM", isBooked: false },
-    // { time: "01:30-02:30PM", isBooked: false },
-    // { time: "02:30-03:30PM", isBooked: false },
-    // { time: "03:30-04:30PM", isBooked: false },
-    // { time: "04:30-05:30PM", isBooked: true },
-    // { time: "05:30-06:30PM", isBooked: false },
-    // { time: "06:30-07:30PM", isBooked: false },
-    // { time: "07:30-08:30PM", isBooked: false },
-    // { time: "08:30-09:30PM", isBooked: false },
-    // { time: "09:30-10:30PM", isBooked: true },
-    // { time: "10:30-11:30PM", isBooked: true },
-  ]);
+  const [timeSlots, setTimeSlots] = useState([]);
+  const [terms, setTerms] = useState(
+    "<ul><li>Condition</li><li>Condition</li><li>Condition</li></ul></p>"
+  );
+  const filterOptions = ["All", "30min", "1hr"];
+
+  const filterSlots = (timeSlots, option) => {
+    return timeSlots.filter((slot) => {
+      return option == "All" || slot.filter == option;
+    });
+  };
+
+  const bookSlot = async (slot, game_id) => {
+    const data = {
+      token: document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("authToken="))
+        ?.split("=")[1],
+      date: selectedDate.toISOString().split("T")[0].replace(/-/g, "/"),
+      slot: slot,
+      game_id: game_id,
+    };
+    const res = await axios.post(
+      "http://192.168.0.130/final_project/final_project/Api's/book_game.php",
+      data,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return res.data;
+  };
+
   useEffect(() => {
+    const fetchTerms = async () => {
+      const res = await axios.get(
+        "http://192.168.0.130/final_project/final_project/Api's/term_condition.php"
+      );
+      setTerms(res.data);
+    };
     const fetchAllSlots = async () => {
       let bookedSlots;
       let allSlots;
       let filter;
+      const date = selectedDate.toJSON().slice(0, 10).replace(/-/g, "/");
       const res = await axios.post(
-        "http://192.168.0.130/final_project/final_project/Api's/slots_data.php",
-        { id: id },
+        "http://192.168.0.130/final_project/final_project/Api's/filter_time.php",
+        { id: id, date: date },
         {
           headers: {
             "Content-Type": "application/json",
@@ -44,7 +72,6 @@ function GameSlots() {
       allSlots = res.data.slots;
       filter = res.data.filter;
       setName(res.data.name);
-      const date = selectedDate.toJSON().slice(0, 10).replace(/-/g, "/");
       const res2 = await axios.post(
         "http://192.168.0.130/final_project/final_project/Api's/book_slots.php",
         { game_id: id, date: date },
@@ -54,47 +81,67 @@ function GameSlots() {
           },
         }
       );
-      bookedSlots = res2.data.booked_slots;
-      let timeSlots = [];
+      bookedSlots = res2.data.booked_slots.map((slot) => slot.slot);
+      let tempTimeSlots = [];
       allSlots.forEach((slot, index) => {
         if (bookedSlots.includes(slot)) {
-          timeSlots.push({ time: slot, isBooked: true, filter: filter[index] });
+          tempTimeSlots.push({
+            time: slot,
+            isBooked: true,
+            filter: filter[index],
+          });
         } else {
-          timeSlots.push({
+          tempTimeSlots.push({
             time: slot,
             isBooked: false,
             filter: filter[index],
           });
         }
       });
-      setOriginalSlots(timeSlots);
-      setTimeSlots(timeSlots);
+      setOriginalSlots(tempTimeSlots);
+      setTimeSlots(filterSlots(tempTimeSlots, filterOptions[selected]));
     };
-
+    const checkLogin = async () => {
+      const res = await axios.post(
+        "http://192.168.0.130/final_project/final_project/Api's/decode.php",
+        {
+          token: document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("authToken="))
+            ?.split("=")[1],
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setIsLogin(res.data.success);
+    };
     fetchAllSlots();
-  }, [selectedDate]);
+    fetchTerms();
+    if (document.cookie) {
+      checkLogin();
+    }
+  }, [selectedDate, refreshPage]);
 
   return (
-    <div className="w-[80vw] flex flex-col gap-5">
-      <h2 className="text-4xl font-black text-gray-700">
+    <div className="w-[80vw] p-5 flex flex-col gap-5">
+      <h2 className="text-3xl p-3 sm:text-4xl font-black text-gray-700">
         {name.toUpperCase()}
       </h2>
-      <div className='flex w-full flex-col sm:flex-row gap-5 justify-between items-center'>
+      <div className="flex w-full flex-col sm:flex-row gap-5 justify-between items-center">
         <div>
           <DatePicker
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
           />
         </div>
-        <div className='flex  bg-gray-200 rounded-full duration-300'>
-          {["All", "30min", "1hr"].map((ele, index) => (
+        <div className="flex  bg-gray-200 rounded-full duration-300">
+          {filterOptions.map((ele, index) => (
             <ButtonGroupBtn
               onClickHandler={() => {
-                setTimeSlots(
-                  originalSlots.filter((slot) => {
-                    return ele == "All" || slot.filter == ele;
-                  })
-                );
+                setTimeSlots(filterSlots(originalSlots, ele));
                 setSelected(index);
               }}
               index={index}
@@ -105,13 +152,59 @@ function GameSlots() {
           ))}
         </div>
       </div>
-      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 justify-evenly'>
-        {timeSlots.map((slot, index) => (
-          <TimeSlotCard key={index} isFlex={false} isBooked={slot.isBooked}>
-            {slot.time}
-          </TimeSlotCard>
-        ))}
-      </div>
+      {timeSlots.length > 0 ? (
+        <>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 justify-evenly">
+            {timeSlots.map((slot, index) => (
+              <TimeSlotCard
+                key={index}
+                onClick={
+                  slot.isBooked
+                    ? () => {}
+                    : async () => {
+                        if (isLogin) {
+                          if (
+                            confirm(
+                              `Are you sure you want to Book '${
+                                slot.time
+                              }' for ${name} on ${selectedDate
+                                .toISOString()
+                                .split("T")[0]
+                                .replace(/-/g, "/")}`
+                            )
+                          ) {
+                            const res = await bookSlot(slot.time, id);
+                            alert(res.message);
+                            setRefreshPage((prev) => !prev);
+                          }
+                        } else {
+                          if (
+                            confirm("Please Login to continue before Booking!")
+                          ) {
+                            navigate("/login");
+                          }
+                        }
+                      }
+                }
+                isBooked={slot.isBooked}>
+                {slot.time}
+              </TimeSlotCard>
+            ))}
+          </div>
+          <div className="flex justify-center">
+            <div className="w-max text-lg text-gray-700">
+              <p className="font-bold">TERMS & CONDITIONS</p>
+              <p
+                dangerouslySetInnerHTML={{ __html: terms }}
+                className="text-base text-start text-gray-600"></p>
+            </div>
+          </div>
+        </>
+      ) : (
+        <p className="text-gray-700 italic text-lg">
+          No Slots Available for this Game
+        </p>
+      )}
     </div>
   );
 }
