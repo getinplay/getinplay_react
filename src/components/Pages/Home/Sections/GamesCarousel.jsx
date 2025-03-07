@@ -17,11 +17,11 @@ function GamesCarousel({ games }) {
     setSwiperKey((prev) => prev + 1);
   }, [games]);
   return (
-    <div className='w-[90vw] md:w-[80vw] lg:h-[70vh] h-[50vh] min-h-[300px] py-3 justify-center '>
-      <div className='rounded-xl overflow-hidden h-full'>
+    <div className="w-[90vw] md:w-[80vw] lg:h-[70vh] h-[50vh] min-h-[300px] py-3 justify-center ">
+      <div className="rounded-xl overflow-hidden h-full">
         <Swiper
           key={swiperKey}
-          className='h-full'
+          className="h-full"
           modules={[Autoplay, Navigation, Pagination, Mousewheel]}
           slidesPerView={1}
           spaceBetween={10}
