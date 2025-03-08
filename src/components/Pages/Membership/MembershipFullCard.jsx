@@ -11,7 +11,7 @@ function MembershipFullCard({
   children,
 }) {
   return (
-    <div className='select-none xs:max-w-[350px] max-w-[300px] flex flex-col bg-white gap-1 bg-gray-100 rounded-xl border-1 border-gray-300 shadow-lg'>
+    <div className='select-none xs:max-w-[350px] max-w-[300px] flex flex-col gap-1 bg-gray-100 rounded-xl border-1 border-gray-300 shadow-lg'>
       <div
         className={`${
           isPlanActive

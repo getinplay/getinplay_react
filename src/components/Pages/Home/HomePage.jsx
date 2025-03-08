@@ -11,7 +11,7 @@ function HomePage() {
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(
-        "http://192.168.0.130/final_project/final_project/Api's/game_data.php"
+        `${import.meta.env.VITE_API_URL}/Api's/game_data.php`
       );
 
       setGames(res.data);
@@ -19,7 +19,7 @@ function HomePage() {
     fetchData();
   }, []);
   return (
-    <div className='w-full flex flex-col items-center gap-5'>
+    <div className="w-full flex flex-col items-center gap-5">
       <GamesCarousel games={games} />
       <SlotsSection />
       <MembershipSection />

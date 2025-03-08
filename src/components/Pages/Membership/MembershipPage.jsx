@@ -10,7 +10,7 @@ function MembershipPage() {
       return;
     }
     const res = await axios.post(
-      "http://192.168.0.130/final_project/final_project/Api's/decode.php",
+      `${import.meta.env.VITE_API_URL}/Api's/decode.php`,
       {
         token: document.cookie
           .split("; ")
@@ -31,7 +31,7 @@ function MembershipPage() {
       return;
     }
     const res = await axios.post(
-      "http://192.168.0.130/final_project/final_project/Api's/update_membership.php",
+      `${import.meta.env.VITE_API_URL}/Api's/update_membership.php`,
       {
         token: document.cookie
           .split("; ")
@@ -51,15 +51,15 @@ function MembershipPage() {
   }, []);
 
   return (
-    <div className='flex w-full flex-col gap-2 items-center p-5'>
-      <h1 className='text-red-500 sm:text-5xl text-4xl font-bold p-3'>
+    <div className="flex w-full flex-col gap-2 items-center p-5">
+      <h1 className="text-red-500 sm:text-5xl text-4xl font-bold p-3">
         Compare our plans and find yours
       </h1>
-      <p className='sm:text-lg font-[400] text-gray-400'>
+      <p className="sm:text-lg font-[400] text-gray-400">
         We offer exciting plan that makes you play hustle-free and enjoy the
         time.
       </p>
-      <div className='py-5 w-full h-full justify-center items-center flex flex-col lg:flex-row gap-5 overflow-x-auto'>
+      <div className="py-5 w-full h-full justify-center items-center flex flex-col lg:flex-row gap-5 overflow-x-auto">
         <MembershipFullCard
           allSlotBooking={true}
           cancellation={4}

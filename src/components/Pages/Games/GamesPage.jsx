@@ -9,7 +9,7 @@ function GamesPage() {
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(
-        "http://192.168.0.130/final_project/final_project/Api's/game_data.php"
+        `${import.meta.env.VITE_API_URL}/Api's/game_data.php`
       );
       setGames(res.data);
     };
@@ -17,14 +17,14 @@ function GamesPage() {
     fetchData();
   }, []);
   return (
-    <div className='p-3 sm:p-5 lg:p-10 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 justify-evenly'>
+    <div className="p-3 sm:p-5 lg:p-10 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 justify-evenly">
       {games.map((game) => (
         <GamesCard
           key={game.id}
           half={game.half_hour}
           full={game.hour}
           gameId={game.id}
-          src={`http://192.168.0.130/final_project/final_project/admin/${game.card_image}`}>
+          src={`${import.meta.env.VITE_API_URL}/admin/${game.card_image}`}>
           {game.name}
         </GamesCard>
       ))}

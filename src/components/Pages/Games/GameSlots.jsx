@@ -37,7 +37,7 @@ function GameSlots() {
       game_id: game_id,
     };
     const res = await axios.post(
-      "http://192.168.0.130/final_project/final_project/Api's/book_game.php",
+      `${import.meta.env.VITE_API_URL}/Api's/book_game.php`,
       data,
       {
         headers: {
@@ -51,7 +51,7 @@ function GameSlots() {
   useEffect(() => {
     const fetchTerms = async () => {
       const res = await axios.get(
-        "http://192.168.0.130/final_project/final_project/Api's/term_condition.php"
+        `${import.meta.env.VITE_API_URL}/Api's/term_condition.php`
       );
       setTerms(res.data);
     };
@@ -61,7 +61,7 @@ function GameSlots() {
       let filter;
       const date = selectedDate.toJSON().slice(0, 10).replace(/-/g, "/");
       const res = await axios.post(
-        "http://192.168.0.130/final_project/final_project/Api's/filter_time.php",
+        `${import.meta.env.VITE_API_URL}/Api's/filter_time.php`,
         { id: id, date: date },
         {
           headers: {
@@ -73,7 +73,7 @@ function GameSlots() {
       filter = res.data.filter;
       setName(res.data.name);
       const res2 = await axios.post(
-        "http://192.168.0.130/final_project/final_project/Api's/book_slots.php",
+        `${import.meta.env.VITE_API_URL}/Api's/book_slots.php`,
         { game_id: id, date: date },
         {
           headers: {
@@ -103,7 +103,7 @@ function GameSlots() {
     };
     const checkLogin = async () => {
       const res = await axios.post(
-        "http://192.168.0.130/final_project/final_project/Api's/decode.php",
+        `${import.meta.env.VITE_API_URL}/Api's/decode.php`,
         {
           token: document.cookie
             .split("; ")
@@ -191,13 +191,11 @@ function GameSlots() {
               </TimeSlotCard>
             ))}
           </div>
-          <div className="flex justify-center">
-            <div className="w-max text-lg text-gray-700">
-              <p className="font-bold">TERMS & CONDITIONS</p>
-              <p
-                dangerouslySetInnerHTML={{ __html: terms }}
-                className="text-base text-start text-gray-600"></p>
-            </div>
+          <div className="text-lg text-gray-700">
+            <p className="font-bold p-5">TERMS & CONDITIONS</p>
+            <p
+              dangerouslySetInnerHTML={{ __html: terms }}
+              className="text-base text-start text-gray-600"></p>
           </div>
         </>
       ) : (
