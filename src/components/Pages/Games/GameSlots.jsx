@@ -191,12 +191,16 @@ function GameSlots() {
               </TimeSlotCard>
             ))}
           </div>
-          <div className="text-lg text-gray-700">
-            <p className="font-bold p-5">TERMS & CONDITIONS</p>
-            <p
-              dangerouslySetInnerHTML={{ __html: terms }}
-              className="text-base text-start text-gray-600"></p>
-          </div>
+          <div className="flex justify-center items-center h-screen">
+  <div className="text-lg text-gray-700 max-w-3xl mx-auto">
+    <p className="font-bold p-5 text-center">TERMS & CONDITIONS</p>
+    <p
+      dangerouslySetInnerHTML={{ __html: terms }}
+      className="text-base text-start text-gray-600"
+    ></p>
+  </div>
+</div>
+
         </>
       ) : (
         <p className="text-gray-700 italic text-lg">
