@@ -41,8 +41,8 @@ function MembershipPage() {
       }
     );
     if (res.data.success) {
-      document.cookie = `authToken=${res.data.token}; path=/; secure`;
       setCurrentPlan(planId);
+      alert(res.data.message);
     }
   };
 
