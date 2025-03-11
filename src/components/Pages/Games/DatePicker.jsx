@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function DatePicker({ selectedDate, setSelectedDate }) {
+  const [currentPlan, setCurrentPlan] = useState(0);
   const today = new Date();
   const tomorrow = new Date();
   tomorrow.setDate(today.getDate() + 1);
@@ -11,7 +13,37 @@ function DatePicker({ selectedDate, setSelectedDate }) {
   const getDay = (date) => date.getDate();
   const getMonth = (date) => date.toLocaleDateString("en-US", { month: "short" });
 
-  const dates = [today, tomorrow, dayAfterTomorrow];
+  const fetchPlan = async () => {
+    if (!document.cookie) {
+      return;
+    }
+    const res = await axios.post(
+      `${import.meta.env.VITE_API_URL}/Api's/decode.php`,
+      {
+        token: document.cookie
+          .split("; ")
+          .find((row) => row.startsWith("authToken="))
+          ?.split("=")[1],
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    setCurrentPlan(res.data.data.membership_id); // Set the membership_id
+  };
+
+  useEffect(() => {
+    fetchPlan(); // Call the fetchPlan function on component mount
+  }, []);
+  // Filter the dates based on the currentPlan
+  let dates = [today];
+  if (currentPlan === 2) {
+    dates = [today, tomorrow];
+  } else if (currentPlan === 3 || currentPlan === 0) {
+    dates = [today, tomorrow, dayAfterTomorrow];
+  }
 
   return (
     <div className="w-max flex bg-gray-200 rounded-lg">
