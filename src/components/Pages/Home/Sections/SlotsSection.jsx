@@ -37,7 +37,7 @@ function SlotsSection() {
       <div className='flex items-center justify-center gap-2 w-full py-3'>
         <button
           type='button'
-          className='flex items-center justify-center cursor-pointer active:text-gray-200 duration-200 text-red-500 z-20 custom-prev-2'>
+          className='flex items-center justify-center cursor-pointer active:text-gray-200 duration-200 text-red-600 z-20 custom-prev-2'>
           <FontAwesomeIcon size='2xl' icon={faSquareCaretLeft} />
         </button>
         <div className='min-w-[70%] flex items-center justify-center'>
@@ -73,7 +73,7 @@ function SlotsSection() {
         </div>
         <button
           type='button'
-          className='flex items-center justify-center cursor-pointer active:text-gray-200 duration-200 text-red-500 z-20 custom-next-2'>
+          className='flex items-center justify-center cursor-pointer active:text-gray-200 duration-200 text-red-600 z-20 custom-next-2'>
           <FontAwesomeIcon size='2xl' icon={faSquareCaretRight} />
         </button>
       </div>

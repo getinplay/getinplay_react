@@ -53,7 +53,7 @@ function DatePicker({ selectedDate, setSelectedDate }) {
           onClick={() => setSelectedDate(date)}
           className={`px-3 rounded-lg cursor-pointer ${
             selectedDate.toDateString() === date.toDateString()
-              ? "bg-red-500 text-white shadow-[2px_2px_5px_rgb(150,150,150)]"
+              ? "bg-red-600 text-white shadow-[2px_2px_5px_rgb(150,150,150)]"
               : "text-gray-900"
           } flex flex-col items-center justify-center`}
         >

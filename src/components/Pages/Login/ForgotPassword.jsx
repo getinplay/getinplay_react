@@ -27,7 +27,7 @@ function ForgotPassword() {
         onSubmit={handleSubmit}
         className="lg:w-[50%] md:w-[65%] duration-500 max-md:w-[90%] max-w-[500px] min-h-max py-5 shadow-[0_2px_16px_rgba(0,0,0,0.4)] rounded-xl bg-white flex flex-col gap-3 items-center justify-between">
         <div>
-          <p className="text-4xl font-bold text-red-500 text-center">
+          <p className="text-4xl font-bold text-red-600 text-center">
             FORGOT PASSWORD?
           </p>
           <p className="text-lg font-semibold text-gray-400">
@@ -50,13 +50,13 @@ function ForgotPassword() {
           </div>
         </div>
 
-        <p className="sticky text-red-500 font-bold mx-5 text-center text-base">
+        <p className="sticky text-red-600 font-bold mx-5 text-center text-base">
           {error} &nbsp;
         </p>
 
         <button
           type="submit"
-          className="cursor-pointer mb-5 bg-red-500 p-2 rounded-lg tracking-wide text-white font-bold text-xl active:translate-y-2 active:shadow-none duration-300 shadow-gray-400 hover:shadow-xl shadow-lg w-5/6">
+          className="cursor-pointer mb-5 bg-red-600 p-2 rounded-lg tracking-wide text-white font-bold text-xl active:translate-y-2 active:shadow-none duration-300 shadow-gray-400 hover:shadow-xl shadow-lg w-5/6">
           RESET PASSWORD
         </button>
       </form>

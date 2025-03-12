@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import MembershipFullCard from "./MembershipFullCard";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function MembershipPage() {
+  const navigate = useNavigate();
   const [currentPlan, setCurrentPlan] = useState(0);
 
   const fetchPlan = async () => {
@@ -27,6 +29,13 @@ function MembershipPage() {
   };
 
   const upgradePlan = async (planId) => {
+    if (!document.cookie) {
+      if (confirm("Please login before upgrading the Membership!")) {
+        navigate("/login");
+      }
+      return;
+    }
+
     if (!confirm("Are you sure you want to Upgrade your membership?")) {
       return;
     }
@@ -51,15 +60,15 @@ function MembershipPage() {
   }, []);
 
   return (
-    <div className="flex w-full flex-col gap-2 items-center p-5">
-      <h1 className="text-red-500 sm:text-5xl text-4xl font-bold p-3">
+    <div className='flex w-full flex-col gap-2 items-center p-5'>
+      <h1 className='text-red-600 sm:text-5xl text-4xl font-bold p-3'>
         Compare our plans and find yours
       </h1>
-      <p className="sm:text-lg font-[400] text-gray-400">
+      <p className='sm:text-lg font-[400] text-gray-400'>
         We offer exciting plan that makes you play hustle-free and enjoy the
         time.
       </p>
-      <div className="py-5 w-full h-full justify-center items-center flex flex-col lg:flex-row gap-5 overflow-x-auto">
+      <div className='py-5 w-full h-full justify-center items-center flex flex-col lg:flex-row gap-5 overflow-x-auto'>
         <MembershipFullCard
           allSlotBooking={true}
           cancellation={4}
@@ -69,7 +78,8 @@ function MembershipPage() {
           personAllowedPerTable={4}
           amount={0}
           popular={false}
-          isPlanActive={currentPlan >= 1}
+          isPlanActive={currentPlan > 1}
+          isCurrentPlan={currentPlan == 1}
           onClick={() => upgradePlan(1)}>
           Normal
         </MembershipFullCard>
@@ -82,7 +92,8 @@ function MembershipPage() {
           personAllowedPerTable={5}
           amount={50}
           popular={true}
-          isPlanActive={currentPlan >= 2}
+          isPlanActive={currentPlan > 2}
+          isCurrentPlan={currentPlan == 2}
           onClick={() => upgradePlan(2)}>
           Silver
         </MembershipFullCard>
@@ -95,7 +106,8 @@ function MembershipPage() {
           personAllowedPerTable={6}
           amount={100}
           popular={false}
-          isPlanActive={currentPlan >= 3}
+          isPlanActive={currentPlan > 3}
+          isCurrentPlan={currentPlan == 3}
           onClick={() => upgradePlan(3)}>
           Gold
         </MembershipFullCard>

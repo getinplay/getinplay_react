@@ -13,8 +13,8 @@ function FooterLink({ toLink, icon, children }) {
             isActive ? "!text-red-600 font-bold" : ""
           } flex hover:text-gray-800 text-sm w-max duration-300 cursor-pointer`
         }>
-        <span className="pr-2">
-          <FontAwesomeIcon icon={icon} size="sm"/>
+        <span className='mr-1 fa-fw'>
+          <FontAwesomeIcon icon={icon} size='sm' />
         </span>
         <p>{children}</p>
       </NavLink>

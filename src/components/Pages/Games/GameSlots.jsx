@@ -12,12 +12,12 @@ function GameSlots() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [refreshPage, setRefreshPage] = useState(false);
   const { id } = useParams();
-  const [name, setName] = useState("");
+  const [currentGame, setCurrentGame] = useState({
+    name: "",
+  });
   const [originalSlots, setOriginalSlots] = useState([]);
   const [timeSlots, setTimeSlots] = useState([]);
-  const [terms, setTerms] = useState(
-    "<ul><li>Condition</li><li>Condition</li><li>Condition</li></ul></p>"
-  );
+  const [terms, setTerms] = useState("");
   const filterOptions = ["All", "30min", "1hr"];
 
   const filterSlots = (timeSlots, option) => {
@@ -71,7 +71,6 @@ function GameSlots() {
       );
       allSlots = res.data.slots;
       filter = res.data.filter;
-      setName(res.data.name);
       const res2 = await axios.post(
         `${import.meta.env.VITE_API_URL}/Api's/book_slots.php`,
         { game_id: id, date: date },
@@ -118,6 +117,14 @@ function GameSlots() {
       );
       setIsLogin(res.data.success);
     };
+    const fetchData = async () => {
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/Api's/game_data.php`
+      );
+      setCurrentGame(res.data.find((ele) => ele.id == id));
+    };
+
+    fetchData();
     fetchAllSlots();
     fetchTerms();
     if (document.cookie) {
@@ -126,18 +133,23 @@ function GameSlots() {
   }, [selectedDate, refreshPage]);
 
   return (
-    <div className="w-[80vw] p-5 flex flex-col gap-5">
-      <h2 className="text-3xl p-3 sm:text-4xl font-black text-gray-700">
-        {name.toUpperCase()}
+    <div className='w-[90vw] md:w-[80vw] p-5 flex flex-col gap-5'>
+      <h2 className='text-3xl p-3 sm:text-4xl font-black text-gray-700'>
+        {currentGame.name.toUpperCase()}
       </h2>
-      <div className="flex w-full flex-col sm:flex-row gap-5 justify-between items-center">
+      <img
+        className='shadow-[0_2px_16px_rgba(0,0,0,0.3)] h-[30vh] sm:h-[50vh] min-h-[200px] object-cover rounded-lg'
+        src={`${import.meta.env.VITE_API_URL}/admin/${currentGame.slot_image}`}
+        alt={`image`}
+      />
+      <div className='flex w-full flex-col sm:flex-row gap-5 justify-between items-center'>
         <div>
           <DatePicker
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
           />
         </div>
-        <div className="flex  bg-gray-200 rounded-full duration-300">
+        <div className='flex  bg-gray-200 rounded-full duration-300'>
           {filterOptions.map((ele, index) => (
             <ButtonGroupBtn
               onClickHandler={() => {
@@ -154,7 +166,7 @@ function GameSlots() {
       </div>
       {timeSlots.length > 0 ? (
         <>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 justify-evenly">
+          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 justify-evenly'>
             {timeSlots.map((slot, index) => (
               <TimeSlotCard
                 key={index}
@@ -167,7 +179,7 @@ function GameSlots() {
                             confirm(
                               `Are you sure you want to Book '${
                                 slot.time
-                              }' for ${name} on ${selectedDate
+                              }' for ${currentGame.name} on ${selectedDate
                                 .toISOString()
                                 .split("T")[0]
                                 .replace(/-/g, "/")}`
@@ -191,19 +203,21 @@ function GameSlots() {
               </TimeSlotCard>
             ))}
           </div>
-          <div className="flex justify-center items-center h-screen">
-  <div className="text-lg text-gray-700 max-w-3xl mx-auto">
-    <p className="font-bold p-5 text-center">TERMS & CONDITIONS</p>
-    <p
-      dangerouslySetInnerHTML={{ __html: terms }}
-      className="text-base text-start text-gray-600"
-    ></p>
-  </div>
-</div>
-
+          <div className='flex justify-center items-center'>
+            <div className='max-w-3xl'>
+              <p className='font-bold sm:text-lg text-gray-700 p-5 text-center'>
+                TERMS & CONDITIONS
+              </p>
+              <div className='shadow-[0_2px_16px_rgba(0,0,0,0.3)] overflow-hidden rounded-xl'>
+                <p
+                  dangerouslySetInnerHTML={{ __html: terms }}
+                  className='p-2 pl-6 overflow-y-auto max-h-50 text-sm sm:text-base text-justify text-gray-600'></p>
+              </div>
+            </div>
+          </div>
         </>
       ) : (
-        <p className="text-gray-700 italic text-lg">
+        <p className='text-gray-700 italic text-lg'>
           No Slots Available for this Game
         </p>
       )}

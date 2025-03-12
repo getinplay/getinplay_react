@@ -22,13 +22,19 @@ import {
 function FooterSection() {
   return (
     <div className='w-full justify-between mt-10 max-xs:items-start bg-gray-100 text-white flex max-md:flex-col items-center p-3 lg:px-10'>
-      <div className='text-2xl font-bold text-gray-700 flex items-center p-4 gap-2'>
-        <FontAwesomeIcon icon={faPlaystation} /> GetInPlay
+      <div className='p-2 z-20 max-md:w-full max-md:flex justify-center'>
+        <Link to={"/"}>
+          <img
+            src='/assets/images/getinplay.png'
+            alt='GETINPLAY LOGO'
+            className='object-contain p-2 md:w-[200px] w-[200px]'
+          />
+        </Link>
       </div>
       <div className='xs:justify-evenly grow flex flex-col xs:flex-row text-start lg:px-10 xs:px-10 md:px-3'>
         <div className='p-4 lg:w-[200px] sm:w-[150px] lg:max-w-[250px] lg:grow'>
           <p className='text-xl font-bold mb-2 text-gray-700'>Pages</p>
-          <div className='lg:grid-cols-2 grid-cols-1 gap-1 grid font-semibold text-gray-500'>
+          <div className='xl:grid-cols-2 grid-cols-1 gap-1 grid font-semibold text-gray-500'>
             <FooterLink toLink='/' icon={faHouse}>
               Home
             </FooterLink>
@@ -53,7 +59,7 @@ function FooterSection() {
               to='https://maps.app.goo.gl/GxYPGCMzoLDwKCb39'
               target='__blank'
               className='hover:text-gray-700 flex hover:underline underline-offset-2 cursor-pointer text-justify'>
-              <span className='pr-1'>
+              <span className='mr-1 fa-fw'>
                 <FontAwesomeIcon icon={faMapLocationDot} />
               </span>
               National Plaza, S7, RC Dutt Rd, Aradhana Society, Vishwas Colony,
@@ -65,7 +71,7 @@ function FooterSection() {
               <Link
                 to='tel:9123456789'
                 className='hover:text-gray-700 hover:underline underline-offset-2 cursor-pointer'>
-                <span className='pr-1'>
+                <span className='mr-1 fa-fw'>
                   <FontAwesomeIcon icon={faPhone} />
                 </span>
                 +91 9123456789
@@ -75,7 +81,7 @@ function FooterSection() {
               <a
                 href='mailto:tempmail@gmail.com'
                 className='hover:text-gray-700 flex hover:underline underline-offset-2 cursor-pointer'>
-                <span className='pr-1'>
+                <span className='mr-1 fa-fw'>
                   <FontAwesomeIcon icon={faEnvelope} />
                 </span>
                 <div>tempmail@gmail.com</div>
