@@ -14,9 +14,9 @@ function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!username) {
-      setError("Username cannot be empty!");
+      setError("Username is required!");
     } else if (!password) {
-      setError("Password cannot be empty!");
+      setError("Password is required!");
     } else if (password.length < 8) {
       setError("Password cannot be less than 8 characters!");
     } else {
@@ -32,10 +32,11 @@ function LoginPage() {
           "Content-Type": "application/json",
         },
       });
-      alert(res.data.message);
       if (res.data.success) {
         document.cookie = `authToken=${res.data.token}; path=/;`;
         navigate(-1);
+      } else {
+        alert(res.data.message);
       }
     }
   };
@@ -56,7 +57,7 @@ function LoginPage() {
         </div>
         <div className='flex flex-col pt-2 items-center justify-center w-full gap-3 sm:text-lg font-medium text-gray-600'>
           <div className='flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 m-2 bg-gray-200 w-5/6'>
-            <label className='required flex gap-1' htmlFor='username'>
+            <label className='flex gap-1' htmlFor='username'>
               <FontAwesomeIcon icon={faCircleUser} size='lg' />
             </label>
             <input
@@ -70,7 +71,7 @@ function LoginPage() {
             />
           </div>
           <div className='flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 m-2 bg-gray-200 w-5/6'>
-            <label htmlFor='password' className='required flex gap-1'>
+            <label htmlFor='password' className='flex gap-1'>
               <FontAwesomeIcon icon={faLock} size='lg' />
             </label>
             <input

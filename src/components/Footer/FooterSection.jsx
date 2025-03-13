@@ -21,6 +21,8 @@ import {
 
 function FooterSection() {
   return (
+    <div className="w-full">
+
     <div className='w-full justify-between mt-10 max-xs:items-start bg-gray-100 text-white flex max-md:flex-col items-center p-3 lg:px-10'>
       <div className='p-2 z-20 max-md:w-full max-md:flex justify-center'>
         <Link to={"/"}>
@@ -115,6 +117,8 @@ function FooterSection() {
           />
         </div>
       </div>
+    </div>
+    <p className="bg-gray-600 text-gray-100 p-2 font-medium tracking-wide">Copyright © 2025 GetInPlay</p>
     </div>
   );
 }
