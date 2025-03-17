@@ -4,9 +4,7 @@ import TimeSlotCard from "../Home/Cards/TimeSlotCard";
 import ButtonGroupBtn from "./ButtonGroupBtn";
 import DatePicker from "./DatePicker";
 import axios from "axios";
-import { toast, Bounce } from "react-toastify";
 import ConfirmLogin from "../../ConfirmLogin";
-import ConfirmActionToast from "../../ConfirmToast";
 import BookGamePopup from "./BookGamePopup";
 
 function GameSlots() {
@@ -181,6 +179,7 @@ function GameSlots() {
               gameName={currentGame.name}
               selectedDate={selectedDate}
               setRefreshPage={setRefreshPage}
+              showTerms={showBookingConfirm}
               hideBooking={() => setShowBookingConfirm(false)}
             />
           )}

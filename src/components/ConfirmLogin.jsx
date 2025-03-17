@@ -8,14 +8,14 @@ function ConfirmLoginToast({ closeToast }) {
   const navigate = useNavigate();
 
   return (
-    <div className="flex-col gap-2 items-center text-start">
-      <p className="px-2">Please login before you upgrade your membership!</p>
+    <div className='flex-col gap-2 items-center text-start'>
+      <p className='px-2'>Please login before you continue!</p>
       <button
         onClick={() => {
           navigate("/login");
           closeToast(); // Close the toast after clicking Login
         }}
-        className="flex gap-2 items-center justify-center font-semibold cursor-pointer bg-red-500 m-2 text-white px-3 py-[1px] rounded-lg">
+        className='flex gap-2 items-center justify-center font-semibold cursor-pointer bg-[#4A5BE6] m-2 text-white px-3 py-[1px] rounded-lg'>
         <FontAwesomeIcon icon={faRightToBracket} />
         Login
       </button>

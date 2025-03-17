@@ -14,8 +14,7 @@ import {
 import {
   faFacebook,
   faInstagram,
-  faPlaystation,
-  faTwitter,
+  faXTwitter,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 
@@ -35,8 +34,8 @@ function FooterSection() {
       </div>
       <div className='xs:justify-evenly grow flex flex-col xs:flex-row text-start lg:px-10 xs:px-10 md:px-3'>
         <div className='p-4 lg:w-[200px] sm:w-[150px] lg:max-w-[250px] lg:grow'>
-          <p className='text-xl font-bold mb-2 text-gray-700'>Pages</p>
-          <div className='xl:grid-cols-2 grid-cols-1 gap-1 grid font-semibold text-gray-500'>
+          <p className='text-xl font-bold mb-2 text-black'>Pages</p>
+          <div className='xl:grid-cols-2 grid-cols-1 gap-1 grid font-semibold text-[#212121]'>
             <FooterLink toLink='/' icon={faHouse}>
               Home
             </FooterLink>
@@ -55,12 +54,12 @@ function FooterSection() {
           </div>
         </div>
         <div className='flex-1 max-w-[400px] text-start p-4 rounded-lg text-sm'>
-          <p className='text-xl text-gray-700 font-bold'>Address</p>
-          <div className='text-gray-500 font-semibold p-1 rounded-md'>
+          <p className='text-xl text-black font-bold'>Address</p>
+          <div className='text-[#212121] font-semibold p-1 rounded-md'>
             <Link
               to='https://maps.app.goo.gl/GxYPGCMzoLDwKCb39'
               target='__blank'
-              className='hover:text-gray-700 flex hover:underline underline-offset-2 cursor-pointer text-justify'>
+              className='hover:text-black flex hover:underline underline-offset-2 cursor-pointer text-justify'>
               <span className='mr-1 fa-fw'>
                 <FontAwesomeIcon icon={faMapLocationDot} />
               </span>
@@ -69,20 +68,20 @@ function FooterSection() {
             </Link>
           </div>
           <div className='flex flex-col xl:flex-row justify-between'>
-            <div className='text-gray-500 font-semibold p-1 rounded-md'>
+            <div className='text-[#212121] font-semibold p-1 rounded-md'>
               <Link
                 to='tel:9123456789'
-                className='hover:text-gray-700 hover:underline underline-offset-2 cursor-pointer'>
+                className='hover:text-black hover:underline underline-offset-2 cursor-pointer'>
                 <span className='mr-1 fa-fw'>
                   <FontAwesomeIcon icon={faPhone} />
                 </span>
                 +91 9123456789
               </Link>
             </div>
-            <div className='text-gray-500 font-semibold p-1 rounded-md'>
+            <div className='text-[#212121] font-semibold p-1 rounded-md'>
               <a
                 href='mailto:tempmail@gmail.com'
-                className='hover:text-gray-700 flex hover:underline underline-offset-2 cursor-pointer'>
+                className='hover:text-black flex hover:underline underline-offset-2 cursor-pointer'>
                 <span className='mr-1 fa-fw'>
                   <FontAwesomeIcon icon={faEnvelope} />
                 </span>
@@ -93,15 +92,15 @@ function FooterSection() {
         </div>
       </div>
       <div className='p-4 flex flex-col justify-center max-xs:w-full'>
-        <p className='text-xl text-gray-700 font-bold '>Follow us</p>
-        <div className='flex justify-center grow gap-4 items-center text-gray-500 py-4'>
+        <p className='text-xl text-black font-bold '>Follow us</p>
+        <div className='flex justify-center grow gap-4 items-center text-[#212121] py-4'>
           <FontAwesomeIcon
             icon={faFacebook}
             size='xl'
             className='cursor-pointer hover:text-[#1877F2] active:text-[#1877F2] duration-300 active:scale-[1.1] hover:scale-[1.1]'
           />
           <FontAwesomeIcon
-            icon={faTwitter}
+            icon={faXTwitter}
             size='xl'
             className='cursor-pointer hover:text-[#1DA1F2] active:text-[#1DA1F2] duration-300 active:scale-[1.1] hover:scale-[1.1]'
           />

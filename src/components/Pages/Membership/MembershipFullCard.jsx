@@ -22,8 +22,8 @@ function MembershipFullCard({
             ? "bg-green-200"
             : isPlanActive
             ? "text-gray-600"
-            : "hover:shadow-lg hover:bg-red-600 hover:text-white"
-        } relative group shadow-red-400 p-5 sm:py-8 flex bg-gray-100 flex-col gap-3 rounded-xl items-start duration-300`}>
+            : "hover:shadow-lg hover:bg-[#4A5BE6] hover:text-white"
+        } relative group shadow-blue-400 p-5 sm:py-8 flex bg-gray-100 flex-col gap-3 rounded-xl items-start duration-300`}>
         <p className='text-2xl sm:text-3xl font-semibold'>{children}</p>
         <p className='text-lg sm:text-2xl font-semibold'>
           <span className='text-3xl sm:text-4xl font-bold'>₹{amount}</span>
@@ -36,7 +36,7 @@ function MembershipFullCard({
                 ? "bg-green-700"
                 : isPlanActive
                 ? "bg-gray-500 text-gray-200"
-                : "group-hover:text-red-600 group-hover:bg-white bg-red-600"
+                : "group-hover:text-[#4A5BE6] group-hover:bg-white bg-[#4A5BE6]"
             } rounded-full absolute top-5 right-5 px-2 py-1 text-white `}>
             Popular
           </div>
@@ -48,7 +48,7 @@ function MembershipFullCard({
               ? "bg-green-700"
               : isPlanActive
               ? "bg-gray-500"
-              : "group-hover:bg-red-300 bg-red-600 cursor-pointer"
+              : "group-hover:bg-blue-300 bg-[#4A5BE6] cursor-pointer"
           }`}>
           {isCurrentPlan ? "Current Plan" : isPlanActive ? "Active" : "Upgrade"}
         </button>

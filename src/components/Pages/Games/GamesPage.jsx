@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/scrollbar";
 import GamesCard from "./GamesCard";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClose, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 function GamesPage() {
   const [games, setGames] = useState([]);
@@ -24,15 +26,19 @@ function GamesPage() {
   );
 
   return (
-    <div className='p-3 sm:p-5 lg:p-10'>
-      <div className='mb-5'>
+    <div className='p-3 sm:p-5 grow lg:p-10'>
+      <div className='flex items-center shadow-[0_3px_8px_rgb(150,150,150)] text-gray-500 px-2 mb-5 border border-gray-300 rounded-lg'>
+        <FontAwesomeIcon icon={faSearch} />
         <input
           type='text'
           placeholder='Search games...'
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className='w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600'
+          className='w-full p-2 focus:outline-none'
         />
+        <button className='cursor-pointer' onClick={() => setSearchQuery("")}>
+          <FontAwesomeIcon icon={faClose} />
+        </button>
       </div>
       <div className='grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 justify-evenly'>
         {filteredGames.length > 0 ? (
@@ -47,11 +53,18 @@ function GamesPage() {
             </GamesCard>
           ))
         ) : (
-          <p className='italic col-span-full text-center text-gray-500'>
-            No games found.
-          </p>
+          <>
+            <div className='w-[250px]'></div>
+            <div></div>
+            <div></div>
+          </>
         )}
       </div>
+      {filteredGames.length <= 0 && (
+        <p className='italic text-center w-full text-gray-500'>
+          No games found.
+        </p>
+      )}
     </div>
   );
 }

@@ -10,7 +10,7 @@ import {
 function AboutUsPage() {
   return (
     <div className='flex flex-col gap-3 justify-between p-5 font-semibold'>
-      <h1 className='sm:text-5xl text-4xl p-3 font-bold text-red-600'>
+      <h1 className='sm:text-5xl text-4xl p-3 font-bold text-gray-700'>
         About Us
       </h1>
       <div className='rounded-xl text-gray-600 text-lg sm:text-xl p-5 max-w-[1000px] grow flex sm:flex-row flex-col gap-5 justify-center'>

@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { toast, Bounce } from "react-toastify";
-import ConfirmActionToast from "../../ConfirmToast";
 import axios from "axios";
+import ConfirmDialog from "../../ConfirmToast"; // Import reusable ConfirmDialog
 
 function BookGamePopup({
   terms,
@@ -13,8 +13,22 @@ function BookGamePopup({
   gameName,
   selectedDate,
   setRefreshPage,
+  showTerms,
 }) {
   const bookingRef = useRef();
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+
+  useEffect(() => {
+    if (showTerms) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showTerms]);
 
   const hideBookingPage = (e) => {
     if (bookingRef.current && !bookingRef.current.contains(e.target)) {
@@ -33,6 +47,7 @@ function BookGamePopup({
       slot: slot,
       game_id: game_id,
     };
+
     const res = await axios.post(
       `${import.meta.env.VITE_API_URL}/Api's/book_game.php`,
       data,
@@ -42,22 +57,18 @@ function BookGamePopup({
         },
       }
     );
+
     return res.data;
   };
 
   const confirmBooking = async () => {
     if (!agree) return;
+    setShowConfirmModal(true);
+  };
 
+  const handleConfirm = async () => {
+    setShowConfirmModal(false);
     hideBooking();
-
-    const userConfirmed = await ConfirmActionToast(
-      `Are you sure you want to book '${slotTime}' slot for ${gameName} on ${selectedDate
-        .toISOString()
-        .split("T")[0]
-        .replace(/-/g, "/")}?`
-    );
-
-    if (!userConfirmed) return;
 
     try {
       await toast.promise(
@@ -73,7 +84,7 @@ function BookGamePopup({
           pending: "Booking in progress...",
           success: {
             render({ data }) {
-              return data; 
+              return data;
             },
           },
           error: {
@@ -130,12 +141,24 @@ function BookGamePopup({
           onClick={confirmBooking}
           className={`${
             agree
-              ? "bg-red-600 cursor-pointer active:translate-y-1 active:bg-gray-300"
+              ? "bg-[#4A5BE6] cursor-pointer active:translate-y-1 active:bg-gray-300"
               : "bg-gray-300"
           } duration-300 text-white rounded-lg font-medium text-lg px-3`}>
           Continue Booking
         </button>
       </div>
+
+      {/* Reusable Confirm Dialog */}
+      <ConfirmDialog
+        isOpen={showConfirmModal}
+        title='Confirm Booking'
+        message={`Are you sure you want to book ${slotTime} slot for ${gameName} on ${selectedDate
+          .toISOString()
+          .split("T")[0]
+          .replace(/-/g, "/")}?`}
+        onConfirm={handleConfirm}
+        onCancel={() => setShowConfirmModal(false)}
+      />
     </div>
   );
 }

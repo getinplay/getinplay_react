@@ -10,8 +10,8 @@ function FooterLink({ toLink, icon, children }) {
         viewTransition
         className={({ isActive }) =>
           ` ${
-            isActive ? "!text-red-600 font-bold" : ""
-          } flex hover:text-gray-800 text-sm w-max duration-300 cursor-pointer`
+            isActive ? "!text-[#4A5BE6] font-bold" : ""
+          } flex hover:text-[#41C2CB] text-sm w-max duration-300 cursor-pointer`
         }>
         <span className='mr-1 fa-fw'>
           <FontAwesomeIcon icon={icon} size='sm' />

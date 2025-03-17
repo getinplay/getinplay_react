@@ -1,51 +1,44 @@
-import React from "react";
-import { toast, Bounce } from "react-toastify";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCircleCheck,
-  faCircleXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import React, { useEffect, useRef } from "react";
 
-function showConfirmActionToast(title) {
-  return new Promise((resolve) => {
-    toast(
-      ({ closeToast }) => (
-        <div className="flex flex-col gap-2 text-start text-lg">
-          <p className="px-2 text-gray-700 font-semibold">{title}</p>
-          <div className="flex justify-center gap-3">
-            <button
-              onClick={() => {
-                resolve(true); // User confirmed
-                closeToast();
-              }}
-              className="flex items-center gap-2 font-semibold cursor-pointer bg-green-500 text-white px-3 py-[1px] rounded-lg">
-              <FontAwesomeIcon icon={faCircleCheck} />
-              Yes
-            </button>
-            <button
-              onClick={() => {
-                resolve(false); // User canceled
-                closeToast();
-              }}
-              className="flex items-center gap-2 font-semibold cursor-pointer bg-red-500 text-white px-3 py-[1px] rounded-lg">
-              <FontAwesomeIcon icon={faCircleXmark} />
-              No
-            </button>
-          </div>
+function ConfirmDialog({ isOpen, title, message, onConfirm, onCancel }) {
+  const modalRef = useRef();
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  return (
+    <div className='fixed inset-0 bg-black/50 flex items-center justify-center z-50'>
+      <div
+        ref={modalRef}
+        className='bg-white p-5 rounded-lg shadow-lg w-80 max-w-full'>
+        <p className='text-lg font-bold text-gray-800'>{title}</p>
+        <p className='text-gray-600 text-base text-justify my-3'>{message}</p>
+        <div className='flex justify-end gap-3'>
+          <button
+            onClick={onCancel}
+            className='cursor-pointer bg-gray-300 px-4 py-1 rounded-md'>
+            No
+          </button>
+          <button
+            onClick={onConfirm}
+            className='cursor-pointer bg-[#4A5BE6] text-white px-4 py-1 rounded-md'>
+            Yes
+          </button>
         </div>
-      ),
-      {
-        position: "top-center",
-        autoClose: false,
-        hideProgressBar: true,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: false,
-        theme: "light",
-        transition: Bounce,
-      }
-    );
-  });
+      </div>
+    </div>
+  );
 }
 
-export default showConfirmActionToast;
+export default ConfirmDialog;
