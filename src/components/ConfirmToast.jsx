@@ -10,8 +10,8 @@ function showConfirmActionToast(title) {
   return new Promise((resolve) => {
     toast(
       ({ closeToast }) => (
-        <div className="flex flex-col gap-2 text-start">
-          <p className="px-2 font-semibold">{title}</p>
+        <div className="flex flex-col gap-2 text-start text-lg">
+          <p className="px-2 text-gray-700 font-semibold">{title}</p>
           <div className="flex justify-center gap-3">
             <button
               onClick={() => {
@@ -35,8 +35,8 @@ function showConfirmActionToast(title) {
         </div>
       ),
       {
-        position: "top-right",
-        autoClose: false, // Requires user interaction
+        position: "top-center",
+        autoClose: false,
         hideProgressBar: true,
         closeOnClick: false,
         pauseOnHover: true,

@@ -89,7 +89,7 @@ function Navbar() {
               navigate("/login");
             }
           }}
-          className="select-none bg-red-600 text-white hover:bg-red-400 flex items-center gap-2 py-0.5 2xs:py-1 px-1 2xs:px-2 md:px-6 h-min shadow-gray-400 shadow-md my-2 m-2 cursor-pointer rounded-xl active:translate-y-1 active:shadow-none duration-300">
+          className="select-none bg-red-600 text-white hover:bg-red-400 flex items-center gap-2 py-0.5 2xs:py-1 px-1 2xs:px-2 md:px-6 h-min shadow-gray-400 shadow-md my-2 m-2 cursor-pointer rounded-md active:translate-y-1 active:shadow-none duration-300">
           <FontAwesomeIcon
             icon={isLogin ? faRightFromBracket : faRightToBracket}
           />
