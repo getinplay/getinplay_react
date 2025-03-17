@@ -23,6 +23,12 @@
   @apply sm:text-2xl font-bold text-xl;
 }
 
+@layer base {
+  .Toastify__toast {
+    font-family: "Outfit", sans-serif !important;
+  }
+}
+
 body {
   @apply text-center font-[Outfit] relative;
 }

@@ -16,7 +16,6 @@ function ForgotPassword() {
       setError("Please enter a valid email-id!");
     } else {
       setError("");
-      alert(res.data.message);
     }
   };
 

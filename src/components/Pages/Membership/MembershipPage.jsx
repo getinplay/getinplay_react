@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import MembershipFullCard from "./MembershipFullCard";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import ConfirmLogin from "../../ConfirmLogin";
+import ConfirmActionToast from "../../ConfirmToast";
+import { toast, Bounce } from "react-toastify";
 
 function MembershipPage() {
-  const navigate = useNavigate();
   const [currentPlan, setCurrentPlan] = useState(0);
 
   const fetchPlan = async () => {
@@ -30,13 +31,14 @@ function MembershipPage() {
 
   const upgradePlan = async (planId) => {
     if (!document.cookie) {
-      if (confirm("Please login before upgrading the Membership!")) {
-        navigate("/login");
-      }
+      ConfirmLogin();
       return;
     }
 
-    if (!confirm("Are you sure you want to Upgrade your membership?")) {
+    const confirmation = await ConfirmActionToast(
+      "Are you sure you want to Upgrade your membership?"
+    );
+    if (!confirmation) {
       return;
     }
     const res = await axios.post(
@@ -51,7 +53,17 @@ function MembershipPage() {
     );
     if (res.data.success) {
       setCurrentPlan(planId);
-      alert(res.data.message);
+      toast.success(res.data.message, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   };
 
@@ -60,15 +72,15 @@ function MembershipPage() {
   }, []);
 
   return (
-    <div className='flex w-full flex-col gap-2 items-center p-5'>
-      <h1 className='text-red-600 sm:text-5xl text-4xl font-bold p-3'>
+    <div className="flex w-full flex-col gap-2 items-center p-5">
+      <h1 className="text-red-600 sm:text-5xl text-4xl font-bold p-3">
         Compare our plans and find yours
       </h1>
-      <p className='sm:text-lg font-[400] text-gray-400'>
+      <p className="sm:text-lg font-[400] text-gray-400">
         We offer exciting plan that makes you play hustle-free and enjoy the
         time.
       </p>
-      <div className='py-5 w-full h-full justify-center items-center flex flex-col lg:flex-row gap-5 overflow-x-auto'>
+      <div className="py-5 w-full h-full justify-center items-center flex flex-col lg:flex-row gap-5 overflow-x-auto">
         <MembershipFullCard
           allSlotBooking={true}
           cancellation={4}

@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import TimeSlotCard from "../Home/Cards/TimeSlotCard";
 import ButtonGroupBtn from "./ButtonGroupBtn";
 import DatePicker from "./DatePicker";
 import axios from "axios";
+import { toast, Bounce } from "react-toastify";
+import ConfirmLogin from "../../ConfirmLogin";
+import ConfirmActionToast from "../../ConfirmToast";
+import BookGamePopup from "./BookGamePopup";
 
 function GameSlots() {
-  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(false);
   const [selected, setSelected] = useState(0);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -18,6 +21,8 @@ function GameSlots() {
   const [originalSlots, setOriginalSlots] = useState([]);
   const [timeSlots, setTimeSlots] = useState([]);
   const [terms, setTerms] = useState("");
+  const [showBookingConfirm, setShowBookingConfirm] = useState(false);
+  const [agree, setAgree] = useState(false);
   const filterOptions = ["All", "30min", "1hr"];
 
   const filterSlots = (timeSlots, option) => {
@@ -133,23 +138,23 @@ function GameSlots() {
   }, [selectedDate, refreshPage]);
 
   return (
-    <div className='w-[90vw] md:w-[80vw] p-5 flex flex-col gap-5'>
-      <h2 className='text-3xl p-3 sm:text-4xl font-black text-gray-700'>
+    <div className="w-[90vw] md:w-[80vw] p-5 flex flex-col gap-5">
+      <h2 className="text-3xl p-3 sm:text-4xl font-black text-gray-700">
         {currentGame.name.toUpperCase()}
       </h2>
       <img
-        className='shadow-[0_2px_16px_rgba(0,0,0,0.3)] h-[30vh] sm:h-[50vh] min-h-[200px] object-cover rounded-lg'
+        className="shadow-[0_2px_16px_rgba(0,0,0,0.3)] h-[30vh] sm:h-[50vh] min-h-[200px] object-cover rounded-lg"
         src={`${import.meta.env.VITE_API_URL}/admin/${currentGame.slot_image}`}
         alt={`image`}
       />
-      <div className='flex w-full flex-col sm:flex-row gap-5 justify-between items-center'>
+      <div className="flex w-full flex-col xs:flex-row gap-5 justify-between max-xs:items-start items-center">
         <div>
           <DatePicker
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
           />
         </div>
-        <div className='flex  bg-gray-200 rounded-full duration-300'>
+        <div className="flex  bg-gray-200 rounded-full duration-300">
           {filterOptions.map((ele, index) => (
             <ButtonGroupBtn
               onClickHandler={() => {
@@ -166,7 +171,7 @@ function GameSlots() {
       </div>
       {timeSlots.length > 0 ? (
         <>
-          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 justify-evenly'>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 justify-evenly">
             {timeSlots.map((slot, index) => (
               <TimeSlotCard
                 key={index}
@@ -175,26 +180,47 @@ function GameSlots() {
                     ? () => {}
                     : async () => {
                         if (isLogin) {
-                          if (
-                            confirm(
-                              `Are you sure you want to Book '${
-                                slot.time
-                              }' for ${currentGame.name} on ${selectedDate
-                                .toISOString()
-                                .split("T")[0]
-                                .replace(/-/g, "/")}`
-                            )
-                          ) {
-                            const res = await bookSlot(slot.time, id);
-                            alert(res.message);
-                            setRefreshPage((prev) => !prev);
-                          }
+                          setShowBookingConfirm(true);
+                          // if (agree&&
+                          //   await ConfirmActionToast(
+                          //     `Are you sure you want to Book '${
+                          //       slot.time
+                          //     }' for ${currentGame.name} on ${selectedDate
+                          //       .toISOString()
+                          //       .split("T")[0]
+                          //       .replace(/-/g, "/")}`
+                          //   )
+                          // ) {
+                          //   const res = await bookSlot(slot.time, id);
+                          //   if (res.success) {
+                          //     toast.success(res.message, {
+                          //       position: "top-right",
+                          //       autoClose: 5000,
+                          //       hideProgressBar: false,
+                          //       closeOnClick: false,
+                          //       pauseOnHover: false,
+                          //       draggable: false,
+                          //       progress: undefined,
+                          //       theme: "light",
+                          //       transition: Bounce,
+                          //     });
+                          // } else {
+                          //   toast.error(res.message, {
+                          //     position: "top-right",
+                          //     autoClose: 5000,
+                          //     hideProgressBar: false,
+                          //     closeOnClick: false,
+                          //     pauseOnHover: false,
+                          //     draggable: false,
+                          //     progress: undefined,
+                          //     theme: "light",
+                          //     transition: Bounce,
+                          //   });
+                          // }
+                          //   setRefreshPage((prev) => !prev);
+                          // }
                         } else {
-                          if (
-                            confirm("Please Login to continue before Booking!")
-                          ) {
-                            navigate("/login");
-                          }
+                          ConfirmLogin();
                         }
                       }
                 }
@@ -203,21 +229,17 @@ function GameSlots() {
               </TimeSlotCard>
             ))}
           </div>
-          <div className='flex justify-center items-center'>
-            <div className='max-w-3xl'>
-              <p className='font-bold sm:text-lg text-gray-700 p-5 text-center'>
-                TERMS & CONDITIONS
-              </p>
-              <div className='shadow-[0_2px_16px_rgba(0,0,0,0.3)] overflow-hidden rounded-xl'>
-                <p
-                  dangerouslySetInnerHTML={{ __html: terms }}
-                  className='p-2 pl-6 overflow-y-auto max-h-50 text-sm sm:text-base text-justify text-gray-600'></p>
-              </div>
-            </div>
-          </div>
+          {showBookingConfirm && (
+            <BookGamePopup
+              terms={terms}
+              setAgree={setAgree}
+              agree={agree}
+              hideBooking={() => setShowBookingConfirm(false)}
+            />
+          )}
         </>
       ) : (
-        <p className='text-gray-700 italic text-lg'>
+        <p className="text-gray-700 italic text-lg">
           No Slots Available for this Game
         </p>
       )}
