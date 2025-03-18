@@ -11,7 +11,7 @@ function FooterLink({ toLink, icon, children }) {
         className={({ isActive }) =>
           ` ${
             isActive ? "!text-[#4A5BE6] font-bold" : ""
-          } flex hover:text-[#41C2CB] text-sm w-max duration-300 cursor-pointer`
+          } flex hover:text-[#1529be] text-sm w-max duration-300 cursor-pointer`
         }>
         <span className='mr-1 fa-fw'>
           <FontAwesomeIcon icon={icon} size='sm' />

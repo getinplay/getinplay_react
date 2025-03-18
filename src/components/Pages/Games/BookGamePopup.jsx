@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { toast, Bounce } from "react-toastify";
 import axios from "axios";
-import ConfirmDialog from "../../ConfirmToast"; // Import reusable ConfirmDialog
+import ConfirmDialog from "../../ConfirmDialog";
 
 function BookGamePopup({
   terms,
@@ -152,10 +152,17 @@ function BookGamePopup({
       <ConfirmDialog
         isOpen={showConfirmModal}
         title='Confirm Booking'
-        message={`Are you sure you want to book ${slotTime} slot for ${gameName} on ${selectedDate
-          .toISOString()
-          .split("T")[0]
-          .replace(/-/g, "/")}?`}
+        message={
+          <>
+            Are you sure you want to book <b>{slotTime}</b> slot for{" "}
+            <b>{gameName}</b> on
+            <b>
+              {" "}
+              {selectedDate.toISOString().split("T")[0].replace(/-/g, "/")}
+            </b>
+            ?
+          </>
+        }
         onConfirm={handleConfirm}
         onCancel={() => setShowConfirmModal(false)}
       />

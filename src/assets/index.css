@@ -43,11 +43,11 @@ body {
 }
 
 .navbarlink-wrapper:hover .navbarlink {
-  @apply text-[#41C2CB];
+  @apply text-[#1529be];
 }
 
 .navbarlink-wrapper:hover::after {
-  @apply bg-[#41C2CB] opacity-0;
+  @apply bg-[#1529be] opacity-0;
 }
 
 .navbarlink-wrapper:focus {
@@ -68,5 +68,5 @@ body {
 }
 
 .active.navbarlink-wrapper:hover .navbarlink {
-  @apply text-[#41C2CB];
+  @apply text-[#1529be];
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import MembershipFullCard from "./MembershipFullCard";
 import axios from "axios";
 import ConfirmLogin from "../../ConfirmLogin";
-import ConfirmDialog from "../../ConfirmToast";
+import ConfirmDialog from "../../ConfirmDialog";
 import { toast, Bounce } from "react-toastify";
 
 function MembershipPage() {
@@ -12,7 +12,7 @@ function MembershipPage() {
   const membershipPlans = [
     {
       id: 1,
-      name: "Normal",
+      name: "Basic",
       allSlotBooking: true,
       cancellation: 4,
       bookBefore: 24,
@@ -135,7 +135,11 @@ function MembershipPage() {
       <ConfirmDialog
         isOpen={showConfirmModal}
         title='Confirm Upgrade'
-        message='Are you sure you want to upgrade your membership?'
+        message={
+          <>
+            Are you sure you want to <b>Upgrade</b> your <b>Membership?</b>
+          </>
+        }
         onConfirm={upgradePlan}
         onCancel={() => setShowConfirmModal(false)}
       />
