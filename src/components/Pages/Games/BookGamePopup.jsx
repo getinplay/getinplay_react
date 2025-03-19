@@ -14,6 +14,7 @@ function BookGamePopup({
   selectedDate,
   setRefreshPage,
   showTerms,
+  price,
 }) {
   const bookingRef = useRef();
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -124,7 +125,7 @@ function BookGamePopup({
         <div className='bg-gray-100 overflow-hidden rounded-lg'>
           <p
             dangerouslySetInnerHTML={{ __html: terms }}
-            className='p-2 pl-6 overflow-y-auto max-h-50 text-sm sm:text-base text-justify text-gray-600'></p>
+            className='p-2 pl-6 overflow-y-auto max-h-50 text-sm sm:text-base xs:text-justify text-gray-600'></p>
         </div>
 
         <p className='flex items-center w-full gap-2'>
@@ -160,8 +161,8 @@ function BookGamePopup({
             <b>
               {" "}
               {selectedDate.toISOString().split("T")[0].replace(/-/g, "/")}
-            </b>
-            ?
+            </b>{" "}
+            for <b>₹{price}</b>?
           </>
         }
         onConfirm={handleConfirm}

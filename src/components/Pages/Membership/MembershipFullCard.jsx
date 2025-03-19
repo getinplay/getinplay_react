@@ -13,17 +13,17 @@ function MembershipFullCard({
 }) {
   return (
     <div
-      className={`select-none xs:max-w-[350px] max-w-[300px] flex flex-col gap-1 bg-white rounded-xl border-1 ${
+      className={`group select-none xs:max-w-[350px] max-w-[300px] flex flex-col gap-1 bg-white rounded-xl border-1 ${
         isCurrentPlan ? "border-green-600" : "border-gray-300"
-      } shadow-lg`}>
+      } hover:shadow-lg hover:bg-gray-100 hover:scale-103 duration-300`}>
       <div
         className={`${
           isCurrentPlan
             ? "bg-green-200"
             : isPlanActive
             ? "text-gray-600"
-            : "hover:shadow-lg hover:bg-[#4A5BE6] hover:text-white"
-        } relative group shadow-[#1529be] p-5 sm:py-8 flex bg-gray-100 flex-col gap-3 rounded-xl items-start duration-300`}>
+            : "group-hover:shadow-lg group-hover:bg-[#4A5BE6] group-hover:text-white"
+        } relative p-5 sm:py-8 flex bg-gray-200 flex-col gap-3 rounded-xl items-start duration-300`}>
         <p className='text-2xl sm:text-3xl font-semibold'>{children}</p>
         <p className='text-lg sm:text-2xl font-semibold'>
           <span className='text-3xl sm:text-4xl font-bold'>₹{amount}</span>

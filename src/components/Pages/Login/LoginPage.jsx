@@ -78,9 +78,9 @@ function LoginPage() {
           className='lg:w-[50%] md:w-[65%] max-md:w-[90%] max-w-[500px] min-h-max py-5 shadow-[0_2px_16px_rgba(0,0,0,0.4)] rounded-xl bg-white flex flex-col gap-3 items-center justify-between'>
           <div>
             <p className='text-3xl sm:text-4xl font-bold text-[#4A5BE6] text-center'>
-              WELCOME BACK
+               WELCOME
             </p>
-            <p className='sm:text-lg font-semibold text-gray-400'>
+            <p className='sm:text-lg font-medium text-gray-400'>
               Login to your account
             </p>
           </div>

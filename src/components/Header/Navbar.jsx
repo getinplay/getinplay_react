@@ -16,6 +16,7 @@ function Navbar() {
   const navigate = useNavigate();
   const [userData, setUserData] = useState();
   const navLinksRef = useRef();
+  const profileRef = useRef();
   const [isLogin, setIsLogin] = useState(false);
   const [showNav, setShowNav] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
@@ -25,6 +26,22 @@ function Navbar() {
       setShowNav((prev) => !prev);
     }
   };
+
+  // Close profile when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setShowProfile(false);
+      }
+    };
+
+    if (showProfile) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showProfile]);
 
   useEffect(() => {
     const getInfo = async () => {
@@ -46,6 +63,7 @@ function Navbar() {
       setIsLogin(res.data.success);
     };
     getInfo();
+
     if (window.innerWidth < 1024 && showNav) {
       document.body.style.overflow = "hidden";
     } else {
@@ -56,6 +74,7 @@ function Navbar() {
       document.body.style.overflow = ""; // Ensure scrolling is enabled when component unmounts
     };
   }, [showNav]);
+
   return (
     <nav className='sticky md:px-5 top-0 z-30 bg-white h-18 flex w-full max-sm:px-1 py-1 items-center justify-between border-b-1 border-gray-200'>
       <div className='p-2 z-20 lg:w-[250px] w-[170px]'>
@@ -71,9 +90,6 @@ function Navbar() {
       <div
         ref={navLinksRef}
         onClick={closeNavLinks}
-        onScroll={(e) => {
-          e.preventDefault;
-        }}
         className={`${
           showNav ? "" : "max-lg:hidden"
         } lg:relative max-lg:mt-18 max-lg:flex justify-end backdrop-blur-xs duration-300 bg-gray-200/50 max-lg:inset-0 absolute max-lg:h-dvh w-full z-10`}>
@@ -96,7 +112,7 @@ function Navbar() {
         </div>
       </div>
 
-      <div className='flex gap-1 h-full items-center 2xs:text-sm sm:text-base text-xs font-semibold z-20 '>
+      <div className='flex gap-1 h-full items-center 2xs:text-sm sm:text-base text-xs font-semibold z-20'>
         {!isLogin ? (
           <div
             onClick={() => navigate("/login")}
@@ -105,11 +121,11 @@ function Navbar() {
             <div>Login</div>
           </div>
         ) : (
-          <div className='h-full relative text-gray-700'>
+          <div className='h-full relative text-gray-700' ref={profileRef}>
             <button
               onClick={() => setShowProfile((prev) => !prev)}
               className='cursor-pointer gap-3 px-3 h-full w-max flex items-center justify-end'>
-              <div className="flex text-lg items-center justify-center bg-gray-200 h-7 w-7 rounded-[100px]">
+              <div className='flex text-lg items-center justify-center bg-gray-200 h-7 w-7 rounded-[100px]'>
                 <FontAwesomeIcon icon={faUser} />
               </div>
               <p className={`max-xs:hidden`}>
@@ -149,11 +165,10 @@ function Navbar() {
         <button
           onClick={() => {
             setShowNav(!showNav);
-            setShowProfile(false);
           }}>
           <FontAwesomeIcon
             icon={faBars}
-            className='px-2 cursor-pointer lg:!hidden'
+            className='px-2 cursor-pointer text-lg lg:!hidden'
           />
         </button>
       </div>

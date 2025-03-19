@@ -158,7 +158,7 @@ function GameSlots() {
                     : async () => {
                         if (isLogin) {
                           setShowBookingConfirm(true);
-                          setSelectedSlot(slot.time);
+                          setSelectedSlot(slot);
                         } else {
                           ConfirmLogin();
                         }
@@ -174,12 +174,17 @@ function GameSlots() {
               terms={terms}
               setAgree={setAgree}
               agree={agree}
-              slotTime={selectedSlot}
+              slotTime={selectedSlot.time}
               gameId={id}
               gameName={currentGame.name}
               selectedDate={selectedDate}
               setRefreshPage={setRefreshPage}
               showTerms={showBookingConfirm}
+              price={
+                selectedSlot.filter == "30min"
+                  ? currentGame.half_hour
+                  : currentGame.hour
+              }
               hideBooking={() => setShowBookingConfirm(false)}
             />
           )}

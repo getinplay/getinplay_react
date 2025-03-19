@@ -77,7 +77,7 @@ function ForgotPassword() {
           <p className='text-4xl font-bold text-[#4A5BE6] text-center'>
             FORGOT PASSWORD?
           </p>
-          <p className='text-lg font-semibold text-gray-400'>
+          <p className='text-lg font-medium text-gray-400'>
             We'll send you reset instructions.
           </p>
         </div>
