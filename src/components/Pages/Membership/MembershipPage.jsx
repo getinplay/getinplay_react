@@ -99,6 +99,7 @@ function MembershipPage() {
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: false,
+        pauseOnFocusLoss: false,
         draggable: false,
         progress: undefined,
         theme: "light",

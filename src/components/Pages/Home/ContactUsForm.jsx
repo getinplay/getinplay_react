@@ -9,20 +9,31 @@ function ContactUsForm() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
-  const [error, setError] = useState("");
+
   const sendEmail = async (data) => {
     setIsSending(true);
-    const res = await axios.post(
-      `${import.meta.env.VITE_API_URL}/Api's/contact.php`,
-      data,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    setIsSending(false);
-    return res.data;
+
+    return toast
+      .promise(
+        axios.post(`${import.meta.env.VITE_API_URL}/Api's/contact.php`, data, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }),
+        {
+          pending: "Sending Email...",
+          success: "Email Sent Successfully!",
+          error: "Error sending email. Please try again.",
+        }
+      )
+      .then((res) => {
+        setIsSending(false);
+        return res.data;
+      })
+      .catch((error) => {
+        setIsSending(false);
+        return { success: false, message: "Error sending email." };
+      });
   };
 
   async function handleSubmit(e) {
@@ -31,48 +42,35 @@ function ContactUsForm() {
     const phoneRegex = /^[6-9]\d{9}$/;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+    let errorMessage = "";
+
     if (!name) {
-      setError("Name is required!");
+      errorMessage = "Name is required!";
     } else if (!phone) {
-      setError("Phone no. is required!");
+      errorMessage = "Phone no. is required!";
     } else if (!phoneRegex.test(phone)) {
-      setError("Enter a valid phone no.!");
+      errorMessage = "Enter a valid phone no.!";
     } else if (!email) {
-      setError("Email is required!");
+      errorMessage = "Email is required!";
     } else if (!emailRegex.test(email)) {
-      setError("Enter a valid email address!");
+      errorMessage = "Enter a valid email address!";
     } else if (!message) {
-      setError("Message is required!");
-    } else {
-      setError("");
-      const data = { name: name, phone: phone, email: email, message: message };
-      const res = await sendEmail(data);
-      if (res.success) {
-        toast.success(res.message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: false,
-          draggable: false,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
-      } else {
-        toast.error(res.message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: false,
-          draggable: false,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
-      }
+      errorMessage = "Message is required!";
     }
+
+    if (errorMessage) {
+      toast.error(errorMessage, {
+        toastId: errorMessage,
+        position: "top-center",
+        autoClose: 2000,
+        pauseOnHover: false,
+        pauseOnFocusLoss: false,
+      });
+      return;
+    }
+
+    const data = { name, phone, email, message };
+    await sendEmail(data);
   }
 
   return (
@@ -153,8 +151,7 @@ function ContactUsForm() {
             className='resize-none bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1'
           />
         </div>
-        <div className='flex max-sm:flex-col w-full justify-between items-center'>
-          <p className='sm:pl-27 text-red-600 sm:text-lg'>{error}&nbsp;</p>
+        <div className='flex max-sm:flex-col w-full justify-end items-center'>
           <button
             type='submit'
             disabled={isSending}

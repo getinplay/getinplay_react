@@ -23,7 +23,7 @@ function MembershipFullCard({
             : isPlanActive
             ? "text-gray-600"
             : "hover:shadow-lg hover:bg-[#4A5BE6] hover:text-white"
-        } relative group shadow-blue-400 p-5 sm:py-8 flex bg-gray-100 flex-col gap-3 rounded-xl items-start duration-300`}>
+        } relative group shadow-[#1529be] p-5 sm:py-8 flex bg-gray-100 flex-col gap-3 rounded-xl items-start duration-300`}>
         <p className='text-2xl sm:text-3xl font-semibold'>{children}</p>
         <p className='text-lg sm:text-2xl font-semibold'>
           <span className='text-3xl sm:text-4xl font-bold'>₹{amount}</span>
@@ -48,7 +48,7 @@ function MembershipFullCard({
               ? "bg-green-700"
               : isPlanActive
               ? "bg-gray-500"
-              : "group-hover:bg-blue-300 bg-[#4A5BE6] cursor-pointer"
+              : "group-hover:bg-[#34409e] bg-[#4A5BE6] cursor-pointer"
           }`}>
           {isCurrentPlan ? "Current Plan" : isPlanActive ? "Active" : "Upgrade"}
         </button>

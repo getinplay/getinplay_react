@@ -1,16 +1,24 @@
 import NavBarLink from "./NavBarLink";
 import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faHistory,
+  faUser,
+  faRightFromBracket,
+  faLock,
+} from "@fortawesome/free-solid-svg-icons";
 import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Navbar() {
   const navigate = useNavigate();
+  const [userData, setUserData] = useState();
   const navLinksRef = useRef();
   const [isLogin, setIsLogin] = useState(false);
   const [showNav, setShowNav] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
 
   const closeNavLinks = (e) => {
     if (navLinksRef.current === e.target) {
@@ -34,6 +42,7 @@ function Navbar() {
           },
         }
       );
+      setUserData(res.data);
       setIsLogin(res.data.success);
     };
     getInfo();
@@ -87,26 +96,60 @@ function Navbar() {
         </div>
       </div>
 
-      <div className='flex items-center 2xs:text-sm sm:text-base text-xs font-semibold z-20 '>
-        <div
-          onClick={() => {
-            if (isLogin) {
-              document.cookie =
-                "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-              navigate(0);
-            } else {
-              navigate("/login");
-            }
-          }}
-          className='select-none bg-[#4A5BE6] text-white hover:bg-[#1529be] flex items-center gap-2 py-0.5 2xs:py-1 px-1 2xs:px-2 md:px-6 h-min shadow-gray-400 shadow-md my-2 m-2 cursor-pointer rounded-md active:translate-y-1 active:shadow-none duration-300'>
-          <FontAwesomeIcon
-            icon={isLogin ? faRightFromBracket : faRightToBracket}
-          />
-          <div>{isLogin ? "Logout" : "Login"}</div>
-        </div>
+      <div className='flex gap-1 h-full items-center 2xs:text-sm sm:text-base text-xs font-semibold z-20 '>
+        {!isLogin ? (
+          <div
+            onClick={() => navigate("/login")}
+            className='select-none bg-[#4A5BE6] text-white hover:bg-[#1529be] flex items-center gap-2 py-0.5 2xs:py-1 px-1 2xs:px-2 md:px-6 h-min shadow-gray-400 shadow-md my-2 m-2 cursor-pointer rounded-md active:translate-y-1 active:shadow-none duration-300'>
+            <FontAwesomeIcon icon={faRightToBracket} />
+            <div>Login</div>
+          </div>
+        ) : (
+          <div className='h-full relative text-gray-700'>
+            <button
+              onClick={() => setShowProfile((prev) => !prev)}
+              className='cursor-pointer gap-3 px-3 h-full w-max flex items-center justify-end'>
+              <div className="flex text-lg items-center justify-center bg-gray-200 h-7 w-7 rounded-[100px]">
+                <FontAwesomeIcon icon={faUser} />
+              </div>
+              <p className={`max-xs:hidden`}>
+                {userData.data.full_name.toUpperCase()}
+              </p>
+            </button>
+            {showProfile && (
+              <div className='flex flex-col gap-1 py-1 overflow-hidden absolute top-[100%] right-0 rounded-lg shadow-[0_2px_16px_rgba(0,0,0,0.3)] shadow-black/50 w-max bg-white'>
+                <button className='hover:text-[#1529be] cursor-pointer flex gap-2 mx-3 items-center text-gray-600'>
+                  <FontAwesomeIcon icon={faUser} />
+                  View Profile
+                </button>
+                <button className='hover:text-[#1529be] cursor-pointer flex gap-2 mx-3 items-center text-gray-600'>
+                  <FontAwesomeIcon icon={faLock} />
+                  Update Password
+                </button>
+                <button className='hover:text-[#1529be] cursor-pointer flex gap-2 mx-3 items-center text-gray-600'>
+                  <FontAwesomeIcon icon={faHistory} />
+                  Booking History
+                </button>
+
+                <hr className='text-gray-300' />
+                <button
+                  onClick={() => {
+                    document.cookie =
+                      "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    navigate(0);
+                  }}
+                  className='cursor-pointer flex gap-2 mx-3 items-center text-red-600'>
+                  <FontAwesomeIcon icon={faRightFromBracket} />
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
+        )}
         <button
           onClick={() => {
             setShowNav(!showNav);
+            setShowProfile(false);
           }}>
           <FontAwesomeIcon
             icon={faBars}

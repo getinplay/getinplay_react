@@ -13,7 +13,7 @@ function ConfirmLoginToast({ closeToast }) {
       <button
         onClick={() => {
           navigate("/login");
-          closeToast(); // Close the toast after clicking Login
+          closeToast();
         }}
         className='flex gap-2 items-center justify-center font-semibold cursor-pointer bg-[#4A5BE6] m-2 text-white px-3 py-[1px] rounded-lg'>
         <FontAwesomeIcon icon={faRightToBracket} />
@@ -25,6 +25,7 @@ function ConfirmLoginToast({ closeToast }) {
 
 function showConfirmLoginToast() {
   toast(({ closeToast }) => <ConfirmLoginToast closeToast={closeToast} />, {
+    toastId: "login",
     position: "top-right",
     autoClose: 2000,
     hideProgressBar: true,

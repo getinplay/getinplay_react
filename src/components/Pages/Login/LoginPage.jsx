@@ -3,54 +3,71 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser, faLock } from "@fortawesome/free-solid-svg-icons";
-import { ToastContainer, toast, Bounce } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 function LoginPage() {
   const [showPass, setShowPass] = useState(false);
-  const [error, setError] = useState(null);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
+
+    let errorMessage = "";
+
     if (!username) {
-      setError("Username is required!");
+      errorMessage = "Username is required!";
     } else if (!password) {
-      setError("Password is required!");
+      errorMessage = "Password is required!";
     } else if (password.length < 8) {
-      setError("Password cannot be less than 8 characters!");
-    } else {
-      setError("");
-      const url = `${import.meta.env.VITE_API_URL}/Api's/check_login.php`;
-      const data = {
-        username: username,
-        password: password,
-      };
-      const res = await axios.post(url, data, {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
+      errorMessage = "Password cannot be less than 8 characters!";
+    }
+
+    if (errorMessage) {
+      toast.error(errorMessage, {
+        toastId: errorMessage,
+        position: "top-center",
+        autoClose: 2000,
+        pauseOnHover: false,
+        pauseOnFocusLoss: false,
       });
+      return;
+    }
+
+    const data = { username, password };
+
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/Api's/check_login.php`,
+        data,
+        {
+          withCredentials: true,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
       if (res.data.success) {
         document.cookie = `authToken=${res.data.token}; path=/;`;
         navigate(-1);
       } else {
         toast.error(res.data.message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
+          toastId: res.data.message,
+          position: "top-center",
+          autoClose: 3000,
           pauseOnHover: false,
-          draggable: false,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
+          pauseOnFocusLoss: false,
         });
       }
+    } catch (error) {
+      toast.error("An error occurred. Please try again.", {
+        position: "top-center",
+        autoClose: 3000,
+        pauseOnHover: false,
+        pauseOnFocusLoss: false,
+      });
     }
-  };
+  }
 
   return (
     <>
@@ -138,9 +155,6 @@ function LoginPage() {
               </Link>
             </div>
           </div>
-          <p className='text-red-600 font-bold mx-5 text-center text-base'>
-            {error}&nbsp;
-          </p>
 
           <button
             type='submit'

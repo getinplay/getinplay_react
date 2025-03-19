@@ -2,20 +2,68 @@ import React from "react";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { ToastContainer, toast } from "react-toastify";
 
 function ForgotPassword() {
-  const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
 
   const handleSubmit = async (e) => {
-    const emailRegex = /^[^@]+@[^@]+\.[^@]+$/;
     e.preventDefault();
+
+    const emailRegex = /^[^@]+@[^@]+\.[^@]+$/;
+    let errorMessage = "";
+
     if (!email) {
-      setError("Email cannot be empty!");
+      errorMessage = "Email cannot be empty!";
     } else if (!emailRegex.test(email)) {
-      setError("Please enter a valid email-id!");
-    } else {
-      setError("");
+      errorMessage = "Please enter a valid email!";
+    }
+
+    if (errorMessage) {
+      toast.error(errorMessage, {
+        toastId: errorMessage, // Prevents duplicate toasts
+        position: "top-center",
+        autoClose: 2000,
+        pauseOnHover: false,
+        pauseOnFocusLoss: false,
+      });
+      return;
+    }
+
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/Api's/forgot_password.php`,
+        { email },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      if (res.data.success) {
+        toast.success("Password reset instructions sent to your email!", {
+          toastId: "password-reset",
+          position: "top-center",
+          autoClose: 3000,
+          pauseOnHover: false,
+          pauseOnFocusLoss: false,
+        });
+      } else {
+        toast.error(res.data.message, {
+          toastId: "reset-error",
+          position: "top-center",
+          autoClose: 3000,
+          pauseOnHover: false,
+          pauseOnFocusLoss: false,
+        });
+      }
+    } catch (error) {
+      toast.error("An error occurred. Please try again.", {
+        toastId: "network-error",
+        position: "top-center",
+        autoClose: 3000,
+        pauseOnHover: false,
+        pauseOnFocusLoss: false,
+      });
     }
   };
 
@@ -48,17 +96,13 @@ function ForgotPassword() {
             />
           </div>
         </div>
-
-        <p className='sticky text-red-600 font-bold mx-5 text-center text-base'>
-          {error} &nbsp;
-        </p>
-
         <button
           type='submit'
           className='cursor-pointer mb-5 bg-[#4A5BE6] p-2 rounded-lg tracking-wide text-white font-bold text-xl active:translate-y-2 active:shadow-none duration-300 shadow-gray-400 hover:shadow-xl shadow-lg w-5/6'>
           RESET PASSWORD
         </button>
       </form>
+      <ToastContainer />
     </div>
   );
 }

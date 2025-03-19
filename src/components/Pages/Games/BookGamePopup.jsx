@@ -99,6 +99,7 @@ function BookGamePopup({
           hideProgressBar: false,
           closeOnClick: false,
           pauseOnHover: false,
+          pauseOnFocusLoss: false,
           draggable: false,
           theme: "light",
           transition: Bounce,

@@ -6,7 +6,7 @@ function GamesCard({ children, src, half, full, gameId }) {
     <div>
       <Link
         to={gameId}
-        className='select-none shadow-[0_3px_10px_rgb(150,150,150)] bg-white flex flex-col active:bg-gray-100 hover:bg-gray-100 cursor-pointer active:scale-[1.08] hover:scale-[1.03] duration-300 gap-2 lg:w-[250px] sm:w-[225px] xs:w-[200px] max-xs:max-w-[300px] h-[300px] xs:h-[300px] sm:h-[325px] lg:h-[350px] rounded-lg overflow-hidden'>
+        className='select-none hover:shadow-[0_3px_10px_rgb(150,150,150)] shadow-[0_1px_5px_rgb(150,150,150)] bg-white flex flex-col active:bg-gray-100 hover:bg-gray-100 cursor-pointer active:scale-[1.08] hover:scale-[1.03] duration-300 gap-2 lg:w-[250px] sm:w-[225px] xs:w-[200px] max-xs:max-w-[300px] h-[300px] xs:h-[300px] sm:h-[325px] lg:h-[350px] rounded-lg overflow-hidden'>
         <div className='w-full h-[90%] overflow-hidden'>
           <img
             src={src}
