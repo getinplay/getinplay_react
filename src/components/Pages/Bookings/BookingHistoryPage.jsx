@@ -88,6 +88,7 @@ function BookingHistoryPage() {
                 slot={booking.slot}
                 showCancel={activeTab === "upcoming"}
                 id={booking.id.toString()}
+                game_id={booking.game_id}
               />
             ))
           ) : (

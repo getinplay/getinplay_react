@@ -1,14 +1,83 @@
 import React from "react";
+import { toast } from "react-toastify"; // Import Toastify
+import "react-toastify/dist/ReactToastify.css"; // Import Toastify styles
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-function BookingCard({ date, price, game, slot, showCancel, id }) {
+import axios from "axios"; // Import axios
+
+function BookingCard({ date, price, game, slot, showCancel, id, game_id }) {
+  const API_URL = import.meta.env.VITE_API_URL;
+
+  const getAuthToken = () => {
+    return document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("authToken="))
+      ?.split("=")[1];
+  };
+
+  const handleCancelBooking = async () => {
+    const token = getAuthToken();
+
+    if (!token) {
+      toast.error("Authentication error! Please log in again.", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        `${API_URL}/Api's/slot_cancle.php`,
+        {
+          token,
+          auth: "user",
+          date,
+          slot,
+          game_id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.data.success) {
+        toast.success("Booking cancelled successfully!", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+      } else {
+        toast.error(`Failed to cancel booking: ${response.data.message}`, {
+          position: "top-right",
+          autoClose: 3000,
+        });
+      }
+    } catch (error) {
+      console.error("Error cancelling booking:", error);
+      toast.error("Something went wrong! Please try again.", {
+        position: "top-right",
+        pauseOnFocusLoss: false,
+        pauseOnHover: false,
+        autoClose: 3000,
+      });
+    }
+  };
+
   return (
     <div className='flex w-full shadow-[0_2px_16px_rgba(0,0,0,0.3)] bg-white px-2 rounded-md text-start'>
       {showCancel && (
-        <div className='flex gap-1'>
-          <div className='flex hover:text-red-400 items-center justify-center text-lg text-gray-400 cursor-pointer'>
+        <div className='flex justify-center items-center gap-1'>
+          <button
+            className='relative group flex hover:text-red-400 items-center justify-center text-lg text-gray-400 cursor-pointer'
+            onClick={handleCancelBooking}>
             <FontAwesomeIcon icon={faTrashCan} />
-          </div>
+            <div className='absolute -bottom-10 left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-gray-700 rounded-md opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200 whitespace-nowrap'>
+              Cancel Booking
+            </div>
+          </button>
+
           <div className='bg-gray-300 w-0.25 h-full'></div>
         </div>
       )}
@@ -20,7 +89,7 @@ function BookingCard({ date, price, game, slot, showCancel, id }) {
               Booking-ID: #{id}
             </p>
           </div>
-          <p className='font-semibold  text-gray-500'>₹{price}</p>
+          <p className='font-semibold text-gray-500'>₹{price}</p>
         </div>
         <div className='flex max-2xs:flex-col sm:text-lg justify-between 2xs:gap-2'>
           <p className='font-medium tracking-wide'>{game.toUpperCase()}</p>
