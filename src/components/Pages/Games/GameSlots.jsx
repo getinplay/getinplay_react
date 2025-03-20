@@ -116,7 +116,7 @@ function GameSlots() {
 
   return (
     <div className='w-[90vw] md:w-[80vw] p-5 flex flex-col gap-5'>
-      <h2 className='text-3xl p-3 sm:text-4xl font-black text-gray-700'>
+      <h2 className='text-3xl p-3 sm:text-4xl font-extrabold text-gray-700'>
         {currentGame.name.toUpperCase()}
       </h2>
       <img

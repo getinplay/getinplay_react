@@ -161,6 +161,7 @@ function Navbar() {
                   onClick={() => {
                     document.cookie =
                       "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    navigate("/");
                     navigate(0);
                   }}
                   className='cursor-pointer flex gap-2 mx-3 items-center text-red-600'>

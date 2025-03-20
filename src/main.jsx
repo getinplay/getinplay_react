@@ -2,14 +2,7 @@ import ReactDOM from "react-dom/client";
 // import { useState } from "react";
 import "./assets/index.css";
 import App from "./App";
-import {
-  createRoutesFromElements,
-  Route,
-  createBrowserRouter,
-  BrowserRouter,
-  Routes,
-  RouterProvider,
-} from "react-router-dom";
+import { Route, BrowserRouter, Routes } from "react-router-dom";
 
 import GamesPage from "./components/Pages/Games/GamesPage";
 import HomePage from "./components/Pages/Home/HomePage";
@@ -19,7 +12,7 @@ import ContactUsPage from "./components/Pages/ContactUs/ContactUsPage";
 import LoginPage from "./components/Pages/Login/LoginPage";
 import GameSlots from "./components/Pages/Games/GameSlots";
 import ForgotPassword from "./components/Pages/Login/ForgotPassword";
-import BookingPage from "./components/Pages/Bookings/BookingPage";
+import BookingHistoryPage from "./components/Pages/Bookings/BookingHistoryPage";
 import ProfilePage from "./components/Pages/Profile/ProfilePage";
 import UpdatePasswordPage from "./components/Pages/UpdatePassword/UpdatePasswordPage";
 
@@ -33,7 +26,7 @@ const router = (
         <Route path='membership' element={<MembershipPage />} />
         <Route path='about-us' element={<AboutUsPage />} />
         <Route path='contact-us' element={<ContactUsPage />} />
-        <Route path='bookings' element={<BookingPage />} />
+        <Route path='bookings' element={<BookingHistoryPage />} />
         <Route path='profile' element={<ProfilePage />} />
         <Route path='update-password' element={<UpdatePasswordPage />} />
       </Route>

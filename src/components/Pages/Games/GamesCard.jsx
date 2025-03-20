@@ -14,7 +14,7 @@ function GamesCard({ children, src, half, full, gameId }) {
             className='object-cover h-full w-full transition-transform duration-300 ease-in-out group-hover:scale-110'
           />
         </div>
-        <p className='xs:text-2xl text-xl font-black text-gray-800'>
+        <p className='xs:text-2xl text-xl font-extrabold text-gray-800'>
           {children.toUpperCase()}
         </p>
         <div className='flex-col text-start px-3 pb-3'>
