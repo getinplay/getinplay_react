@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BookingCard from "./BookingCard";
+import ReactPaginate from "react-paginate";
 
 function BookingHistoryPage() {
   const [bookings, setBookings] = useState({
@@ -9,6 +10,8 @@ function BookingHistoryPage() {
     cancelled: [],
   });
   const [activeTab, setActiveTab] = useState("upcoming");
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 6;
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -46,6 +49,15 @@ function BookingHistoryPage() {
     fetchBookings();
   }, []);
 
+  const handlePageClick = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+
+  const currentBookings = bookings[activeTab].slice(
+    currentPage * itemsPerPage,
+    (currentPage + 1) * itemsPerPage
+  );
+
   return (
     <div className='w-full grow py-10'>
       <div className='flex flex-col justify-center w-full xs:px-15 lg:px-30'>
@@ -62,7 +74,10 @@ function BookingHistoryPage() {
                   ? "font-semibold text-blue-700"
                   : "text-gray-400 border-transparent"
               }`}
-              onClick={() => setActiveTab(key)}>
+              onClick={() => {
+                setActiveTab(key);
+                setCurrentPage(0);
+              }}>
               {label}
 
               {activeTab === key && (
@@ -78,8 +93,8 @@ function BookingHistoryPage() {
         </div>
 
         <div className='h-max grow lg:px-5 px-2 py-5 rounded-lg lg:gap-5 gap-2 justify-center w-full items-stretch grid grid-cols-1 md:grid-cols-2'>
-          {bookings[activeTab].length > 0 ? (
-            bookings[activeTab].map((booking) => (
+          {currentBookings.length > 0 ? (
+            currentBookings.map((booking) => (
               <BookingCard
                 key={booking.id}
                 date={booking.book_date}
@@ -101,6 +116,34 @@ function BookingHistoryPage() {
             </div>
           )}
         </div>
+
+        {bookings[activeTab].length > itemsPerPage && (
+          <ReactPaginate
+            previousLabel={"Prev"}
+            nextLabel={"Next"}
+            pageCount={Math.ceil(bookings[activeTab].length / itemsPerPage)}
+            onPageChange={handlePageClick}
+            containerClassName={"flex justify-center space-x-2 mt-5"}
+            pageClassName={
+              "px-1 sm:px-3 py-0.5 sm:py-1 bg-gray-200 rounded cursor-pointer list-none"
+            }
+            activeClassName={"bg-blue-600 text-blue-700 font-bold"}
+            previousClassName={
+              "px-1 sm:px-3 py-0.5 sm:py-1 bg-gray-300 rounded cursor-pointer list-none"
+            }
+            nextClassName={
+              "px-1 sm:px-3 py-0.5 sm:py-1 bg-gray-300 rounded cursor-pointer list-none"
+            }
+            disabledClassName={"opacity-50 cursor-not-allowed"}
+            pageLinkClassName={"block px-1 sm:px-3 py-0.5 sm:py-1"}
+            previousLinkClassName={"block px-1 sm:px-3 py-0.5 sm:py-1"}
+            nextLinkClassName={"block px-1 sm:px-3 py-0.5 sm:py-1"}
+            breakLabel={"..."}
+            breakClassName={"list-none"}
+            pageRangeDisplayed={0}
+            marginPagesDisplayed={1}
+          />
+        )}
       </div>
     </div>
   );
