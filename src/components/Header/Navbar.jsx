@@ -139,18 +139,21 @@ function Navbar() {
                 <hr className='xs:hidden text-gray-300' />
                 <Link
                   to={"profile"}
+                  onClick={() => setShowProfile(false)}
                   className='hover:text-[#1529be] cursor-pointer flex gap-2 mx-3 items-center text-gray-600'>
                   <FontAwesomeIcon icon={faUser} />
                   View Profile
                 </Link>
                 <Link
                   to={"/update-password"}
+                  onClick={() => setShowProfile(false)}
                   className='hover:text-[#1529be] cursor-pointer flex gap-2 mx-3 items-center text-gray-600'>
                   <FontAwesomeIcon icon={faLock} />
                   Update Password
                 </Link>
                 <Link
                   to={"/bookings"}
+                  onClick={() => setShowProfile(false)}
                   className='hover:text-[#1529be] cursor-pointer flex gap-2 mx-3 items-center text-gray-600'>
                   <FontAwesomeIcon icon={faHistory} />
                   View Bookings
@@ -159,6 +162,7 @@ function Navbar() {
                 <hr className='text-gray-300' />
                 <button
                   onClick={() => {
+                    setShowProfile(false);
                     document.cookie =
                       "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                     navigate("/");

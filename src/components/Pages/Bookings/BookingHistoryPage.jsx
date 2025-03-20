@@ -3,8 +3,12 @@ import axios from "axios";
 import BookingCard from "./BookingCard";
 
 function BookingHistoryPage() {
-  const [bookings, setBookings] = useState({ upcoming: [], past: [] });
-  const [isUpcoming, setIsUpcoming] = useState(true);
+  const [bookings, setBookings] = useState({
+    upcoming: [],
+    past: [],
+    cancelled: [],
+  });
+  const [activeTab, setActiveTab] = useState("upcoming");
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -29,6 +33,7 @@ function BookingHistoryPage() {
           setBookings({
             upcoming: response.data.upcoming || [],
             past: response.data.past || [],
+            cancelled: response.data.deleted || [],
           });
         } else {
           console.error("Failed to fetch booking history");
@@ -43,39 +48,57 @@ function BookingHistoryPage() {
 
   return (
     <div className='w-full grow py-10'>
-      <div className='flex flex-col justify-center w-full md:px-15 lg:px-30'>
-        <div className='bg-white flex text-lg sm:text-xl lg:px-5 px-2 lg:gap-5 gap-2'>
-          <button
-            className={`cursor-pointer w-[50%] px-2 py-1 rounded-t-lg border-b-3 duration-300 ${
-              isUpcoming
-                ? " font-semibold text-blue-700"
-                : "text-gray-700 border-transparent"
-            }`}
-            onClick={() => setIsUpcoming(true)}>
-            Upcoming
-          </button>
-          <button
-            className={`cursor-pointer w-[50%] px-2 py-1 rounded-t-lg border-b-3 duration-300 ${
-              !isUpcoming
-                ? "font-semibold text-blue-700 "
-                : "text-gray-400 border-transparent"
-            }`}
-            onClick={() => setIsUpcoming(false)}>
-            Past
-          </button>
-        </div>
-        <div className='h-max md:grow lg:p-5 p-2 max-md:w-max rounded-lg lg:gap-5 gap-2 justify-center items-stretch grid md:grid-cols-2'>
-          {bookings[isUpcoming ? "upcoming" : "past"].map((booking) => (
-            <BookingCard
-              key={booking.id}
-              date={booking.book_date}
-              price={"100"} // Price is not in the response, consider fetching it from API
-              game={booking.game_name}
-              slot={booking.slot}
-              showCancel={isUpcoming}
-              id={booking.id.toString()}
-            />
+      <div className='flex flex-col justify-center w-full xs:px-15 lg:px-30'>
+        <div className='bg-white flex text-lg sm:text-xl justify-center lg:px-5 px-5 lg:gap-5 gap-2'>
+          {[
+            { label: "Upcoming", key: "upcoming" },
+            { label: "Past", key: "past" },
+            { label: "Cancelled", key: "cancelled" },
+          ].map(({ label, key }) => (
+            <button
+              key={key}
+              className={`relative flex items-center justify-center gap-0.5 cursor-pointer 2xs:w-[33.3%] py-1 rounded-t-lg border-b-3 duration-300 ${
+                activeTab === key
+                  ? "font-semibold text-blue-700"
+                  : "text-gray-400 border-transparent"
+              }`}
+              onClick={() => setActiveTab(key)}>
+              {label}
+
+              {activeTab === key && (
+                <span
+                  className={`text-white text-xs font-normal aspect-square px-2 w-5 flex justify-center items-center rounded-full ${
+                    activeTab === key ? "bg-blue-700" : "bg-gray-400"
+                  }`}>
+                  {bookings[key]?.length || 0}
+                </span>
+              )}
+            </button>
           ))}
+        </div>
+
+        <div className='h-max grow lg:px-5 px-2 py-5 rounded-lg lg:gap-5 gap-2 justify-center w-full items-stretch grid grid-cols-1 md:grid-cols-2'>
+          {bookings[activeTab].length > 0 ? (
+            bookings[activeTab].map((booking) => (
+              <BookingCard
+                key={booking.id}
+                date={booking.book_date}
+                price={"100"}
+                game={booking.game_name}
+                slot={booking.slot}
+                showCancel={activeTab === "upcoming"}
+                id={booking.id.toString()}
+              />
+            ))
+          ) : (
+            <div className='text-gray-500 italic text-lg font-medium text-center col-span-2 py-5'>
+              {activeTab === "upcoming"
+                ? "No upcoming game bookings. Book a slot now!"
+                : activeTab === "past"
+                ? "No past game bookings. Start playing and check your history here!"
+                : "No cancelled bookings."}
+            </div>
+          )}
         </div>
       </div>
     </div>

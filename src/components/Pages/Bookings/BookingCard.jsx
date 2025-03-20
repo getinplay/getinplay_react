@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 function BookingCard({ date, price, game, slot, showCancel, id }) {
   return (
-    <div className='flex shadow-[0_2px_16px_rgba(0,0,0,0.3)] bg-white px-2 rounded-md text-start'>
+    <div className='flex w-full shadow-[0_2px_16px_rgba(0,0,0,0.3)] bg-white px-2 rounded-md text-start'>
       {showCancel && (
         <div className='flex gap-1'>
           <div className='flex hover:text-red-400 items-center justify-center text-lg text-gray-400 cursor-pointer'>
@@ -20,9 +20,8 @@ function BookingCard({ date, price, game, slot, showCancel, id }) {
               Booking-ID: #{id}
             </p>
           </div>
-          <p className='font-semibold  text-red-400'>₹{price}</p>
+          <p className='font-semibold  text-gray-500'>₹{price}</p>
         </div>
-        {/* <hr className='text-gray-300' /> */}
         <div className='flex max-2xs:flex-col sm:text-lg justify-between 2xs:gap-2'>
           <p className='font-medium tracking-wide'>{game.toUpperCase()}</p>
           <p className=''>{slot}</p>
