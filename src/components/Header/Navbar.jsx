@@ -27,7 +27,6 @@ function Navbar() {
     }
   };
 
-  // Close profile when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (profileRef.current && !profileRef.current.contains(event.target)) {
@@ -134,18 +133,28 @@ function Navbar() {
             </button>
             {showProfile && (
               <div className='flex flex-col gap-1 py-1 overflow-hidden absolute top-[100%] right-0 rounded-lg shadow-[0_2px_16px_rgba(0,0,0,0.3)] shadow-black/50 w-max bg-white'>
-                <button className='hover:text-[#1529be] cursor-pointer flex gap-2 mx-3 items-center text-gray-600'>
+                <p className={`xs:hidden`}>
+                  {userData.data.full_name.toUpperCase()}
+                </p>
+                <hr className='xs:hidden text-gray-300' />
+                <Link
+                  to={"profile"}
+                  className='hover:text-[#1529be] cursor-pointer flex gap-2 mx-3 items-center text-gray-600'>
                   <FontAwesomeIcon icon={faUser} />
                   View Profile
-                </button>
-                <button className='hover:text-[#1529be] cursor-pointer flex gap-2 mx-3 items-center text-gray-600'>
+                </Link>
+                <Link
+                  to={"/update-password"}
+                  className='hover:text-[#1529be] cursor-pointer flex gap-2 mx-3 items-center text-gray-600'>
                   <FontAwesomeIcon icon={faLock} />
                   Update Password
-                </button>
-                <button className='hover:text-[#1529be] cursor-pointer flex gap-2 mx-3 items-center text-gray-600'>
+                </Link>
+                <Link
+                  to={"/bookings"}
+                  className='hover:text-[#1529be] cursor-pointer flex gap-2 mx-3 items-center text-gray-600'>
                   <FontAwesomeIcon icon={faHistory} />
-                  Booking History
-                </button>
+                  View Bookings
+                </Link>
 
                 <hr className='text-gray-300' />
                 <button

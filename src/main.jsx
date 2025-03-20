@@ -19,6 +19,9 @@ import ContactUsPage from "./components/Pages/ContactUs/ContactUsPage";
 import LoginPage from "./components/Pages/Login/LoginPage";
 import GameSlots from "./components/Pages/Games/GameSlots";
 import ForgotPassword from "./components/Pages/Login/ForgotPassword";
+import BookingPage from "./components/Pages/Bookings/BookingPage";
+import ProfilePage from "./components/Pages/Profile/ProfilePage";
+import UpdatePasswordPage from "./components/Pages/UpdatePassword/UpdatePasswordPage";
 
 const router = (
   <BrowserRouter>
@@ -30,6 +33,9 @@ const router = (
         <Route path='membership' element={<MembershipPage />} />
         <Route path='about-us' element={<AboutUsPage />} />
         <Route path='contact-us' element={<ContactUsPage />} />
+        <Route path='bookings' element={<BookingPage />} />
+        <Route path='profile' element={<ProfilePage />} />
+        <Route path='update-password' element={<UpdatePasswordPage />} />
       </Route>
       <Route path='login' element={<LoginPage />} />
       <Route path='forgot-password' element={<ForgotPassword />} />
