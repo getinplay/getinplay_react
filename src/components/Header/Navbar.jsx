@@ -111,7 +111,7 @@ function Navbar() {
         </div>
       </div>
 
-      <div className='flex gap-1 h-full items-center 2xs:text-sm sm:text-base text-xs font-semibold z-20'>
+      <div className='flex gap-1 h-full items-center 2xs:text-sm sm:text-base text-xs font-medium z-20'>
         {!isLogin ? (
           <div
             onClick={() => navigate("/login")}
@@ -168,7 +168,7 @@ function Navbar() {
                     navigate("/");
                     navigate(0);
                   }}
-                  className='cursor-pointer flex gap-2 mx-3 items-center text-red-600'>
+                  className='cursor-pointer font-medium flex gap-2 mx-3 items-center text-red-600'>
                   <FontAwesomeIcon icon={faRightFromBracket} />
                   Logout
                 </button>

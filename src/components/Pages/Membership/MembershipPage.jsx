@@ -123,7 +123,7 @@ function MembershipPage() {
         We offer exciting plans that make you play hustle-free and enjoy the
         time.
       </p>
-      <div className='py-5 w-full grow justify-center items-stretch max-md:flex-col flex gap-5 overflow-x-auto'>
+      <div className='py-5 w-full grow justify-center items-center md:items-stretch max-md:flex-col flex gap-5 overflow-x-auto'>
         {membershipPlans.map((plan) => (
           <MembershipFullCard
             key={plan.id}

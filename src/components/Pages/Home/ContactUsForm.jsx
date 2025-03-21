@@ -173,7 +173,7 @@ function ContactUsForm() {
               placeholder='Enter your Message'
               className='resize-none bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1'
             />
-            <p className='text-gray-600 text-sm px-2 font-medium'>
+            <p className='text-gray-400 text-sm px-2 font-medium'>
               {message.length}/{maxMessageLength}
             </p>
             <p className='select-none text-red-500 text-sm px-2 font-medium'>

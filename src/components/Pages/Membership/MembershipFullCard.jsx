@@ -12,21 +12,17 @@ function MembershipFullCard({
   return (
     <div
       className={`group select-none xs:max-w-[350px] max-w-[300px] flex flex-col gap-1 bg-white rounded-xl border-1 ${
-        isCurrentPlan
-          ? "border-green-600"
-          : isPlanActive
+        isPlanActive || isCurrentPlan
           ? "border-gray-300 "
-          : "border-gray-300 hover:shadow-lg duration-300 hover:bg-gradient-to-tr from-indigo-500 via-violet-600 to-cyan-400"
-      }  duration-300`}>
+          : "border-gray-300 hover:shadow-lg hover:bg-gradient-to-tr from-indigo-500 via-violet-600 to-cyan-400"
+      }   `}>
       <div
         className={`${
-          isCurrentPlan
-            ? "bg-green-200"
-            : isPlanActive
+          isPlanActive || isCurrentPlan
             ? "text-gray-600"
-            : "group-hover:shadow-lg group-hover:bg-white/40 group-hover:text-white"
-        } relative p-5 sm:py-8 flex bg-gray-100 flex-col gap-1 rounded-xl items-start duration-300`}>
-        <p className='text-xl sm:text-2xl font-medium'>{children}</p>
+            : "group-hover:bg-white/0 group-hover:text-white"
+        } relative p-5 sm:py-8 flex flex-col gap-1 rounded-xl items-start  `}>
+        <p className="text-xl sm:text-2xl font-medium">{children}</p>
         <p
           className={`text-lg sm:text-xl ${
             !isPlanActive && !isCurrentPlan
@@ -34,7 +30,7 @@ function MembershipFullCard({
               : " "
           }`}>
           <span
-            className={`text-3xl sm:text-4xl font-semibold text-black duration-300  ${
+            className={`text-3xl sm:text-4xl font-semibold text-black    ${
               !isPlanActive && !isCurrentPlan ? "group-hover:text-white" : ""
             }`}>
             ₹{amount}{" "}
@@ -54,13 +50,14 @@ function MembershipFullCard({
           </div>
         )}
       </div>
+      <hr className="text-gray-300" />
       <div
         className={`${
           isPlanActive ? "text-gray-400" : ""
         } p-5 grow flex flex-col rounded-xl gap-3 sm:gap-4 text-start`}>
         {features}
       </div>
-      <div className='p-4'>
+      <div className="p-4">
         <button
           onClick={isPlanActive || isCurrentPlan ? () => {} : onClick}
           className={`sm:text-lg text-white rounded-xl p-1 w-full ${
@@ -68,7 +65,7 @@ function MembershipFullCard({
               ? "bg-green-700"
               : isPlanActive
               ? "bg-gray-500"
-              : " bg-[#4A5BE6] cursor-pointer group-hover:bg-white/40 hover:bg-white/60 duration-300 hover:text-"
+              : " bg-[#4A5BE6] cursor-pointer group-hover:bg-white/40 hover:bg-white/60   hover:text-"
           }`}>
           {isCurrentPlan ? "Current Plan" : isPlanActive ? "Active" : "Upgrade"}
         </button>
