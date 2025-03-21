@@ -47,6 +47,7 @@ function BookGamePopup({
       date: selectedDate.toISOString().split("T")[0].replace(/-/g, "/"),
       slot: slot,
       game_id: game_id,
+      price,
     };
 
     const res = await axios.post(

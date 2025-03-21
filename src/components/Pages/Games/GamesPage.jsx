@@ -27,7 +27,7 @@ function GamesPage() {
 
   return (
     <div className='p-3 sm:p-5 grow lg:p-10'>
-      <div className='flex items-center duration-300 focus-within:shadow-[0_3px_8px_rgb(150,150,150)] text-gray-500 px-2 mb-5 border border-gray-300 rounded-lg'>
+      <div className='flex items-center duration-300 focus-within:shadow-[0_3px_8px_rgb(150,150,150)] text-gray-500 px-2 mb-5 border bg-gray-100 border-gray-300 rounded-xl'>
         <FontAwesomeIcon icon={faSearch} />
         <input
           type='text'

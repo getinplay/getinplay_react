@@ -14,8 +14,12 @@ function MembershipFullCard({
   return (
     <div
       className={`group select-none xs:max-w-[350px] max-w-[300px] flex flex-col gap-1 bg-white rounded-xl border-1 ${
-        isCurrentPlan ? "border-green-600" : "border-gray-300"
-      } hover:shadow-lg hover:bg-gray-100 hover:scale-103 duration-300`}>
+        isCurrentPlan
+          ? "border-green-600"
+          : isPlanActive
+          ? "border-gray-300 "
+          : "border-gray-300 hover:shadow-lg hover:bg-gray-100 hover:scale-103"
+      }  duration-300`}>
       <div
         className={`${
           isCurrentPlan
@@ -23,11 +27,19 @@ function MembershipFullCard({
             : isPlanActive
             ? "text-gray-600"
             : "group-hover:shadow-lg group-hover:bg-[#4A5BE6] group-hover:text-white"
-        } relative p-5 sm:py-8 flex bg-gray-200 flex-col gap-3 rounded-xl items-start duration-300`}>
-        <p className='text-2xl sm:text-3xl font-semibold'>{children}</p>
-        <p className='text-lg sm:text-2xl font-semibold'>
-          <span className='text-3xl sm:text-4xl font-bold'>₹{amount}</span>
-          /month
+        } relative p-5 sm:py-8 flex bg-gray-100 flex-col gap-1 rounded-xl items-start duration-300`}>
+        <p className='text-xl sm:text-2xl font-medium'>{children}</p>
+        <p
+          className={`text-lg sm:text-xl text-gray-500 ${
+            !isPlanActive && !isCurrentPlan ? " group-hover:text-gray-300 " : ""
+          } duration-300`}>
+          <span
+            className={`text-3xl sm:text-4xl font-semibold text-black duration-300 ${
+              !isPlanActive && !isCurrentPlan ? "group-hover:text-white" : ""
+            }`}>
+            ₹{amount}{" "}
+          </span>
+          /per month
         </p>
         {popular && (
           <div
@@ -48,7 +60,7 @@ function MembershipFullCard({
               ? "bg-green-700"
               : isPlanActive
               ? "bg-gray-500"
-              : "group-hover:bg-[#34409e] bg-[#4A5BE6] cursor-pointer"
+              : "group-hover:bg-[#34409e] bg-[#4A5BE6] cursor-pointer hover:bg-white duration-300 hover:text-[#4A5BE6]"
           }`}>
           {isCurrentPlan ? "Current Plan" : isPlanActive ? "Active" : "Upgrade"}
         </button>
@@ -56,7 +68,7 @@ function MembershipFullCard({
       <div
         className={`${
           isPlanActive ? "text-gray-400" : ""
-        } p-5 flex flex-col rounded-xl gap-3 sm:gap-4 text-xl text-start font-medium`}>
+        } p-5 flex flex-col rounded-xl gap-3 sm:gap-4 text-start`}>
         <p>30min - 1hr Booking</p>
         <p>Cancellation {cancellation}hrs before game</p>
         <p>Book before {bookBefore}hrs</p>

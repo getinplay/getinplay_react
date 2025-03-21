@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios"; // Import axios
 
-function BookingCard({ date, price, game, slot, showCancel, id, game_id }) {
+function BookingCard({ date, price, game, slot, showCancel, id, refreshPage }) {
   const API_URL = import.meta.env.VITE_API_URL;
 
   const getAuthToken = () => {
@@ -32,9 +32,9 @@ function BookingCard({ date, price, game, slot, showCancel, id, game_id }) {
         {
           token,
           auth: "user",
+          book_id: id,
           date,
           slot,
-          game_id,
         },
         {
           headers: {
@@ -46,11 +46,15 @@ function BookingCard({ date, price, game, slot, showCancel, id, game_id }) {
       if (response.data.success) {
         toast.success("Booking cancelled successfully!", {
           position: "top-right",
+          pauseOnFocusLoss: false,
+          pauseOnHover: false,
           autoClose: 3000,
         });
       } else {
         toast.error(`Failed to cancel booking: ${response.data.message}`, {
           position: "top-right",
+          pauseOnFocusLoss: false,
+          pauseOnHover: false,
           autoClose: 3000,
         });
       }
@@ -63,6 +67,7 @@ function BookingCard({ date, price, game, slot, showCancel, id, game_id }) {
         autoClose: 3000,
       });
     }
+    refreshPage();
   };
 
   return (

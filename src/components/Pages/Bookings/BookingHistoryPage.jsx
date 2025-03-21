@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BookingCard from "./BookingCard";
 import ReactPaginate from "react-paginate";
+import { useNavigate } from "react-router-dom";
 
 function BookingHistoryPage() {
   const [bookings, setBookings] = useState({
@@ -11,9 +12,12 @@ function BookingHistoryPage() {
   });
   const [activeTab, setActiveTab] = useState("upcoming");
   const [currentPage, setCurrentPage] = useState(0);
+  const [refreshPage, setRefreshPage] = useState(false);
   const itemsPerPage = 6;
+  const navigate = useNavigate();
 
   useEffect(() => {
+    setCurrentPage(0);
     const fetchBookings = async () => {
       try {
         const token = document.cookie
@@ -23,6 +27,7 @@ function BookingHistoryPage() {
 
         if (!token) {
           console.error("Auth token not found");
+          navigate("/home");
           return;
         }
 
@@ -47,7 +52,7 @@ function BookingHistoryPage() {
     };
 
     fetchBookings();
-  }, []);
+  }, [activeTab, refreshPage]);
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
@@ -98,12 +103,12 @@ function BookingHistoryPage() {
               <BookingCard
                 key={booking.id}
                 date={booking.book_date}
-                price={"100"}
-                game={booking.game_name}
+                price={booking.price}
+                game={booking.name}
                 slot={booking.slot}
                 showCancel={activeTab === "upcoming"}
                 id={booking.id.toString()}
-                game_id={booking.game_id}
+                refreshPage={() => setRefreshPage((prev) => !prev)}
               />
             ))
           ) : (
@@ -124,22 +129,25 @@ function BookingHistoryPage() {
             pageCount={Math.ceil(bookings[activeTab].length / itemsPerPage)}
             onPageChange={handlePageClick}
             containerClassName={"flex justify-center space-x-2 mt-5"}
+            forcePage={currentPage}
             pageClassName={
-              "px-1 sm:px-3 py-0.5 sm:py-1 bg-gray-200 rounded cursor-pointer list-none"
+              "select-none px-1 sm:px-3 py-0.5 sm:py-1 bg-gray-200 rounded cursor-pointer list-none"
             }
-            activeClassName={"bg-blue-600 text-blue-700 font-bold"}
+            activeClassName={"select-none bg-blue-600 text-blue-700 font-bold"}
             previousClassName={
-              "px-1 sm:px-3 py-0.5 sm:py-1 bg-gray-300 rounded cursor-pointer list-none"
+              "select-none px-1 sm:px-3 py-0.5 sm:py-1 bg-gray-300 rounded cursor-pointer list-none"
             }
             nextClassName={
-              "px-1 sm:px-3 py-0.5 sm:py-1 bg-gray-300 rounded cursor-pointer list-none"
+              "select-none px-1 sm:px-3 py-0.5 sm:py-1 bg-gray-300 rounded cursor-pointer list-none"
             }
-            disabledClassName={"opacity-50 cursor-not-allowed"}
-            pageLinkClassName={"block px-1 sm:px-3 py-0.5 sm:py-1"}
-            previousLinkClassName={"block px-1 sm:px-3 py-0.5 sm:py-1"}
-            nextLinkClassName={"block px-1 sm:px-3 py-0.5 sm:py-1"}
+            disabledClassName={"select-none opacity-40 !cursor-not-allowed"}
+            pageLinkClassName={"select-none block px-1 sm:px-3 py-0.5 sm:py-1"}
+            previousLinkClassName={
+              "select-none block px-1 sm:px-3 py-0.5 sm:py-1"
+            }
+            nextLinkClassName={"select-none block px-1 sm:px-3 py-0.5 sm:py-1"}
             breakLabel={"..."}
-            breakClassName={"list-none"}
+            breakClassName={"select-none list-none"}
             pageRangeDisplayed={0}
             marginPagesDisplayed={1}
           />

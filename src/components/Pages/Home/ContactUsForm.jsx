@@ -111,7 +111,7 @@ function ContactUsForm() {
               type='tel'
               id='phone'
               name='phone'
-              placeholder='+91 123456789'
+              placeholder='9123456789'
               className='bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1'
             />
           </div>
