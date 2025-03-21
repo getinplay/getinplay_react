@@ -2,36 +2,41 @@ import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 function LoginPage() {
   const [showPass, setShowPass] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({ username: "", password: "" });
   const navigate = useNavigate();
+
+  function validateFields() {
+    let tempErrors = { username: "", password: "" };
+    let isValid = true;
+
+    if (!username) {
+      tempErrors.username = "Username is required!";
+      isValid = false;
+    }
+
+    if (!password) {
+      tempErrors.password = "Password is required!";
+      isValid = false;
+    } else if (password.length < 8) {
+      tempErrors.password = "Password must be at least 8 characters!";
+      isValid = false;
+    }
+
+    setErrors(tempErrors);
+    return isValid;
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    let errorMessage = "";
-
-    if (!username) {
-      errorMessage = "Username is required!";
-    } else if (!password) {
-      errorMessage = "Password is required!";
-    } else if (password.length < 8) {
-      errorMessage = "Password cannot be less than 8 characters!";
-    }
-
-    if (errorMessage) {
-      toast.error(errorMessage, {
-        toastId: errorMessage,
-        position: "top-center",
-        autoClose: 2000,
-        pauseOnHover: false,
-        pauseOnFocusLoss: false,
-      });
-      return;
-    }
+    if (!validateFields()) return;
 
     const data = { username, password };
 
@@ -50,7 +55,6 @@ function LoginPage() {
         navigate(-1);
       } else {
         toast.error(res.data.message, {
-          toastId: res.data.message,
           position: "top-center",
           autoClose: 3000,
           pauseOnHover: false,
@@ -82,12 +86,11 @@ function LoginPage() {
               Login to your account
             </p>
           </div>
-          <div className='flex flex-col pt-2 items-center justify-center w-full gap-3 sm:text-lg font-medium text-gray-600'>
+          <div className='flex flex-col pt-2 items-center justify-center w-full sm:text-lg font-medium text-gray-600'>
             <div className='flex flex-col text-start w-full'>
               <label className='px-2'>Email</label>
               <div className='flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full'>
                 <input
-                  required
                   type='text'
                   name='username'
                   id='username'
@@ -96,14 +99,17 @@ function LoginPage() {
                   onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
+              <p className='select-none text-red-500 text-sm px-2'>
+                {errors.username}&nbsp;
+              </p>
             </div>
+
             <div className='flex flex-col text-start w-full'>
               <label htmlFor='password' className='px-2'>
                 Password
               </label>
               <div className='flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full'>
                 <input
-                  required
                   type={showPass ? "text" : "password"}
                   name='password'
                   id='password'
@@ -111,22 +117,18 @@ function LoginPage() {
                   className='grow min-w-0 outline-none border-none'
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                <FontAwesomeIcon
+                  icon={showPass ? faEyeSlash : faEye}
+                  size='sm'
+                  className='cursor-pointer text-gray-600 fa-fw'
+                  onClick={() => setShowPass(!showPass)}
+                />
               </div>
+              <p className='select-none text-red-500 text-sm px-2'>
+                {errors.password}&nbsp;
+              </p>
             </div>
-            {/* <div className='flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 m-2 bg-gray-200 w-5/6'>
-              <label htmlFor='password' className='flex gap-1'>
-                <FontAwesomeIcon icon={faLock} size='lg' />
-              </label>
-              <input
-                required
-                type={showPass ? "text" : "password"}
-                name='password'
-                id='password'
-                placeholder='Password'
-                className='grow min-w-0 outline-none border-none'
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div> */}
+
             <div className='w-full flex justify-end select-none px-1'>
               <Link
                 to={"/forgot-password"}
@@ -139,7 +141,7 @@ function LoginPage() {
 
           <button
             type='submit'
-            className='mb-5 cursor-pointer bg-[#4A5BE6] p-2 rounded-lg tracking-wide text-white sm:text-lg active:translate-y-2 active:shadow-none duration-300 shadow-gray-400 hover:shadow-xl shadow-lg w-full'>
+            className='select-none mb-5 cursor-pointer bg-[#4A5BE6] p-2 rounded-lg tracking-wide text-white sm:text-lg active:translate-y-2 active:shadow-none duration-300 shadow-gray-400 hover:shadow-xl shadow-lg w-full'>
             LOGIN
           </button>
         </form>

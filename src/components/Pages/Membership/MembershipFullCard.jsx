@@ -32,7 +32,7 @@ function MembershipFullCard({
             !isPlanActive && !isCurrentPlan
               ? " group-hover:text-gray-100 "
               : " "
-          } duration-300 `}>
+          }`}>
           <span
             className={`text-3xl sm:text-4xl font-semibold text-black duration-300  ${
               !isPlanActive && !isCurrentPlan ? "group-hover:text-white" : ""
@@ -48,7 +48,7 @@ function MembershipFullCard({
                 ? "bg-green-700"
                 : isPlanActive
                 ? "bg-gray-500 text-gray-200"
-                : "group-hover:text-[#4A5BE6] group-hover:bg-white bg-[#4A5BE6]"
+                : "group-hover:text-[#4A5BE6] group-hover:bg-white/80 bg-[#4A5BE6]"
             } rounded-full absolute top-5 right-5 px-2 py-1 text-white `}>
             Popular
           </div>
