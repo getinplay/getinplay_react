@@ -4,6 +4,8 @@ import axios from "axios";
 import ConfirmLogin from "../../ConfirmLogin";
 import ConfirmDialog from "../../ConfirmDialog";
 import { toast, Bounce } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 function MembershipPage() {
   const [currentPlan, setCurrentPlan] = useState(0);
@@ -113,7 +115,7 @@ function MembershipPage() {
   }, []);
 
   return (
-    <div className='flex w-full flex-col gap-2 items-center p-5'>
+    <div className='flex grow h-full w-full flex-col gap-2 items-center p-5'>
       <h1 className='text-gray-700 sm:text-5xl text-4xl font-bold p-3'>
         Compare our plans and find yours
       </h1>
@@ -121,11 +123,81 @@ function MembershipPage() {
         We offer exciting plans that make you play hustle-free and enjoy the
         time.
       </p>
-      <div className='py-5 w-full h-full justify-center items-center flex flex-col lg:flex-row gap-5 overflow-x-auto'>
+      <div className='py-5 w-full grow justify-center items-stretch max-md:flex-col flex gap-5 overflow-x-auto'>
         {membershipPlans.map((plan) => (
           <MembershipFullCard
             key={plan.id}
             {...plan}
+            features={
+              <>
+                <p className={`${currentPlan < plan.id ? "group-hover:text-white" : ""}`}>
+                  <span
+                    className={`${
+                      currentPlan === plan.id
+                        ? "text-green-700"
+                        : !(currentPlan > plan.id)
+                        ? "group-hover:text-white text-[#4A5BE6]"
+                        : "text-gray-500"
+                    }`}>
+                    <FontAwesomeIcon icon={faCheckCircle} />
+                  </span>{" "}
+                  30min - 1hr Booking
+                </p>
+                <p className={`${currentPlan < plan.id ? "group-hover:text-white" : ""}`}>
+                  <span
+                    className={`${
+                      currentPlan === plan.id
+                        ? "text-green-700"
+                        : !(currentPlan > plan.id)
+                        ? "group-hover:text-white text-[#4A5BE6]"
+                        : "text-gray-500"
+                    }`}>
+                    <FontAwesomeIcon icon={faCheckCircle} />
+                  </span>{" "}
+                  Cancellation {plan.cancellation}hrs before game
+                </p>
+                <p className={`${currentPlan < plan.id ? "group-hover:text-white" : ""}`}>
+                  <span
+                    className={`${
+                      currentPlan === plan.id
+                        ? "text-green-700"
+                        : !(currentPlan > plan.id)
+                        ? "group-hover:text-white text-[#4A5BE6]"
+                        : "text-gray-500"
+                    }`}>
+                    <FontAwesomeIcon icon={faCheckCircle} />
+                  </span>{" "}
+                  Book before {plan.bookBefore}hrs
+                </p>
+                <p className={`${currentPlan < plan.id ? "group-hover:text-white" : ""}`}>
+                  <span
+                    className={`${
+                      currentPlan === plan.id
+                        ? "text-green-700"
+                        : !(currentPlan > plan.id)
+                        ? "group-hover:text-white text-[#4A5BE6]"
+                        : "text-gray-500"
+                    }`}>
+                    <FontAwesomeIcon icon={faCheckCircle} />
+                  </span>{" "}
+                  Extend slot if free
+                </p>
+                {/* <p>
+                  <span
+                    className={`${
+                      currentPlan === plan.id
+                        ? "text-green-700"
+                        : !(currentPlan > plan.id)
+                        ? "group-hover:text-white text-[#4A5BE6]"
+                        : "text-gray-500"
+                    }`}>
+                    <FontAwesomeIcon icon={faCheckCircle} />
+                  </span>{" "}
+                  Upto {plan.personAllowedPerTable} person on single table
+                </p> */}
+                {/* {plan.name == "Gold" ? <p>TEST</p> : ""} */}
+              </>
+            }
             isPlanActive={currentPlan > plan.id}
             isCurrentPlan={currentPlan === plan.id}
             onClick={() => handleUpgradeClick(plan.id)}>
@@ -136,11 +208,7 @@ function MembershipPage() {
       <ConfirmDialog
         isOpen={showConfirmModal}
         title='Confirm Upgrade'
-        message={
-          <>
-            Are you sure you want to <b>Upgrade</b> your <b>Membership?</b>
-          </>
-        }
+        message={<p>Are you sure you want to upgrade your membership?</p>}
         onConfirm={upgradePlan}
         onCancel={() => setShowConfirmModal(false)}
       />

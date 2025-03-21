@@ -73,7 +73,7 @@ function LoginPage() {
         <form
           onSubmit={handleSubmit}
           noValidate
-          className='lg:w-[50%] md:w-[65%] max-md:w-[90%] max-w-[400px] min-h-max p-5 rounded-xl bg-white flex flex-col gap-3 items-center justify-between'>
+          className='lg:w-[50%] md:w-[65%] max-md:w-[90%] max-w-[400px] min-h-max sm:p-5 rounded-xl bg-white flex flex-col gap-3 items-center justify-between'>
           <div>
             <p className='text-3xl sm:text-4xl font-bold text-[#4A5BE6] text-center'>
               WELCOME BACK
