@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useState } from "react";
 import { toast } from "react-toastify";
 
 function ContactUsForm() {
@@ -10,10 +9,14 @@ function ContactUsForm() {
   const [message, setMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
   const [errors, setErrors] = useState({});
+  const maxMessageLength = 250;
 
   const validateForm = () => {
     const phoneRegex = /^[6-9]\d{9}$/;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    // Allowed: letters, numbers, whitespace, and only these special characters: . , ? '
+    const messageRegex = /^[a-zA-Z0-9\s.,?']*$/;
+
     let errors = {};
 
     if (!name) errors.name = "Name is required!";
@@ -23,6 +26,11 @@ function ContactUsForm() {
     else if (!emailRegex.test(email))
       errors.email = "Enter a valid email address!";
     if (!message) errors.message = "Message is required!";
+    else if (!messageRegex.test(message))
+      errors.message =
+        "Message can only contain letters, numbers, spaces, and .,?'";
+    else if (message.length > maxMessageLength)
+      errors.message = `Message cannot exceed ${maxMessageLength} characters!`;
 
     setErrors(errors);
     return Object.keys(errors).length === 0;
@@ -39,6 +47,11 @@ function ContactUsForm() {
           pending: "Sending Email...",
           success: "Email Sent Successfully!",
           error: "Error sending email. Please try again.",
+        },
+        {
+          pauseOnFocusLoss: false,
+          pauseOnHover: false,
+          autoClose: 3000,
         }
       )
       .then((res) => {
@@ -144,13 +157,25 @@ function ContactUsForm() {
             <textarea
               required
               value={message}
-              onChange={(e) => setMessage(e.target.value)}
+              onChange={(e) => {
+                const newMessage = e.target.value;
+                // Only update if within max length and allowed characters only
+                if (
+                  newMessage.length <= maxMessageLength &&
+                  /^[a-zA-Z0-9\s.,?']*$/.test(newMessage)
+                ) {
+                  setMessage(newMessage);
+                }
+              }}
               rows={3}
               id='message'
               name='message'
               placeholder='Enter your Message'
               className='resize-none bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1'
             />
+            <p className='text-gray-600 text-sm px-2 font-medium'>
+              {message.length}/{maxMessageLength}
+            </p>
             <p className='select-none text-red-500 text-sm px-2 font-medium'>
               {errors.message || " "}
             </p>
