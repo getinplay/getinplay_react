@@ -88,7 +88,7 @@ function LoginPage() {
           </div>
           <div className="flex flex-col pt-2 items-center justify-center w-full sm:text-lg font-medium text-gray-600">
             <div className="flex flex-col text-start w-full">
-              <label className="px-2">Email</label>
+              <label className="px-2">Username</label>
               <div className="flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full">
                 <input
                   type="text"

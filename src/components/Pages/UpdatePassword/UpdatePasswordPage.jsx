@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -22,7 +22,9 @@ function UpdatePasswordPage() {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!oldPassword) newErrors.oldPassword = "Old password is required";
+    if (!oldPassword) {
+      newErrors.oldPassword = "Old password is required";
+    }
     if (!newPassword) {
       newErrors.newPassword = "New password is required";
     } else if (!validatePassword(newPassword)) {
@@ -41,19 +43,26 @@ function UpdatePasswordPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
-    
+    if (!validateForm()) {
+      return;
+    }
+
     setLoading(true);
+    await new Promise((r) => setTimeout(r, 2000));
 
     try {
       const token = document.cookie
         .split("; ")
         .find((row) => row.startsWith("authToken="))
         ?.split("=")[1];
-        
+
       if (!token) {
-        toast.error("You are not authenticated. Please login again.");
-        navigate("/home");
+        toast.error("You are not authenticated. Please login again.", {
+          pauseOnHover: false,
+          autoClose: 3000,
+          pauseOnFocusLoss: false,
+        });
+        navigate("/");
         return;
       }
 
@@ -70,37 +79,66 @@ function UpdatePasswordPage() {
       );
 
       if (response.data.success) {
-        toast.success("Password updated successfully!");
+        toast.success("Password updated successfully!", {
+          pauseOnHover: false,
+          autoClose: 3000,
+          pauseOnFocusLoss: false,
+        });
         setOldPassword("");
         setNewPassword("");
         setConfirmPassword("");
         setErrors({});
-        setTimeout(() => navigate("/profile"), 2000);
       } else {
-        toast.error(response.data.message || "Failed to update password.");
+        toast.error(response.data.message || "Failed to update password.", {
+          pauseOnHover: false,
+          autoClose: 3000,
+          pauseOnFocusLoss: false,
+        });
       }
     } catch (error) {
       console.error("Error updating password:", error);
-      toast.error("An error occurred. Please try again.");
+      toast.error("An error occurred. Please try again.", {
+        pauseOnHover: false,
+        autoClose: 3000,
+        pauseOnFocusLoss: false,
+      });
     } finally {
       setLoading(false);
     }
   };
 
+  useEffect(() => {
+    const token = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("authToken="))
+      ?.split("=")[1];
+
+    if (!token) {
+      toast.error("You are not authenticated. Please login again.", {
+        pauseOnHover: false,
+        autoClose: 3000,
+        pauseOnFocusLoss: false,
+      });
+      navigate("/");
+    }
+    return;
+  }, []);
 
   return (
-    <div className="sm:w-lg shadow-[0_2px_16px_rgba(0,0,0,0.4)] mt-5 rounded-lg mx-auto p-4">
-      <h1 className="text-2xl font-semibold text-gray-700 pb-3 text-center">
+    <div className="sm:w-lg max-sm:max-w-max w-full mt-5 rounded-lg p-4">
+      <h1 className="text-2xl sm:text-3xl font-semibold text-gray-700 pb-3 text-center">
         Update Your Password
       </h1>
 
       <form onSubmit={handleSubmit}>
-        <div className="flex flex-col gap-1 items-center justify-center w-full sm:text-lg font-medium text-gray-600">
+        <div className="flex flex-col gap-1 items-center justify-center shadow-[0_2px_16px_rgba(0,0,0,0.4)] rounded-lg p-5 w-full sm:text-lg font-medium text-gray-600">
           <div className="flex flex-col text-start w-full">
-            <label htmlFor="old-password" className="px-2">
+            <label
+              htmlFor="old-password"
+              className="text-gray-700 font-semibold required px-2">
               Old Password
             </label>
-            <div className="flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full">
+            <div className="flex bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1">
               <input
                 type={showOldPassword ? "text" : "password"}
                 name="old-password"
@@ -110,12 +148,15 @@ function UpdatePasswordPage() {
                 value={oldPassword}
                 onChange={(e) => setOldPassword(e.target.value)}
               />
-              <button
-                type="button"
+              <div
                 onClick={() => setShowOldPassword(!showOldPassword)}
-                className="text-gray-500 focus:outline-none">
-                <FontAwesomeIcon icon={showOldPassword ? faEyeSlash : faEye} />
-              </button>
+                className="text-gray-500 focus:outline-none cursor-pointer">
+                <FontAwesomeIcon
+                  className="fa-fw"
+                  icon={showOldPassword ? faEyeSlash : faEye}
+                  size="sm"
+                />
+              </div>
             </div>
             <p className="select-none text-red-500 text-sm px-2">
               {errors.oldPassword || "\u00A0"}
@@ -123,10 +164,12 @@ function UpdatePasswordPage() {
           </div>
 
           <div className="flex flex-col text-start w-full">
-            <label htmlFor="new-password" className="px-2">
+            <label
+              htmlFor="new-password"
+              className="text-gray-700 font-semibold required px-2">
               New Password
             </label>
-            <div className="flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full">
+            <div className="flex bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1">
               <input
                 type={showNewPassword ? "text" : "password"}
                 name="new-password"
@@ -136,12 +179,15 @@ function UpdatePasswordPage() {
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
               />
-              <button
-                type="button"
+              <div
                 onClick={() => setShowNewPassword(!showNewPassword)}
-                className="text-gray-500 focus:outline-none">
-                <FontAwesomeIcon icon={showNewPassword ? faEyeSlash : faEye} />
-              </button>
+                className="text-gray-500 focus:outline-none cursor-pointer">
+                <FontAwesomeIcon
+                  className="fa-fw"
+                  icon={showNewPassword ? faEyeSlash : faEye}
+                  size="sm"
+                />
+              </div>
             </div>
             <p className="select-none text-red-500 text-sm px-2">
               {errors.newPassword || "\u00A0"}
@@ -149,10 +195,12 @@ function UpdatePasswordPage() {
           </div>
 
           <div className="flex flex-col text-start w-full">
-            <label htmlFor="confirm-password" className="px-2">
+            <label
+              htmlFor="confirm-password"
+              className="text-gray-700 font-semibold required px-2">
               Confirm Password
             </label>
-            <div className="flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full">
+            <div className="flex bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1">
               <input
                 type={showConfirmPassword ? "text" : "password"}
                 name="confirm-password"
@@ -162,14 +210,15 @@ function UpdatePasswordPage() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
-              <button
-                type="button"
+              <div
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="text-gray-500 focus:outline-none">
+                className="text-gray-500 focus:outline-none cursor-pointer">
                 <FontAwesomeIcon
+                  className="fa-fw"
                   icon={showConfirmPassword ? faEyeSlash : faEye}
+                  size="sm"
                 />
-              </button>
+              </div>
             </div>
             <p className="select-none text-red-500 text-sm px-2">
               {errors.confirmPassword || "\u00A0"}
@@ -179,10 +228,12 @@ function UpdatePasswordPage() {
           <button
             type="submit"
             disabled={loading}
-            className={`select-none mt-5 cursor-pointer bg-[#4A5BE6] p-2 rounded-lg tracking-wide font-normal text-white sm:text-lg active:translate-y-2 active:shadow-none duration-300 shadow-gray-400 hover:shadow-xl shadow-lg w-full ${
-              loading ? "opacity-70 cursor-not-allowed" : ""
+            className={`select-none mt-2 bg-[#4A5BE6] p-3 py-1 rounded-lg tracking-wide font-normal text-white sm:text-lg active:translate-y-2 active:shadow-none duration-300 shadow-gray-400 w-full sm:w-[210px] ${
+              loading
+                ? "bg-gray-500 text-gray-200 translate-y-2 shadow-none"
+                : "hover:shadow-xl shadow-lg cursor-pointer"
             }`}>
-            {loading ? "Updating..." : "Update Password"}
+            {loading ? "UPDATING..." : "UPDATE PASSWORD"}
           </button>
         </div>
       </form>
