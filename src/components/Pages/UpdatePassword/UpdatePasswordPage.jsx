@@ -150,14 +150,14 @@ function UpdatePasswordPage() {
 
           <div className="flex flex-col text-start w-full">
             <label htmlFor="confirm-password" className="px-2">
-              Confirm New Password
+              Confirm Password
             </label>
             <div className="flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full">
               <input
                 type={showConfirmPassword ? "text" : "password"}
                 name="confirm-password"
                 id="confirm-password"
-                placeholder="Confirm New Password"
+                placeholder="Confirm Password"
                 className="grow min-w-0 outline-none border-none bg-transparent"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
