@@ -127,6 +127,7 @@ function ProfilePage() {
     if (name.length < 2) return "Name must be at least 2 characters";
     if (!/^[a-zA-Z\s]+$/.test(name))
       return "Name can only contain letters and spaces";
+    if (/\s\s/.test(name)) return "Name cannot contain consecutive spaces";
     return "";
   };
 
