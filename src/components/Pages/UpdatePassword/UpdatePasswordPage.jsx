@@ -25,8 +25,11 @@ function UpdatePasswordPage() {
     if (!oldPassword) {
       newErrors.oldPassword = "Old password is required";
     }
+
     if (!newPassword) {
       newErrors.newPassword = "New password is required";
+    } else if (/\s/.test(newPassword)) {
+      newErrors.newPassword = "Password cannot contain whitespace";
     } else if (!validatePassword(newPassword)) {
       newErrors.newPassword = "Password must be at least 8 characters";
     }
