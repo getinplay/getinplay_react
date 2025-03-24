@@ -48,7 +48,7 @@ function DatePicker({ selectedDate, setSelectedDate }) {
   }
 
   return (
-    <div className='w-max flex bg-gray-200 rounded-lg'>
+    <div className="w-max select-none flex bg-gray-200 rounded-lg">
       {dates.map((date, index) => (
         <button
           key={index}
@@ -66,7 +66,7 @@ function DatePicker({ selectedDate, setSelectedDate }) {
             }`}>
             {getWeekday(date)}
           </span>
-          <span className='text-lg sm:text-xl font-semibold'>
+          <span className="text-lg sm:text-xl font-semibold">
             {getDay(date)}
           </span>
           <span
