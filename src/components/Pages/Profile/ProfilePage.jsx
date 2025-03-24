@@ -197,6 +197,7 @@ function ProfilePage() {
     }
 
     setLoading(true);
+    await new Promise((r) => setTimeout(r, 2000));
 
     try {
       const token = document.cookie
@@ -266,175 +267,205 @@ function ProfilePage() {
 
   if (fetchLoading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="text-xl text-gray-600">Loading profile data...</div>
+      <div className='flex justify-center items-center h-64'>
+        <div className='text-xl text-gray-600'>Loading profile data...</div>
       </div>
     );
   }
 
   return (
-    <div className="sm:w-lg max-sm:max-w-max w-full mt-5 rounded-lg p-4">
-      <h1 className="text-2xl sm:text-3xl font-semibold text-gray-700 pb-3 text-center">
-        Profile Page
+    <div className='max-w-max w-full mt-5 rounded-lg p-4'>
+      <h1 className='text-2xl sm:text-3xl font-semibold text-gray-700 pb-3 text-center'>
+        Profile
       </h1>
 
       <form onSubmit={handleSubmit}>
-        <div className="flex flex-col gap-1 items-center justify-center shadow-[0_2px_16px_rgba(0,0,0,0.4)] rounded-lg p-5 w-full sm:text-lg font-medium text-gray-600">
-          {/* Name Field */}
-          <div className="flex flex-col text-start w-full">
-            <label
-              htmlFor="full_name"
-              className="text-gray-700 font-semibold px-2">
-              Name
-            </label>
-            <div className="flex bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1">
-              <input
-                ref={nameInputRef}
-                name="full_name"
-                id="full_name"
-                placeholder="John Doe"
-                className={`grow min-w-0 outline-none border-none bg-transparent ${
-                  editMode.full_name ? "" : "cursor-not-allowed"
-                }`}
-                value={userData.full_name}
-                onChange={handleChange}
-                readOnly={!editMode.full_name}
-              />
-              <div
-                onClick={() => toggleEditMode("full_name")}
-                className="text-gray-500 focus:outline-none cursor-pointer">
-                <FontAwesomeIcon
-                  className={`fa-fw ${
-                    editMode.full_name ? "text-blue-500" : ""
-                  }`}
-                  icon={faPen}
-                  size="sm"
-                />
+        <div className='flex flex-col gap-1 items-center justify-center shadow-[0_2px_16px_rgba(0,0,0,0.4)] rounded-lg p-5 w-full sm:text-lg font-medium text-gray-600'>
+          <div className='flex max-sm:flex-col sm:gap-5 '>
+            <div className='w-full'>
+              {/* Name Field */}
+              <div className='flex flex-col text-start w-full'>
+                <label
+                  htmlFor='full_name'
+                  className='cursor-pointer required text-gray-700 font-semibold px-2'>
+                  Name
+                </label>
+                <div className='flex bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1'>
+                  <input
+                    ref={nameInputRef}
+                    name='full_name'
+                    id='full_name'
+                    placeholder='John Doe'
+                    className={`grow min-w-0 outline-none border-none bg-transparent`}
+                    value={userData.full_name}
+                    onChange={handleChange}
+                  />
+                  <label
+                    htmlFor='full_name'
+                    onClick={() => toggleEditMode("full_name")}
+                    className='text-gray-500 focus:outline-none cursor-pointer'>
+                    <FontAwesomeIcon
+                      className={`fa-fw`}
+                      icon={faPen}
+                      size='sm'
+                    />
+                  </label>
+                </div>
+                <p className='select-none text-red-500 text-sm px-2'>
+                  {errors.full_name || "\u00A0"}
+                </p>
+              </div>
+
+              {/* Phone Number Field */}
+              <div className='flex flex-col text-start w-full'>
+                <p
+                  htmlFor='phone_no'
+                  className='required text-gray-700 font-semibold px-2'>
+                  Phone Number
+                </p>
+                <div className='flex bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1'>
+                  <input
+                    ref={phoneInputRef}
+                    name='phone_no'
+                    id='phone_no'
+                    placeholder='9876543210'
+                    className={`grow min-w-0 outline-none border-none bg-transparent `}
+                    value={userData.phone_no}
+                    onChange={handleChange}
+                  />
+                  <label
+                    htmlFor='phone_no'
+                    onClick={() => toggleEditMode("phone_no")}
+                    className='text-gray-500 focus:outline-none cursor-pointer'>
+                    <FontAwesomeIcon
+                      className={`fa-fw `}
+                      icon={faPen}
+                      size='sm'
+                    />
+                  </label>
+                </div>
+                <p className='select-none text-red-500 text-sm px-2'>
+                  {errors.phone_no || "\u00A0"}
+                </p>
+              </div>
+
+              {/* Email Field */}
+              <div className='flex flex-col text-start w-full'>
+                <label
+                  htmlFor='email'
+                  className='cursor-pointer required text-gray-700 font-semibold px-2'>
+                  Email
+                </label>
+                <div className='flex bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1'>
+                  <input
+                    ref={emailInputRef}
+                    name='email'
+                    id='email'
+                    placeholder='johndoe@gmail.com'
+                    className={`grow min-w-0 outline-none border-none bg-transparent`}
+                    value={userData.email}
+                    onChange={handleChange}
+                  />
+                  <label
+                    htmlFor='email'
+                    onClick={() => toggleEditMode("email")}
+                    className='text-gray-500 focus:outline-none cursor-pointer'>
+                    <FontAwesomeIcon
+                      className={`fa-fw `}
+                      icon={faPen}
+                      size='sm'
+                    />
+                  </label>
+                </div>
+                <p className='select-none text-red-500 text-sm px-2'>
+                  {errors.email || "\u00A0"}
+                </p>
               </div>
             </div>
-            <p className="select-none text-red-500 text-sm px-2">
-              {errors.full_name || "\u00A0"}
-            </p>
-          </div>
 
-          {/* Phone Number Field */}
-          <div className="flex flex-col text-start w-full">
-            <label
-              htmlFor="phone_no"
-              className="text-gray-700 font-semibold px-2">
-              Phone Number
-            </label>
-            <div className="flex bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1">
-              <input
-                ref={phoneInputRef}
-                name="phone_no"
-                id="phone_no"
-                placeholder="9876543210"
-                className={`grow min-w-0 outline-none border-none bg-transparent ${
-                  editMode.phone_no ? "" : "cursor-not-allowed"
-                }`}
-                value={userData.phone_no}
-                onChange={handleChange}
-                readOnly={!editMode.phone_no}
-              />
-              <div
-                onClick={() => toggleEditMode("phone_no")}
-                className="text-gray-500 focus:outline-none cursor-pointer">
-                <FontAwesomeIcon
-                  className={`fa-fw ${
-                    editMode.phone_no ? "text-blue-500" : ""
-                  }`}
-                  icon={faPen}
-                  size="sm"
-                />
+            <div className='w-full'>
+              {/* Username Field (Non-editable) */}
+              <div className='flex flex-col text-start w-full'>
+                <label
+                  htmlFor='username'
+                  className='text-gray-700 font-semibold px-2'>
+                  Username
+                </label>
+                <div className='flex bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1'>
+                  <input
+                    disabled
+                    name='username'
+                    id='username'
+                    placeholder='johndoe123'
+                    className='grow min-w-0 outline-none border-none bg-transparent cursor-not-allowed'
+                    value={userData.username}
+                    readOnly
+                  />
+                  <label className='opacity-0'>
+                    <FontAwesomeIcon
+                      className={`fa-fw`}
+                      icon={faPen}
+                      size='sm'
+                    />
+                  </label>
+                </div>
+                <p className='select-none text-transparent text-sm px-2'>
+                  &nbsp;
+                </p>
+              </div>
+
+              {/* Membership Field (Non-editable) */}
+              <div className='flex flex-col text-start w-full'>
+                <label
+                  htmlFor='membership'
+                  className='text-gray-700 font-semibold px-2'>
+                  Membership
+                </label>
+                <div className='flex bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1'>
+                  <input
+                    disabled
+                    name='membership'
+                    id='membership'
+                    placeholder='Gold'
+                    className='grow min-w-0 outline-none border-none bg-transparent cursor-not-allowed'
+                    value={getMembershipType(userData.membership_id)}
+                    readOnly
+                  />
+                </div>
+                <p className='select-none text-transparent text-sm px-2'>
+                  &nbsp;
+                </p>
+              </div>
+
+              <div className='flex flex-col text-start w-full'>
+                <label
+                  htmlFor='gender'
+                  className='text-gray-700 font-semibold px-2'>
+                  Gender
+                </label>
+                <div className='flex bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1'>
+                  <input
+                    disabled
+                    name='gender'
+                    id='gender'
+                    placeholder='Gender'
+                    className='grow min-w-0 outline-none border-none bg-transparent cursor-not-allowed'
+                    value={userData.gender}
+                    readOnly
+                  />
+                </div>
+                <p className='select-none text-transparent text-sm px-2'>
+                  &nbsp;
+                </p>
               </div>
             </div>
-            <p className="select-none text-red-500 text-sm px-2">
-              {errors.phone_no || "\u00A0"}
-            </p>
-          </div>
-
-          {/* Email Field */}
-          <div className="flex flex-col text-start w-full">
-            <label htmlFor="email" className="text-gray-700 font-semibold px-2">
-              Email
-            </label>
-            <div className="flex bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1">
-              <input
-                ref={emailInputRef}
-                name="email"
-                id="email"
-                placeholder="johndoe@gmail.com"
-                className={`grow min-w-0 outline-none border-none bg-transparent ${
-                  editMode.email ? "" : "cursor-not-allowed"
-                }`}
-                value={userData.email}
-                onChange={handleChange}
-                readOnly={!editMode.email}
-              />
-              <div
-                onClick={() => toggleEditMode("email")}
-                className="text-gray-500 focus:outline-none cursor-pointer">
-                <FontAwesomeIcon
-                  className={`fa-fw ${editMode.email ? "text-blue-500" : ""}`}
-                  icon={faPen}
-                  size="sm"
-                />
-              </div>
-            </div>
-            <p className="select-none text-red-500 text-sm px-2">
-              {errors.email || "\u00A0"}
-            </p>
-          </div>
-
-          {/* Username Field (Non-editable) */}
-          <div className="flex flex-col text-start w-full">
-            <label
-              htmlFor="username"
-              className="text-gray-700 font-semibold px-2">
-              Username
-            </label>
-            <div className="flex bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1">
-              <input
-                disabled
-                name="username"
-                id="username"
-                placeholder="johndoe123"
-                className="grow min-w-0 outline-none border-none bg-transparent cursor-not-allowed"
-                value={userData.username}
-                readOnly
-              />
-            </div>
-            <p className="select-none text-transparent text-sm px-2">&nbsp;</p>
-          </div>
-
-          {/* Membership Field (Non-editable) */}
-          <div className="flex flex-col text-start w-full">
-            <label
-              htmlFor="membership"
-              className="text-gray-700 font-semibold px-2">
-              Membership
-            </label>
-            <div className="flex bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1">
-              <input
-                disabled
-                name="membership"
-                id="membership"
-                placeholder="Gold"
-                className="grow min-w-0 outline-none border-none bg-transparent cursor-not-allowed"
-                value={getMembershipType(userData.membership_id)}
-                readOnly
-              />
-            </div>
-            <p className="select-none text-transparent text-sm px-2">&nbsp;</p>
           </div>
 
           {/* Submit Button - Enabled when data is modified */}
           <button
-            type="submit"
-            disabled={loading || !isDataModified()}
-            className={`select-none mt-2 bg-[#4A5BE6] p-3 py-1 mb-2 rounded-lg tracking-wide font-normal text-white sm:text-lg active:translate-y-2 active:shadow-none duration-300 shadow-gray-400 w-full sm:w-[210px] ${
-              loading || !isDataModified()
+            type='submit'
+            className={`select-none mt-2 bg-[#4A5BE6] p-3 py-1 rounded-lg tracking-wide font-normal text-white sm:text-lg active:translate-y-2 active:shadow-none duration-300 shadow-gray-400 w-full sm:w-[210px] ${
+              loading
                 ? "bg-gray-500 text-gray-200 translate-y-2 shadow-none"
                 : "hover:shadow-xl shadow-lg cursor-pointer"
             }`}>

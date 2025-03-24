@@ -39,7 +39,7 @@ body {
 
 .required:after {
   content: " *";
-  @apply text-red-600;
+  @apply text-red-400;
 }
 
 .navbarlink-wrapper:hover .navbarlink {
