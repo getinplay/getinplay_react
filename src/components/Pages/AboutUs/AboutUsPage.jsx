@@ -30,7 +30,7 @@ function AboutUsPage() {
           <Link
             to='https://maps.app.goo.gl/GxYPGCMzoLDwKCb39'
             target='__blank'
-            className='hover:underline underline-offset-3 decoration-2 flex gap-3 xs:text-justify'>
+            className='hover:underline underline-offset-3 decoration-2 flex gap-3 text-start xs:text-justify'>
             <span>
               <FontAwesomeIcon icon={faMapLocationDot} />
             </span>

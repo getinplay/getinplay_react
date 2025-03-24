@@ -3,6 +3,8 @@ import axios from "axios";
 import BookingCard from "./BookingCard";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch, faClose } from "@fortawesome/free-solid-svg-icons";
 
 function BookingHistoryPage() {
   const [bookings, setBookings] = useState({
@@ -13,6 +15,7 @@ function BookingHistoryPage() {
   const [activeTab, setActiveTab] = useState("upcoming");
   const [currentPage, setCurrentPage] = useState(0);
   const [refreshPage, setRefreshPage] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const itemsPerPage = 6;
   const navigate = useNavigate();
 
@@ -54,19 +57,60 @@ function BookingHistoryPage() {
     fetchBookings();
   }, [activeTab, refreshPage]);
 
+  // Search filtering function
+  const filterBookings = (bookingsList) => {
+    if (!searchQuery) return bookingsList;
+
+    const normalizedQuery = searchQuery.toLowerCase().trim();
+
+    return bookingsList.filter((booking) =>
+      Object.values(booking).some((value) =>
+        String(value).toLowerCase().includes(normalizedQuery)
+      )
+    );
+  };
+
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
   };
 
-  const currentBookings = bookings[activeTab].slice(
+  // Apply search filter to current tab's bookings
+  const filteredBookings = filterBookings(bookings[activeTab]);
+
+  // Paginate filtered bookings
+  const currentBookings = filteredBookings.slice(
     currentPage * itemsPerPage,
     (currentPage + 1) * itemsPerPage
   );
 
+  // Clear search query
+  const clearSearch = () => {
+    setSearchQuery("");
+    setCurrentPage(0);
+  };
+
   return (
-    <div className='w-full grow py-10'>
-      <div className='flex flex-col justify-center w-full xs:px-15 lg:px-30'>
-        <div className='bg-white flex text-lg sm:text-xl justify-center lg:px-5 px-5 lg:gap-5 gap-2'>
+    <div className="w-full grow py-10">
+      <div className="flex flex-col justify-center w-full xs:px-15 lg:px-30">
+        <div className="flex items-center duration-300 focus-within:shadow-[0_3px_8px_rgb(150,150,150)] text-gray-500 px-2 mb-5 border bg-gray-100 border-gray-300 rounded-xl">
+          <FontAwesomeIcon icon={faSearch} />
+          <input
+            type="text"
+            placeholder="Search games..."
+            value={searchQuery}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setCurrentPage(0);
+            }}
+            className="w-full p-2 focus:outline-none"
+          />
+          {searchQuery && (
+            <button className="cursor-pointer" onClick={clearSearch}>
+              <FontAwesomeIcon icon={faClose} />
+            </button>
+          )}
+        </div>
+        <div className="bg-white flex text-lg sm:text-xl justify-center lg:px-5 px-5 lg:gap-5 gap-2">
           {[
             { label: "Upcoming", key: "upcoming" },
             { label: "Past", key: "past" },
@@ -82,6 +126,7 @@ function BookingHistoryPage() {
               onClick={() => {
                 setActiveTab(key);
                 setCurrentPage(0);
+                setSearchQuery(""); // Clear search when changing tabs
               }}>
               {label}
 
@@ -90,14 +135,14 @@ function BookingHistoryPage() {
                   className={`text-white text-xs font-normal aspect-square px-2 w-5 flex justify-center items-center rounded-full ${
                     activeTab === key ? "bg-blue-700" : "bg-gray-400"
                   }`}>
-                  {bookings[key]?.length || 0}
+                  {filteredBookings.length || 0}
                 </span>
               )}
             </button>
           ))}
         </div>
 
-        <div className='h-max grow lg:px-5 px-2 py-5 rounded-lg lg:gap-5 gap-2 justify-center w-full items-stretch grid grid-cols-1 md:grid-cols-2'>
+        <div className="h-max grow lg:px-5 px-2 py-5 rounded-lg lg:gap-5 gap-2 justify-center w-full items-stretch grid grid-cols-1 md:grid-cols-2">
           {currentBookings.length > 0 ? (
             currentBookings.map((booking) => (
               <BookingCard
@@ -112,8 +157,10 @@ function BookingHistoryPage() {
               />
             ))
           ) : (
-            <div className='text-gray-500 italic text-lg font-medium text-center col-span-2 py-5'>
-              {activeTab === "upcoming"
+            <div className="text-gray-500 italic text-lg font-medium text-center col-span-2 py-5">
+              {searchQuery
+                ? "No bookings match your search query."
+                : activeTab === "upcoming"
                 ? "No upcoming game bookings. Book a slot now!"
                 : activeTab === "past"
                 ? "No past game bookings. Start playing and check your history here!"
@@ -122,11 +169,11 @@ function BookingHistoryPage() {
           )}
         </div>
 
-        {bookings[activeTab].length > itemsPerPage && (
+        {filteredBookings.length > itemsPerPage && (
           <ReactPaginate
             previousLabel={"Prev"}
             nextLabel={"Next"}
-            pageCount={Math.ceil(bookings[activeTab].length / itemsPerPage)}
+            pageCount={Math.ceil(filteredBookings.length / itemsPerPage)}
             onPageChange={handlePageClick}
             containerClassName={"flex justify-center space-x-2 mt-5"}
             forcePage={currentPage}
