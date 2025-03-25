@@ -57,11 +57,6 @@ function AboutUsPage() {
           </div>
         </div>
       </div>
-      {token && (
-        <div className='w-full flex justify-center'>
-          <FeedBackForm />
-        </div>
-      )}
     </div>
   );
 }

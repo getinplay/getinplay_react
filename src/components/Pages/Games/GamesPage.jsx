@@ -12,10 +12,14 @@ function GamesPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/Api's/game_data.php`
-      );
-      setGames(res.data);
+      try {
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_URL}/Api's/game_data.php`
+        );
+        setGames(res.data);
+      } catch (error) {
+        console.error(error);
+      }
     };
 
     fetchData();

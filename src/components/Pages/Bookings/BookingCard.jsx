@@ -73,7 +73,7 @@ function BookingCard({ date, price, game, slot, showCancel, id, refreshPage }) {
   };
 
   return (
-    <div className='flex w-full shadow-lg border border-gray-100 bg-white px-2 rounded-md text-start'>
+    <div className='select-none flex w-full shadow-lg border border-gray-100 bg-white px-2 rounded-md text-start'>
       {showCancel && (
         <div className='flex justify-center items-center gap-1'>
           <button

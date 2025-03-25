@@ -4,6 +4,7 @@ import GamesCarousel from "./Sections/GamesCarousel";
 import MembershipSection from "./Sections/MembershipSection";
 import ReserveNowSection from "./Sections/ReserveNowSection";
 import TestimonialsSection from "./Sections/TestimonialsSection";
+import FeaturedGamesSection from "./Sections/FeaturedGamesSection";
 
 function HomePage() {
   const [games, setGames] = useState([]);
@@ -41,8 +42,9 @@ function HomePage() {
   return (
     <div className='w-full flex flex-col items-center gap-5'>
       <GamesCarousel games={games} />
-      <MembershipSection />
+      {!isLogin && <MembershipSection />}
       <TestimonialsSection />
+      <FeaturedGamesSection />
       {!isLogin && <ReserveNowSection />}
     </div>
   );

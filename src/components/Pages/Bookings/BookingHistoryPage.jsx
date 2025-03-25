@@ -5,6 +5,7 @@ import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faClose } from "@fortawesome/free-solid-svg-icons";
+import FeedBackForm from "../../FeedBackForm";
 
 function BookingHistoryPage() {
   const [bookings, setBookings] = useState({
@@ -30,7 +31,7 @@ function BookingHistoryPage() {
 
         if (!token) {
           console.error("Auth token not found");
-          navigate("/home");
+          navigate("/");
           return;
         }
 
@@ -90,27 +91,27 @@ function BookingHistoryPage() {
   };
 
   return (
-    <div className="w-full grow py-10">
-      <div className="flex flex-col justify-center w-full xs:px-15 lg:px-30">
-        <div className="flex items-center duration-300 focus-within:shadow-[0_3px_8px_rgb(150,150,150)] text-gray-500 px-2 mb-5 border bg-gray-100 border-gray-300 rounded-xl">
+    <div className='w-full grow py-10'>
+      <div className='flex flex-col justify-center w-full xs:px-15 lg:px-30'>
+        <div className='flex items-center duration-300 focus-within:shadow-[0_3px_8px_rgb(150,150,150)] text-gray-500 px-2 mb-5 border bg-gray-100 border-gray-300 rounded-xl'>
           <FontAwesomeIcon icon={faSearch} />
           <input
-            type="text"
-            placeholder="Search games..."
+            type='text'
+            placeholder='Search games...'
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value);
               setCurrentPage(0);
             }}
-            className="w-full p-2 focus:outline-none"
+            className='w-full p-2 focus:outline-none'
           />
           {searchQuery && (
-            <button className="cursor-pointer" onClick={clearSearch}>
+            <button className='cursor-pointer' onClick={clearSearch}>
               <FontAwesomeIcon icon={faClose} />
             </button>
           )}
         </div>
-        <div className="bg-white flex text-lg sm:text-xl justify-center lg:px-5 px-5 lg:gap-5 gap-2">
+        <div className='bg-white flex text-lg sm:text-xl justify-center lg:px-5 px-5 lg:gap-5 gap-2'>
           {[
             { label: "Upcoming", key: "upcoming" },
             { label: "Past", key: "past" },
@@ -142,7 +143,7 @@ function BookingHistoryPage() {
           ))}
         </div>
 
-        <div className="h-max grow lg:px-5 px-2 py-5 rounded-lg lg:gap-5 gap-2 justify-center w-full items-stretch grid grid-cols-1 md:grid-cols-2">
+        <div className='h-max grow lg:px-5 px-2 py-5 rounded-lg lg:gap-5 gap-2 justify-center w-full items-stretch grid grid-cols-1 md:grid-cols-2'>
           {currentBookings.length > 0 ? (
             currentBookings.map((booking) => (
               <BookingCard
@@ -157,7 +158,7 @@ function BookingHistoryPage() {
               />
             ))
           ) : (
-            <div className="text-gray-500 italic text-lg font-medium text-center col-span-2 py-5">
+            <div className='text-gray-500 italic text-lg font-medium text-center col-span-2 py-5'>
               {searchQuery
                 ? "No bookings match your search query."
                 : activeTab === "upcoming"
@@ -198,6 +199,11 @@ function BookingHistoryPage() {
             pageRangeDisplayed={0}
             marginPagesDisplayed={1}
           />
+        )}
+        {activeTab === "past" && filteredBookings.length > 0 && (
+          <div className='w-full flex justify-center py-10'>
+            <FeedBackForm />
+          </div>
         )}
       </div>
     </div>

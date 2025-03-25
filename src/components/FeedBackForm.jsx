@@ -89,9 +89,8 @@ function FeedBackForm() {
         Rate Us
       </h1>
       <div
-        className='flex max-sm:flex-col max-sm:gap-1 max-sm:p-1 text-gray-600 justify-between
-      items-center'>
-        How was your Experience?
+        className='flex flex-col max-sm:gap-1 max-sm:p-1 text-gray-600 justify-between
+      items-start'>
         <div className='flex gap-1 justify-center sm:py-3 py-1'>
           {[1, 2, 3, 4, 5].map((val) => (
             <FontAwesomeIcon
@@ -103,6 +102,7 @@ function FeedBackForm() {
             />
           ))}
         </div>
+        How was your Experience?
       </div>
       <div className='flex flex-col text-start sm:text-base text-sm w-full'>
         <textarea

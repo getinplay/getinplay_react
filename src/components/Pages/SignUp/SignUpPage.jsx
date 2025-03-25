@@ -6,7 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 function SignUpPage() {
+  const [isLoading, setIsLoading] = useState(false);
   const [showPass, setShowPass] = useState(false);
+  const [showConPass, setShowConPass] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -34,6 +36,9 @@ function SignUpPage() {
     // Name validation
     if (!formData.name.trim()) {
       tempErrors.name = "Name is required!";
+      isValid = false;
+    } else if (/\s{2,}/.test(formData.name)) {
+      tempErrors.name = "No multiple whitespaces allowed!";
       isValid = false;
     } else {
       tempErrors.name = "";
@@ -78,6 +83,9 @@ function SignUpPage() {
     } else if (formData.password.length < 8) {
       tempErrors.password = "Password must be at least 8 characters!";
       isValid = false;
+    } else if (/\s/.test(formData.password)) {
+      tempErrors.password = "Password cannot contain whitespaces!";
+      isValid = false;
     } else {
       tempErrors.password = "";
     }
@@ -119,6 +127,7 @@ function SignUpPage() {
     if (!validateFields()) return;
 
     try {
+      setIsLoading(true);
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/Api's/register.php`,
         {
@@ -133,7 +142,7 @@ function SignUpPage() {
           headers: { "Content-Type": "application/json" },
         }
       );
-
+      setIsLoading(false);
       if (res.data.success) {
         toast.success(res.data.message, {
           position: "top-center",
@@ -142,7 +151,7 @@ function SignUpPage() {
           pauseOnFocusLoss: false,
         });
         await new Promise((r) => setTimeout(r, 2000));
-        // navigate("/login");
+        navigate("/login");
       } else {
         toast.error(res.data.message, {
           position: "top-center",
@@ -163,183 +172,201 @@ function SignUpPage() {
 
   return (
     <>
-      <div className="w-full h-[100vh] py-10 flex items-center justify-center">
+      <div className='w-full min-h-[100vh] py-10 flex items-center justify-center'>
         <form
           onSubmit={handleSubmit}
           noValidate
-          className="lg:w-[50%] md:w-[65%] max-md:w-[90%] max-w-[400px] min-h-max sm:p-5 rounded-xl bg-white flex flex-col gap-3 items-center justify-between">
+          className='w-max min-h-max sm:p-5 rounded-xl bg-white flex flex-col gap-3 items-center justify-between'>
+          <img
+            className='w-[200px] pb-5 object-contain'
+            src='/assets/images/getinplay.png'
+            alt='GetInPlay Logo'
+          />
+
           <div>
-            <p className="text-3xl sm:text-4xl font-bold text-[#4A5BE6] text-center">
+            <p className='text-3xl sm:text-4xl font-bold text-[#4A5BE6] text-center'>
               REGISTER NOW
             </p>
-            <p className="sm:text-lg font-light text-gray-400">
+            <p className='sm:text-lg font-light text-gray-400'>
               Create a new account
             </p>
           </div>
-          <div className="flex gap-3">
-            <div className="flex flex-col pt-2 items-center justify-center w-full sm:text-lg font-medium text-gray-600">
-              <div className="flex flex-col text-start w-full">
-                <label className="px-2">Name</label>
-                <div className="flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full">
+          <div className='flex max-sm:flex-col sm:gap-3'>
+            <div className='flex flex-col  items-center justify-center w-full sm:text-lg font-medium text-gray-600'>
+              <div className='flex flex-col text-start w-full'>
+                <label className='px-2'>Name</label>
+                <div className='flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full'>
                   <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    placeholder="Name"
+                    type='text'
+                    name='name'
+                    id='name'
+                    placeholder='Name'
                     value={formData.name}
-                    className="grow min-w-0 outline-none border-none"
+                    className='grow min-w-0 outline-none border-none'
                     onChange={handleChange}
                   />
                 </div>
-                <p className="select-none text-red-500 text-sm px-2">
+                <p className='select-none text-red-500 text-sm px-2'>
                   {errors.name}&nbsp;
                 </p>
               </div>
 
-              <div className="flex flex-col text-start w-full">
-                <label className="px-2">Username</label>
-                <div className="flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full">
+              <div className='flex flex-col text-start w-full'>
+                <label className='px-2'>Username</label>
+                <div className='flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full'>
                   <input
-                    type="text"
-                    name="username"
-                    id="username"
-                    placeholder="Username"
+                    type='text'
+                    name='username'
+                    id='username'
+                    placeholder='Username'
                     value={formData.username}
-                    className="grow min-w-0 outline-none border-none"
+                    className='grow min-w-0 outline-none border-none'
                     onChange={handleChange}
                   />
                 </div>
-                <p className="select-none text-red-500 text-sm px-2">
+                <p className='select-none text-red-500 text-sm px-2'>
                   {errors.username}&nbsp;
                 </p>
               </div>
 
-              <div className="flex flex-col text-start w-full">
-                <label className="px-2">Phone Number</label>
-                <div className="flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full">
+              <div className='flex flex-col text-start w-full'>
+                <label className='px-2'>Phone Number</label>
+                <div className='flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full'>
                   <input
-                    type="text"
-                    name="phone_no"
-                    id="phone_no"
-                    placeholder="Phone Number"
+                    type='text'
+                    name='phone_no'
+                    id='phone_no'
+                    placeholder='Phone Number'
                     value={formData.phone_no}
-                    className="grow min-w-0 outline-none border-none"
+                    className='grow min-w-0 outline-none border-none'
                     onChange={handleChange}
                   />
                 </div>
-                <p className="select-none text-red-500 text-sm px-2">
+                <p className='select-none text-red-500 text-sm px-2'>
                   {errors.phone_no}&nbsp;
                 </p>
               </div>
             </div>
-            <div className="flex flex-col pt-2 items-center justify-center w-full sm:text-lg font-medium text-gray-600">
-              <div className="flex flex-col text-start w-full">
-                <label className="px-2">Email</label>
-                <div className="flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full">
+            <div className='flex flex-col  items-center justify-center w-full sm:text-lg font-medium text-gray-600'>
+              <div className='flex flex-col text-start w-full'>
+                <label className='px-2'>Email</label>
+                <div className='flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full'>
                   <input
-                    type="text"
-                    name="email"
-                    id="email"
-                    placeholder="Email-Id"
+                    type='text'
+                    name='email'
+                    id='email'
+                    placeholder='Email-Id'
                     value={formData.email}
-                    className="grow min-w-0 outline-none border-none"
+                    className='grow min-w-0 outline-none border-none'
                     onChange={handleChange}
                   />
                 </div>
-                <p className="select-none text-red-500 text-sm px-2">
+                <p className='select-none text-red-500 text-sm px-2'>
                   {errors.email}&nbsp;
                 </p>
               </div>
-              <div className="flex flex-col text-start w-full">
-                <label htmlFor="password" className="px-2">
+              <div className='flex flex-col text-start w-full'>
+                <label htmlFor='password' className='px-2'>
                   Password
                 </label>
-                <div className="flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full">
+                <div className='flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full'>
                   <input
                     type={showPass ? "text" : "password"}
-                    name="password"
-                    id="password"
-                    placeholder="Password"
+                    name='password'
+                    id='password'
+                    placeholder='Password'
                     value={formData.password}
-                    className="grow min-w-0 outline-none border-none"
+                    className='grow min-w-0 outline-none border-none'
                     onChange={handleChange}
                   />
                   <FontAwesomeIcon
                     icon={showPass ? faEyeSlash : faEye}
-                    size="sm"
-                    className="cursor-pointer text-gray-600 fa-fw"
+                    size='sm'
+                    className='cursor-pointer text-gray-600 fa-fw'
                     onClick={() => setShowPass(!showPass)}
                   />
                 </div>
-                <p className="select-none text-red-500 text-sm px-2">
+                <p className='select-none text-red-500 text-sm px-2'>
                   {errors.password}&nbsp;
                 </p>
               </div>
 
-              <div className="flex flex-col text-start w-full">
-                <label htmlFor="confirm_pass" className="px-2">
+              <div className='flex flex-col text-start w-full'>
+                <label htmlFor='confirm_pass' className='px-2'>
                   Confirm Password
                 </label>
-                <div className="flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full">
+                <div className='flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full'>
                   <input
-                    type={showPass ? "text" : "password"}
-                    name="confirm_pass"
-                    id="confirm_pass"
-                    placeholder="Confirm Password"
+                    type={showConPass ? "text" : "password"}
+                    name='confirm_pass'
+                    id='confirm_pass'
+                    placeholder='Confirm Password'
                     value={formData.confirm_pass}
-                    className="grow min-w-0 outline-none border-none"
+                    className='grow min-w-0 outline-none border-none'
                     onChange={handleChange}
                   />
                   <FontAwesomeIcon
-                    icon={showPass ? faEyeSlash : faEye}
-                    size="sm"
-                    className="cursor-pointer text-gray-600 fa-fw"
-                    onClick={() => setShowPass(!showPass)}
+                    icon={showConPass ? faEyeSlash : faEye}
+                    size='sm'
+                    className='cursor-pointer text-gray-600 fa-fw'
+                    onClick={() => setShowConPass(!showConPass)}
                   />
                 </div>
-                <p className="select-none text-red-500 text-sm px-2">
+                <p className='select-none text-red-500 text-sm px-2'>
                   {errors.confirm_pass}&nbsp;
                 </p>
               </div>
             </div>
           </div>
-          <div className="flex flex-col text-start w-full px-2">
-            <label className="mb-2">Gender</label>
-            <div className="flex gap-4">
-              <label className="flex items-center gap-2">
-                <input
-                  type="radio"
-                  name="gender"
-                  value="Male"
-                  checked={formData.gender === "Male"}
-                  onChange={handleChange}
-                />
-                Male
-              </label>
-              <label className="flex items-center gap-2">
-                <input
-                  type="radio"
-                  name="gender"
-                  value="Female"
-                  checked={formData.gender === "Female"}
-                  onChange={handleChange}
-                />
-                Female
-              </label>
+          <div className='flex text-gray-600 items-center text-start w-full px-2 gap-2'>
+            <div className='flex flex-col'>
+              <label className='font-medium sm:text-lg'>Gender: </label>
+              <p className='select-none text-red-500 font-medium text-sm'>
+                &nbsp;
+              </p>
             </div>
-            <p className="select-none text-red-500 text-sm">
-              {errors.gender}&nbsp;
-            </p>
+            <div className='flex flex-col text-base'>
+              <div className='flex gap-4 '>
+                <label className='flex items-center gap-2'>
+                  <input
+                    type='radio'
+                    name='gender'
+                    value='Male'
+                    checked={formData.gender === "Male"}
+                    onChange={handleChange}
+                  />
+                  Male
+                </label>
+                <label className='flex items-center gap-2'>
+                  <input
+                    type='radio'
+                    name='gender'
+                    value='Female'
+                    checked={formData.gender === "Female"}
+                    onChange={handleChange}
+                  />
+                  Female
+                </label>
+              </div>
+              <p className='select-none text-red-500 font-medium text-sm'>
+                {errors.gender}&nbsp;
+              </p>
+            </div>
           </div>
 
           <button
-            type="submit"
-            className="select-none mb-5 cursor-pointer bg-[#4A5BE6] p-2 rounded-lg tracking-wide text-white sm:text-lg active:translate-y-2 active:shadow-none duration-300 shadow-gray-400 hover:shadow-xl shadow-lg w-full">
-            SIGNUP
+            type='submit'
+            disabled={isLoading}
+            className={`select-none mb-5 cursor-pointer ${
+              isLoading
+                ? "bg-gray-500 translate-y-2"
+                : "bg-[#4A5BE6] active:translate-y-2 active:shadow-none hover:shadow-xl shadow-lg"
+            } p-2 rounded-lg tracking-wide text-white sm:text-lg  duration-300 shadow-gray-400  w-[200px] max-sm:w-full`}>
+            {!isLoading ? "SIGNUP" : "SIGNING UP..."}
           </button>
-          <p className="text-gray-500">
+          <p className='text-gray-500'>
             Already have an account?{" "}
-            <Link to={"/login"} className="cursor-pointer text-[#4A5BE6]">
+            <Link to={"/login"} className='cursor-pointer text-[#4A5BE6]'>
               Login
             </Link>
           </p>

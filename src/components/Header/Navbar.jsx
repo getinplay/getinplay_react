@@ -7,6 +7,7 @@ import {
   faUser,
   faRightFromBracket,
   faLock,
+  faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
@@ -92,7 +93,7 @@ function Navbar() {
         className={`${
           showNav ? "" : "max-lg:hidden"
         } lg:relative max-lg:mt-18 max-lg:flex justify-end backdrop-blur-xs duration-300 bg-gray-200/50 max-lg:inset-0 absolute max-lg:h-dvh w-full z-10`}>
-        <div className='max-lg:border-l-1 border-gray-200 text-sm sm:text-base bg-white flex lg:w-auto sm:w-max md:w-45 px-5 lg:flex-row flex-col items-start lg:gap-5 lg:m-0'>
+        <div className='max-lg:border-l-1 border-gray-200 text-sm sm:text-base bg-white flex lg:w-auto sm:w-max md:w-45 lg:flex-row flex-col items-start lg:gap-5 lg:m-0'>
           <NavBarLink onClick={() => setShowNav(false)} toLink='/'>
             Home
           </NavBarLink>
@@ -108,16 +109,40 @@ function Navbar() {
           <NavBarLink onClick={() => setShowNav(false)} toLink='/about-us'>
             About Us
           </NavBarLink>
+          {!isLogin && (
+            <div className='sm:hidden w-full'>
+              <div
+                onClick={() => navigate("/login")}
+                className='flex justify-center select-none bg-[#4A5BE6] text-white hover:bg-[#1529be] items-center gap-2 py-0.5 2xs:py-1 px-1 2xs:px-2 md:px-6 h-min shadow-gray-400 shadow-md my-2 m-2 cursor-pointer rounded-md active:translate-y-1 active:shadow-none duration-300'>
+                <FontAwesomeIcon icon={faRightToBracket} />
+                <div>Login</div>
+              </div>
+              <div
+                onClick={() => navigate("/signup")}
+                className='flex justify-center select-none text-[#4A5BE6] bg-gray-50 hover:bg-gray-200 items-center gap-2 py-0.5 2xs:py-1 px-1 2xs:px-2 md:px-6 h-min shadow-gray-400 shadow-md my-2 m-2 cursor-pointer rounded-md active:translate-y-1 active:shadow-none duration-300'>
+                <FontAwesomeIcon className='fa-fw' icon={faUserPlus} />
+                <div>SignUp</div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
       <div className='flex gap-1 h-full items-center 2xs:text-sm sm:text-base text-xs font-medium z-20'>
         {!isLogin ? (
-          <div
-            onClick={() => navigate("/login")}
-            className='select-none bg-[#4A5BE6] text-white hover:bg-[#1529be] flex items-center gap-2 py-0.5 2xs:py-1 px-1 2xs:px-2 md:px-6 h-min shadow-gray-400 shadow-md my-2 m-2 cursor-pointer rounded-md active:translate-y-1 active:shadow-none duration-300'>
-            <FontAwesomeIcon icon={faRightToBracket} />
-            <div>Login</div>
+          <div className='max-sm:hidden flex'>
+            <div
+              onClick={() => navigate("/login")}
+              className='select-none bg-[#4A5BE6] text-white hover:bg-[#1529be] flex items-center gap-2 py-0.5 2xs:py-1 px-1 2xs:px-2 md:px-6 h-min shadow-gray-400 shadow-md my-2 m-2 cursor-pointer rounded-md active:translate-y-1 active:shadow-none duration-300'>
+              <FontAwesomeIcon icon={faRightToBracket} />
+              <div>Login</div>
+            </div>
+            <div
+              onClick={() => navigate("/signup")}
+              className='select-none text-[#4A5BE6] bg-gray-50 hover:bg-gray-200 flex items-center gap-2 py-0.5 2xs:py-1 px-1 2xs:px-2 md:px-6 h-min shadow-gray-400 shadow-md my-2 m-2 cursor-pointer rounded-md active:translate-y-1 active:shadow-none duration-300'>
+              <FontAwesomeIcon className='fa-fw' icon={faUserPlus} />
+              <div>SignUp</div>
+            </div>
           </div>
         ) : (
           <div className='h-full relative text-gray-700' ref={profileRef}>

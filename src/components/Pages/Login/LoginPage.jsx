@@ -73,58 +73,63 @@ function LoginPage() {
 
   return (
     <>
-      <div className="w-full h-[100vh] py-10 flex items-center justify-center">
+      <div className='w-full h-[100vh] py-10 flex items-center justify-center'>
         <form
           onSubmit={handleSubmit}
           noValidate
-          className="lg:w-[50%] md:w-[65%] max-md:w-[90%] max-w-[400px] min-h-max sm:p-5 rounded-xl bg-white flex flex-col gap-3 items-center justify-between">
+          className='lg:w-[50%] md:w-[65%] max-md:w-[90%] max-w-[400px] min-h-max sm:p-5 rounded-xl bg-white flex flex-col gap-3 items-center justify-between'>
+          <img
+            className='w-[200px] py-5 object-contain'
+            src='/assets/images/getinplay.png'
+            alt='GetInPlay Logo'
+          />
           <div>
-            <p className="text-3xl sm:text-4xl font-bold text-[#4A5BE6] text-center">
-              WELCOME BACK
+            <p className='text-3xl sm:text-4xl font-bold text-[#4A5BE6] text-center'>
+              WELCOME
             </p>
-            <p className="sm:text-lg font-light text-gray-400">
+            <p className='sm:text-lg font-light text-gray-400'>
               Login to your account
             </p>
           </div>
-          <div className="flex flex-col pt-2 items-center justify-center w-full sm:text-lg font-medium text-gray-600">
-            <div className="flex flex-col text-start w-full">
-              <label className="px-2">Username</label>
-              <div className="flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full">
+          <div className='flex flex-col pt-2 items-center justify-center w-full sm:text-lg font-medium text-gray-600'>
+            <div className='flex flex-col text-start w-full'>
+              <label className='px-2'>Username</label>
+              <div className='flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full'>
                 <input
-                  type="text"
-                  name="username"
-                  id="username"
-                  placeholder="Username"
-                  className="grow min-w-0 outline-none border-none"
+                  type='text'
+                  name='username'
+                  id='username'
+                  placeholder='Username'
+                  className='grow min-w-0 outline-none border-none'
                   onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
-              <p className="select-none text-red-500 text-sm px-2">
+              <p className='select-none text-red-500 text-sm px-2'>
                 {errors.username}&nbsp;
               </p>
             </div>
 
-            <div className="flex flex-col text-start w-full">
-              <label htmlFor="password" className="px-2">
+            <div className='flex flex-col text-start w-full'>
+              <label htmlFor='password' className='px-2'>
                 Password
               </label>
-              <div className="flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full">
+              <div className='flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full'>
                 <input
                   type={showPass ? "text" : "password"}
-                  name="password"
-                  id="password"
-                  placeholder="Password"
-                  className="grow min-w-0 outline-none border-none"
+                  name='password'
+                  id='password'
+                  placeholder='Password'
+                  className='grow min-w-0 outline-none border-none'
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <FontAwesomeIcon
                   icon={showPass ? faEyeSlash : faEye}
-                  size="sm"
-                  className="cursor-pointer text-gray-600 fa-fw"
+                  size='sm'
+                  className='cursor-pointer text-gray-600 fa-fw'
                   onClick={() => setShowPass(!showPass)}
                 />
               </div>
-              <p className="select-none text-red-500 text-sm px-2">
+              <p className='select-none text-red-500 text-sm px-2'>
                 {errors.password}&nbsp;
               </p>
             </div>
@@ -140,13 +145,13 @@ function LoginPage() {
           </div>
 
           <button
-            type="submit"
-            className="select-none mb-5 cursor-pointer bg-[#4A5BE6] p-2 rounded-lg tracking-wide text-white sm:text-lg active:translate-y-2 active:shadow-none duration-300 shadow-gray-400 hover:shadow-xl shadow-lg w-full">
+            type='submit'
+            className='select-none mb-5 cursor-pointer bg-[#4A5BE6] p-2 rounded-lg tracking-wide text-white sm:text-lg active:translate-y-2 active:shadow-none duration-300 shadow-gray-400 hover:shadow-xl shadow-lg w-full'>
             LOGIN
           </button>
-          <p className="text-gray-500">
+          <p className='text-gray-500'>
             Don't have an account?{" "}
-            <Link to={"/signup"} className="cursor-pointer text-[#4A5BE6]">
+            <Link to={"/signup"} className='cursor-pointer text-[#4A5BE6]'>
               Sign Up
             </Link>
           </p>
