@@ -281,7 +281,7 @@ function ProfilePage() {
 
       <form onSubmit={handleSubmit}>
         <div className='flex flex-col gap-1 items-center justify-center shadow-[0_2px_16px_rgba(0,0,0,0.4)] rounded-lg p-5 w-full sm:text-lg font-medium text-gray-600'>
-          <div className='flex max-sm:flex-col sm:gap-5 '>
+          <div className='flex w-full max-sm:flex-col sm:gap-5 '>
             <div className='w-full'>
               {/* Name Field */}
               <div className='flex flex-col text-start w-full'>

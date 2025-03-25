@@ -52,7 +52,7 @@ function LoginPage() {
 
       if (res.data.success) {
         document.cookie = `authToken=${res.data.token}; path=/;`;
-        navigate(-1);
+        navigate("/");
       } else {
         toast.error(res.data.message, {
           position: "top-center",
@@ -129,14 +129,14 @@ function LoginPage() {
               </p>
             </div>
 
-            <div className="w-full flex justify-end select-none px-1">
+            {/* <div className="w-full flex justify-end select-none px-1">
               <Link
                 to={"/forgot-password"}
                 className="text-[#4A5BE6] hover:text-blue-900 text-end"
                 viewTransition>
                 Forgot password?
               </Link>
-            </div>
+            </div> */}
           </div>
 
           <button
@@ -146,7 +146,7 @@ function LoginPage() {
           </button>
           <p className="text-gray-500">
             Don't have an account?{" "}
-            <Link to={"#"} className="cursor-pointer text-[#4A5BE6]">
+            <Link to={"/signup"} className="cursor-pointer text-[#4A5BE6]">
               Sign Up
             </Link>
           </p>

@@ -15,23 +15,25 @@ import ForgotPassword from "./components/Pages/Login/ForgotPassword";
 import BookingHistoryPage from "./components/Pages/Bookings/BookingHistoryPage";
 import ProfilePage from "./components/Pages/Profile/ProfilePage";
 import UpdatePasswordPage from "./components/Pages/UpdatePassword/UpdatePasswordPage";
+import SignUpPage from "./components/Pages/SignUp/SignUpPage";
 
 const router = (
   <BrowserRouter>
     <Routes>
-      <Route path='/' element={<App />}>
-        <Route path='' element={<HomePage />} />
-        <Route path='games' element={<GamesPage />} />
-        <Route path='games/:id' element={<GameSlots />} />
-        <Route path='membership' element={<MembershipPage />} />
-        <Route path='about-us' element={<AboutUsPage />} />
-        <Route path='contact-us' element={<ContactUsPage />} />
-        <Route path='bookings' element={<BookingHistoryPage />} />
-        <Route path='profile' element={<ProfilePage />} />
-        <Route path='update-password' element={<UpdatePasswordPage />} />
+      <Route path="/" element={<App />}>
+        <Route path="" element={<HomePage />} />
+        <Route path="games" element={<GamesPage />} />
+        <Route path="games/:id" element={<GameSlots />} />
+        <Route path="membership" element={<MembershipPage />} />
+        <Route path="about-us" element={<AboutUsPage />} />
+        <Route path="contact-us" element={<ContactUsPage />} />
+        <Route path="bookings" element={<BookingHistoryPage />} />
+        <Route path="profile" element={<ProfilePage />} />
+        <Route path="update-password" element={<UpdatePasswordPage />} />
       </Route>
-      <Route path='login' element={<LoginPage />} />
-      <Route path='forgot-password' element={<ForgotPassword />} />
+      <Route path="login" element={<LoginPage />} />
+      <Route path="signup" element={<SignUpPage />} />
+      <Route path="forgot-password" element={<ForgotPassword />} />
     </Routes>
   </BrowserRouter>
 );
