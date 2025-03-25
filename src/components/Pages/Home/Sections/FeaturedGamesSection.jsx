@@ -28,9 +28,10 @@ function FeaturedGamesSection() {
   );
 
   return (
-    <div className='flex flex-col items-center gap-3'>
-      <p className="subtitle">Featured Games</p>
-      <div className='flex max-md:flex-col gap-3'>
+    <div className='flex flex-col items-center'>
+      <p className='subtitle'>Featured Games</p>
+      <p className="pb-5">Fan-Favorite Games You Can’t Miss</p>
+      <div className='flex w-[90vw] md:w-[80vw] gap-5 max-md:flex-col'>
         {featuredGames.map((game) => (
           <FeaturedGameCard
             key={game.id}
@@ -40,7 +41,7 @@ function FeaturedGamesSection() {
           </FeaturedGameCard>
         ))}
       </div>
-      
+
       <Link
         to={"/games"}
         viewTransition

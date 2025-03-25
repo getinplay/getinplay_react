@@ -84,7 +84,7 @@ function FeedBackForm() {
   };
 
   return (
-    <div className='w-full sm:w-lg rounded-lg shadow-[0_2px_16px_rgba(0,0,0,0.4)] flex flex-col gap-1 sm:text-xl text-lg p-3'>
+    <div className='bg-white w-full sm:w-lg rounded-lg shadow-[0_2px_16px_rgba(0,0,0,0.4)] flex flex-col gap-1 sm:text-xl text-lg p-3'>
       <h1 className='text-gray-700 sm:text-4xl text-3xl pt-1 sm:pt-3'>
         Rate Us
       </h1>

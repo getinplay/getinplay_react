@@ -4,7 +4,12 @@ import BookingCard from "./BookingCard";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faClose } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSearch,
+  faClose,
+  faStar,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 import FeedBackForm from "../../FeedBackForm";
 
 function BookingHistoryPage() {
@@ -17,6 +22,7 @@ function BookingHistoryPage() {
   const [currentPage, setCurrentPage] = useState(0);
   const [refreshPage, setRefreshPage] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const itemsPerPage = 6;
   const navigate = useNavigate();
 
@@ -75,6 +81,12 @@ function BookingHistoryPage() {
     setCurrentPage(selected);
   };
 
+  // Clear search query
+  const clearSearch = () => {
+    setSearchQuery("");
+    setCurrentPage(0);
+  };
+
   // Apply search filter to current tab's bookings
   const filteredBookings = filterBookings(bookings[activeTab]);
 
@@ -84,14 +96,24 @@ function BookingHistoryPage() {
     (currentPage + 1) * itemsPerPage
   );
 
-  // Clear search query
-  const clearSearch = () => {
-    setSearchQuery("");
-    setCurrentPage(0);
-  };
-
   return (
     <div className='w-full grow py-10'>
+      {/* Custom Dialog */}
+      {isDialogOpen && (
+        <div className='backdrop-blur-sm justify-center fixed inset-0 z-50 flex items-center bg-gray-200/50 '>
+          <div className='bg-transparent rounded-lg w-max relative'>
+            <button
+              onClick={() => setIsDialogOpen(false)}
+              className='absolute top-10 cursor-pointer right-10 text-gray-500 hover:text-gray-700'>
+              <FontAwesomeIcon icon={faTimes} />
+            </button>
+            <div className='p-6'>
+              <FeedBackForm />
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className='flex flex-col justify-center w-full xs:px-15 lg:px-30'>
         <div className='flex items-center duration-300 focus-within:shadow-[0_3px_8px_rgb(150,150,150)] text-gray-500 px-2 mb-5 border bg-gray-100 border-gray-300 rounded-xl'>
           <FontAwesomeIcon icon={faSearch} />
@@ -111,6 +133,7 @@ function BookingHistoryPage() {
             </button>
           )}
         </div>
+
         <div className='bg-white flex text-lg sm:text-xl justify-center lg:px-5 px-5 lg:gap-5 gap-2'>
           {[
             { label: "Upcoming", key: "upcoming" },
@@ -200,9 +223,15 @@ function BookingHistoryPage() {
             marginPagesDisplayed={1}
           />
         )}
-        {activeTab === "past" && filteredBookings.length > 0 && (
-          <div className='w-full flex justify-center py-10'>
-            <FeedBackForm />
+
+        {activeTab === "past" && (
+          <div className='w-full flex justify-center py-5'>
+            <button
+              onClick={() => setIsDialogOpen(true)}
+              className='bg-[#4A5BE6] cursor-pointer text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition-colors'>
+              <FontAwesomeIcon icon={faStar} />
+              Rate Us
+            </button>
           </div>
         )}
       </div>
