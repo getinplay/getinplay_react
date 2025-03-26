@@ -112,13 +112,19 @@ function Navbar() {
           {!isLogin && (
             <div className='sm:hidden w-full'>
               <div
-                onClick={() => navigate("/login")}
+                onClick={() => {
+                  navigate("/login");
+                  setShowNav(false);
+                }}
                 className='flex justify-center select-none bg-[#4A5BE6] text-white hover:bg-[#1529be] items-center gap-2 py-0.5 2xs:py-1 px-1 2xs:px-2 md:px-6 h-min shadow-gray-400 shadow-md my-2 m-2 cursor-pointer rounded-md active:translate-y-1 active:shadow-none duration-300'>
                 <FontAwesomeIcon icon={faRightToBracket} />
                 <div>Login</div>
               </div>
               <div
-                onClick={() => navigate("/signup")}
+                onClick={() => {
+                  navigate("/signup");
+                  setShowNav(false);
+                }}
                 className='flex justify-center select-none text-[#4A5BE6] bg-gray-50 hover:bg-gray-200 items-center gap-2 py-0.5 2xs:py-1 px-1 2xs:px-2 md:px-6 h-min shadow-gray-400 shadow-md my-2 m-2 cursor-pointer rounded-md active:translate-y-1 active:shadow-none duration-300'>
                 <FontAwesomeIcon className='fa-fw' icon={faUserPlus} />
                 <div>SignUp</div>

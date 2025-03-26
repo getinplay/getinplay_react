@@ -144,14 +144,16 @@ function SignUpPage() {
       );
       setIsLoading(false);
       if (res.data.success) {
+        document.cookie = `authToken=${res.data.token}; path=/;`;
         toast.success(res.data.message, {
           position: "top-center",
-          autoClose: 3000,
+          autoClose: false,
           pauseOnHover: false,
           pauseOnFocusLoss: false,
         });
         await new Promise((r) => setTimeout(r, 2000));
-        navigate("/login");
+        navigate("/");
+        navigate(0);
       } else {
         toast.error(res.data.message, {
           position: "top-center",
@@ -172,17 +174,11 @@ function SignUpPage() {
 
   return (
     <>
-      <div className='w-full min-h-[100vh] py-10 flex items-center justify-center'>
+      <div className='w-full py-10 flex items-center justify-center'>
         <form
           onSubmit={handleSubmit}
           noValidate
           className='w-max min-h-max sm:p-5 rounded-xl bg-white flex flex-col gap-3 items-center justify-between'>
-          <img
-            className='w-[200px] pb-5 object-contain'
-            src='/assets/images/getinplay.png'
-            alt='GetInPlay Logo'
-          />
-
           <div>
             <p className='text-3xl sm:text-4xl font-bold text-[#4A5BE6] text-center'>
               REGISTER NOW
@@ -194,7 +190,7 @@ function SignUpPage() {
           <div className='flex max-sm:flex-col sm:gap-3'>
             <div className='flex flex-col  items-center justify-center w-full sm:text-lg font-medium text-gray-600'>
               <div className='flex flex-col text-start w-full'>
-                <label className='px-2'>Name</label>
+                <label className='px-2 required'>Name</label>
                 <div className='flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full'>
                   <input
                     type='text'
@@ -212,7 +208,7 @@ function SignUpPage() {
               </div>
 
               <div className='flex flex-col text-start w-full'>
-                <label className='px-2'>Username</label>
+                <label className='px-2 required'>Username</label>
                 <div className='flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full'>
                   <input
                     type='text'
@@ -230,7 +226,7 @@ function SignUpPage() {
               </div>
 
               <div className='flex flex-col text-start w-full'>
-                <label className='px-2'>Phone Number</label>
+                <label className='px-2 required'>Phone Number</label>
                 <div className='flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full'>
                   <input
                     type='text'
@@ -249,7 +245,7 @@ function SignUpPage() {
             </div>
             <div className='flex flex-col  items-center justify-center w-full sm:text-lg font-medium text-gray-600'>
               <div className='flex flex-col text-start w-full'>
-                <label className='px-2'>Email</label>
+                <label className='px-2 required'>Email</label>
                 <div className='flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full'>
                   <input
                     type='text'
@@ -266,7 +262,7 @@ function SignUpPage() {
                 </p>
               </div>
               <div className='flex flex-col text-start w-full'>
-                <label htmlFor='password' className='px-2'>
+                <label htmlFor='password' className='px-2 required'>
                   Password
                 </label>
                 <div className='flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full'>
@@ -292,7 +288,7 @@ function SignUpPage() {
               </div>
 
               <div className='flex flex-col text-start w-full'>
-                <label htmlFor='confirm_pass' className='px-2'>
+                <label htmlFor='confirm_pass' className='px-2 required'>
                   Confirm Password
                 </label>
                 <div className='flex items-center gap-1 focus-within:shadow-md focus-within:scale-[1.02] duration-300 rounded-xl px-4 py-2 bg-gray-200 w-full'>
@@ -320,7 +316,9 @@ function SignUpPage() {
           </div>
           <div className='flex text-gray-600 items-center text-start w-full px-2 gap-2'>
             <div className='flex flex-col'>
-              <label className='font-medium sm:text-lg'>Gender: </label>
+              <label className='font-medium sm:text-lg required'>
+                Gender:{" "}
+              </label>
               <p className='select-none text-red-500 font-medium text-sm'>
                 &nbsp;
               </p>

@@ -98,22 +98,11 @@ function BookingHistoryPage() {
 
   return (
     <div className='w-full grow py-10'>
-      {/* Custom Dialog */}
-      {isDialogOpen && (
-        <div className='backdrop-blur-sm justify-center fixed inset-0 z-50 flex items-center bg-gray-200/50 '>
-          <div className='bg-transparent rounded-lg w-max relative'>
-            <button
-              onClick={() => setIsDialogOpen(false)}
-              className='absolute top-10 cursor-pointer right-10 text-gray-500 hover:text-gray-700'>
-              <FontAwesomeIcon icon={faTimes} />
-            </button>
-            <div className='p-6'>
-              <FeedBackForm />
-            </div>
-          </div>
-        </div>
-      )}
-
+      <>
+        {isDialogOpen && (
+          <FeedBackForm closeForm={() => setIsDialogOpen(false)} />
+        )}
+      </>
       <div className='flex flex-col justify-center w-full xs:px-15 lg:px-30'>
         <div className='flex items-center duration-300 focus-within:shadow-[0_3px_8px_rgb(150,150,150)] text-gray-500 px-2 mb-5 border bg-gray-100 border-gray-300 rounded-xl'>
           <FontAwesomeIcon icon={faSearch} />

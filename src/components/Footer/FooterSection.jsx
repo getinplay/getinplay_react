@@ -93,26 +93,34 @@ function FooterSection() {
         <div className='p-4 flex flex-col justify-center max-xs:w-full'>
           <p className='text-xl text-black font-bold '>Follow us</p>
           <div className='flex justify-center grow gap-4 items-center text-[#212121] py-4'>
-            <FontAwesomeIcon
-              icon={faFacebook}
-              size='xl'
-              className='cursor-pointer hover:text-[#1877F2] active:text-[#1877F2] duration-300 active:scale-[1.1] hover:scale-[1.1]'
-            />
-            <FontAwesomeIcon
-              icon={faXTwitter}
-              size='xl'
-              className='cursor-pointer hover:text-[#1DA1F2] active:text-[#1DA1F2] duration-300 active:scale-[1.1] hover:scale-[1.1]'
-            />
-            <FontAwesomeIcon
-              icon={faYoutube}
-              size='xl'
-              className='cursor-pointer hover:text-[#FF0000] active:text-[#FF0000] duration-300 active:scale-[1.1] hover:scale-[1.1]'
-            />
-            <FontAwesomeIcon
-              icon={faInstagram}
-              size='xl'
-              className='cursor-pointer hover:text-[#c92bb7] active:text-[#c92bb7] duration-300 active:scale-[1.1] hover:scale-[1.1]'
-            />
+            <Link to={"https://www.facebook.com/profile.php?id=61574906180529"}>
+              <FontAwesomeIcon
+                icon={faFacebook}
+                size='xl'
+                className='cursor-pointer hover:text-[#1877F2] active:text-[#1877F2] duration-300 active:scale-[1.1] hover:scale-[1.1]'
+              />
+            </Link>
+            <Link to={"https://x.com/get_in_play"}>
+              <FontAwesomeIcon
+                icon={faXTwitter}
+                size='xl'
+                className='cursor-pointer hover:text-[#1DA1F2] active:text-[#1DA1F2] duration-300 active:scale-[1.1] hover:scale-[1.1]'
+              />
+            </Link>
+            <Link to={"https://www.youtube.com/@GetInPlay-c8c"}>
+              <FontAwesomeIcon
+                icon={faYoutube}
+                size='xl'
+                className='cursor-pointer hover:text-[#FF0000] active:text-[#FF0000] duration-300 active:scale-[1.1] hover:scale-[1.1]'
+              />
+            </Link>
+            <Link to={"https://www.instagram.com/get_in_play/"}>
+              <FontAwesomeIcon
+                icon={faInstagram}
+                size='xl'
+                className='cursor-pointer hover:text-[#c92bb7] active:text-[#c92bb7] duration-300 active:scale-[1.1] hover:scale-[1.1]'
+              />
+            </Link>
           </div>
         </div>
       </div>

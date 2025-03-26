@@ -53,6 +53,7 @@ function LoginPage() {
       if (res.data.success) {
         document.cookie = `authToken=${res.data.token}; path=/;`;
         navigate("/");
+        navigate(0);
       } else {
         toast.error(res.data.message, {
           position: "top-center",
@@ -73,16 +74,16 @@ function LoginPage() {
 
   return (
     <>
-      <div className='w-full h-[100vh] py-10 flex items-center justify-center'>
+      <div className='w-full py-10 flex items-center justify-center'>
         <form
           onSubmit={handleSubmit}
           noValidate
           className='lg:w-[50%] md:w-[65%] max-md:w-[90%] max-w-[400px] min-h-max sm:p-5 rounded-xl bg-white flex flex-col gap-3 items-center justify-between'>
-          <img
+          {/* <img
             className='w-[200px] py-5 object-contain'
             src='/assets/images/getinplay.png'
             alt='GetInPlay Logo'
-          />
+          /> */}
           <div>
             <p className='text-3xl sm:text-4xl font-bold text-[#4A5BE6] text-center'>
               WELCOME

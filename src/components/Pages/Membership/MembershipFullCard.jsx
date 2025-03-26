@@ -75,10 +75,10 @@ function MembershipFullCard({
             isCurrentPlan
               ? "bg-green-700"
               : isPlanActive
-              ? "bg-gray-500"
+              ? "opacity-0"
               : " bg-[#4A5BE6] cursor-pointer group-hover:bg-white/40 hover:bg-white/60   hover:text-"
           }`}>
-          {isCurrentPlan ? "Current Plan" : isPlanActive ? "Active" : "Upgrade"}
+          {isCurrentPlan ? "Active Plan" : isPlanActive ? "Active" : "Upgrade"}
         </button>
       </div>
     </div>

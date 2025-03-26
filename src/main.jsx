@@ -20,20 +20,20 @@ import SignUpPage from "./components/Pages/SignUp/SignUpPage";
 const router = (
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />}>
-        <Route path="" element={<HomePage />} />
-        <Route path="games" element={<GamesPage />} />
-        <Route path="games/:id" element={<GameSlots />} />
-        <Route path="membership" element={<MembershipPage />} />
-        <Route path="about-us" element={<AboutUsPage />} />
-        <Route path="contact-us" element={<ContactUsPage />} />
-        <Route path="bookings" element={<BookingHistoryPage />} />
-        <Route path="profile" element={<ProfilePage />} />
-        <Route path="update-password" element={<UpdatePasswordPage />} />
+      <Route path='/' element={<App />}>
+        <Route path='' element={<HomePage />} />
+        <Route path='games' element={<GamesPage />} />
+        <Route path='games/:id' element={<GameSlots />} />
+        <Route path='membership' element={<MembershipPage />} />
+        <Route path='about-us' element={<AboutUsPage />} />
+        <Route path='contact-us' element={<ContactUsPage />} />
+        <Route path='bookings' element={<BookingHistoryPage />} />
+        <Route path='profile' element={<ProfilePage />} />
+        <Route path='update-password' element={<UpdatePasswordPage />} />
+        <Route path='login' element={<LoginPage />} />
+        <Route path='signup' element={<SignUpPage />} />
+        <Route path='forgot-password' element={<ForgotPassword />} />
       </Route>
-      <Route path="login" element={<LoginPage />} />
-      <Route path="signup" element={<SignUpPage />} />
-      <Route path="forgot-password" element={<ForgotPassword />} />
     </Routes>
   </BrowserRouter>
 );
