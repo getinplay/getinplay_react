@@ -6,6 +6,7 @@ import DatePicker from "./DatePicker";
 import axios from "axios";
 import ConfirmLogin from "../../ConfirmLogin";
 import BookGamePopup from "./BookGamePopup";
+import FeedBackForm from "../../FeedBackForm";
 
 function GameSlots() {
   const [isLogin, setIsLogin] = useState(false);
@@ -25,6 +26,7 @@ function GameSlots() {
   const filterOptionsDay = ["All", "Morning", "Afternoon", "Evening", "Night"];
   const [selectedDayFilter, setSelectedDayFilter] = useState(0);
   const [selectedSlot, setSelectedSlot] = useState("");
+  const [showFeedBackForm, setShowFeedBackForm] = useState(false);
 
   // Helper function to parse time from slot format (e.g., 10:30-11:00AM)
   const parseTime = (timeSlot) => {
@@ -162,24 +164,27 @@ function GameSlots() {
   }, [selectedDate, refreshPage, selected, selectedDayFilter]);
 
   return (
-    <div className="w-full xs:w-[90vw] md:w-[80vw] p-2 xs:p-5 flex flex-col gap-5">
-      <h2 className="text-3xl p-3 sm:text-4xl font-extrabold text-gray-700">
+    <div className='w-full xs:w-[90vw] md:w-[80vw] p-2 xs:p-5 flex flex-col gap-5'>
+      {showFeedBackForm && (
+        <FeedBackForm closeForm={() => setShowFeedBackForm(false)} />
+      )}
+      <h2 className='text-3xl p-3 sm:text-4xl font-extrabold text-gray-700'>
         {currentGame.name.toUpperCase()}
       </h2>
       <img
-        className="shadow-[0_2px_16px_rgba(0,0,0,0.3)] h-[30vh] sm:h-[50vh] min-h-[200px] object-cover rounded-lg"
+        className='shadow-[0_2px_16px_rgba(0,0,0,0.3)] h-[30vh] sm:h-[50vh] min-h-[200px] object-cover rounded-lg'
         src={`${import.meta.env.VITE_API_URL}/admin/${currentGame.slot_image}`}
         alt={`image`}
       />
-      <div className="flex w-full flex-col lg:flex-row gap-5 justify-between max-lg:items-start items-center">
+      <div className='flex w-full flex-col lg:flex-row gap-5 justify-between max-lg:items-start items-center'>
         <div>
           <DatePicker
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
           />
         </div>
-        <div className="flex gap-3 w-full justify-end max-sm:flex-col">
-          <div className="flex w-max bg-gray-200 rounded-full duration-300">
+        <div className='flex gap-3 w-full justify-end max-sm:flex-col'>
+          <div className='flex w-max bg-gray-200 rounded-full duration-300'>
             {filterOptionsDay.map((ele, index) => (
               <ButtonGroupBtn
                 onClickHandler={() => {
@@ -195,7 +200,7 @@ function GameSlots() {
               </ButtonGroupBtn>
             ))}
           </div>
-          <div className="flex w-max bg-gray-200 rounded-full duration-300">
+          <div className='flex w-max bg-gray-200 rounded-full duration-300'>
             {filterOptions.map((ele, index) => (
               <ButtonGroupBtn
                 onClickHandler={() => {
@@ -219,7 +224,7 @@ function GameSlots() {
       </div>
       {timeSlots.length > 0 ? (
         <>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 justify-evenly">
+          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 justify-evenly'>
             {timeSlots.map((slot, index) => (
               <TimeSlotCard
                 key={index}
@@ -249,6 +254,7 @@ function GameSlots() {
               gameId={id}
               gameName={currentGame.name}
               selectedDate={selectedDate}
+              setShowFeedBackForm={setShowFeedBackForm}
               setRefreshPage={setRefreshPage}
               showTerms={showBookingConfirm}
               price={
@@ -261,7 +267,7 @@ function GameSlots() {
           )}
         </>
       ) : (
-        <p className="text-gray-700 italic text-lg">
+        <p className='text-gray-700 italic text-lg'>
           No Slots Available for this Game
         </p>
       )}

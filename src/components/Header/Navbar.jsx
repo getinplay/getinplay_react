@@ -28,6 +28,16 @@ function Navbar() {
     }
   };
 
+  function capitalizeName(name) {
+    let splitNames = name.toLowerCase().split(" ");
+    for (let i = 0; i < splitNames.length; i++) {
+      splitNames[i] =
+        splitNames[i].charAt(0).toUpperCase() +
+        splitNames[i].slice(1, splitNames[i].length);
+    }
+    return splitNames.join(" ");
+  }
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (profileRef.current && !profileRef.current.contains(event.target)) {
@@ -159,7 +169,7 @@ function Navbar() {
                 <FontAwesomeIcon icon={faUser} />
               </div>
               <p className={`max-xs:hidden`}>
-                {userData.data.full_name.toUpperCase()}
+                {capitalizeName(userData.data.full_name)}
               </p>
             </button>
             {showProfile && (

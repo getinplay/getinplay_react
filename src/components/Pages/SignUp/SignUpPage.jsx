@@ -147,7 +147,7 @@ function SignUpPage() {
         document.cookie = `authToken=${res.data.token}; path=/;`;
         toast.success(res.data.message, {
           position: "top-center",
-          autoClose: false,
+          autoClose: 2000,
           pauseOnHover: false,
           pauseOnFocusLoss: false,
         });
@@ -355,10 +355,10 @@ function SignUpPage() {
           <button
             type='submit'
             disabled={isLoading}
-            className={`select-none mb-5 cursor-pointer ${
+            className={`select-none mb-5 ${
               isLoading
                 ? "bg-gray-500 translate-y-2"
-                : "bg-[#4A5BE6] active:translate-y-2 active:shadow-none hover:shadow-xl shadow-lg"
+                : "bg-[#4A5BE6] cursor-pointer active:translate-y-2 active:shadow-none hover:shadow-xl shadow-lg"
             } p-2 rounded-lg tracking-wide text-white sm:text-lg  duration-300 shadow-gray-400  w-[200px] max-sm:w-full`}>
             {!isLoading ? "SIGNUP" : "SIGNING UP..."}
           </button>

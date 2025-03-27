@@ -13,6 +13,7 @@ function BookGamePopup({
   gameName,
   selectedDate,
   setRefreshPage,
+  setShowFeedBackForm,
   showTerms,
   price,
 }) {
@@ -77,6 +78,7 @@ function BookGamePopup({
         new Promise(async (resolve, reject) => {
           const res = await bookSlot(slotTime, gameId);
           if (res.success) {
+            setShowFeedBackForm(true);
             resolve(res.message);
           } else {
             reject(new Error(res.message));
@@ -116,27 +118,27 @@ function BookGamePopup({
   return (
     <div
       onClick={hideBookingPage}
-      className="flex items-center justify-center inset-0 fixed bg-gray-200/50 backdrop-blur-xs z-30">
+      className='flex items-center justify-center inset-0 fixed bg-gray-200/50 backdrop-blur-xs z-30'>
       <div
         ref={bookingRef}
-        className="flex flex-col items-center gap-2 max-w-[85vw] sm:max-w-150 sm:w-[80vw] bg-white shadow-[0_2px_16px_rgba(0,0,0,0.3)] overflow-hidden rounded-xl p-5">
-        <p className="font-bold text-lg text-gray-700">TERMS & CONDITIONS</p>
+        className='flex flex-col items-center gap-2 max-w-[85vw] sm:max-w-150 sm:w-[80vw] bg-white shadow-[0_2px_16px_rgba(0,0,0,0.3)] overflow-hidden rounded-xl p-5'>
+        <p className='font-bold text-lg text-gray-700'>TERMS & CONDITIONS</p>
 
-        <div className="bg-gray-100 overflow-hidden rounded-lg">
+        <div className='bg-gray-100 overflow-hidden rounded-lg'>
           <p
             dangerouslySetInnerHTML={{ __html: terms }}
-            className="p-2 pl-6 overflow-y-auto max-h-50 text-sm sm:text-base xs:text-justify text-gray-600"></p>
+            className='p-2 pl-6 overflow-y-auto max-h-50 text-sm sm:text-base xs:text-justify text-gray-600'></p>
         </div>
 
-        <p className="flex items-center w-full gap-2">
+        <p className='flex items-center w-full gap-2'>
           <input
             checked={agree}
             onChange={() => setAgree((prev) => !prev)}
-            type="checkbox"
-            name="terms"
-            id="terms"
+            type='checkbox'
+            name='terms'
+            id='terms'
           />
-          <label htmlFor="terms">I agree to the Terms & Conditions</label>
+          <label htmlFor='terms'>I agree to the Terms & Conditions</label>
         </p>
 
         <button
@@ -153,7 +155,7 @@ function BookGamePopup({
       {/* Reusable Confirm Dialog */}
       <ConfirmDialog
         isOpen={showConfirmModal}
-        title="Confirm Booking"
+        title='Confirm Booking'
         message={
           <>
             Are you sure you want to book <b>{slotTime}</b> slot for{" "}
@@ -166,7 +168,10 @@ function BookGamePopup({
           </>
         }
         onConfirm={handleConfirm}
-        onCancel={() => setShowConfirmModal(false)}
+        onCancel={() => {
+          setShowConfirmModal(false);
+          hideBooking();
+        }}
       />
     </div>
   );
