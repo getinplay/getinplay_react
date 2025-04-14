@@ -30,7 +30,7 @@ function BookingCard({ date, price, game, slot, showCancel, id, refreshPage }) {
 
     try {
       const response = await axios.post(
-        `${API_URL}/Api's/slot_cancle.php`,
+        `${API_URL}/Api/slot_cancle.php`,
         {
           token,
           auth: "user",

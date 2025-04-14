@@ -14,7 +14,7 @@ function GamesPage() {
     const fetchData = async () => {
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/Api's/game_data.php`
+          `${import.meta.env.VITE_API_URL}/Api/game_data.php`
         );
         setGames(res.data);
       } catch (error) {

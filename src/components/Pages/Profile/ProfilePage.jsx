@@ -76,7 +76,7 @@ function ProfilePage() {
         }
 
         const response = await axios.post(
-          `${import.meta.env.VITE_API_URL}/Api's/decode.php`,
+          `${import.meta.env.VITE_API_URL}/Api/decode.php`,
           { token },
           {
             headers: { "Content-Type": "application/json" },
@@ -216,7 +216,7 @@ function ProfilePage() {
       }
 
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/Api's/profile_update.php`,
+        `${import.meta.env.VITE_API_URL}/Api/profile_update.php`,
         {
           token,
           name: userData.full_name,

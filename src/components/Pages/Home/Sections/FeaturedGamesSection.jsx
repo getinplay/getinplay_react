@@ -11,7 +11,7 @@ function FeaturedGamesSection() {
     const fetchData = async () => {
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/Api's/game_data_user.php`
+          `${import.meta.env.VITE_API_URL}/Api/game_data_user.php`
         );
         setGames(res.data.games);
         setTopGames(res.data.top_games);
@@ -30,7 +30,7 @@ function FeaturedGamesSection() {
   return (
     <div className='flex flex-col items-center'>
       <p className='subtitle'>Featured Games</p>
-      <p className="pb-5">Fan-Favorite Games You Can’t Miss</p>
+      <p className='pb-5'>Fan-Favorite Games You Can’t Miss</p>
       <div className='flex w-[90vw] md:w-[80vw] gap-5 max-md:flex-col'>
         {featuredGames.map((game) => (
           <FeaturedGameCard

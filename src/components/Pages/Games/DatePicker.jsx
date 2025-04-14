@@ -16,11 +16,13 @@ function DatePicker({ selectedDate, setSelectedDate }) {
     date.toLocaleDateString("en-US", { month: "short" });
 
   const fetchPlan = async () => {
-    if (!document.cookie) {
+    if (
+      !document.cookie.split("; ").find((row) => row.startsWith("authToken="))
+    ) {
       return;
     }
     const res = await axios.post(
-      `${import.meta.env.VITE_API_URL}/Api's/decode.php`,
+      `${import.meta.env.VITE_API_URL}/Api/decode.php`,
       {
         token: document.cookie
           .split("; ")
@@ -48,7 +50,7 @@ function DatePicker({ selectedDate, setSelectedDate }) {
   }
 
   return (
-    <div className="w-max select-none flex bg-gray-200 rounded-lg">
+    <div className='w-max select-none flex bg-gray-200 rounded-lg'>
       {dates.map((date, index) => (
         <button
           key={index}
@@ -66,7 +68,7 @@ function DatePicker({ selectedDate, setSelectedDate }) {
             }`}>
             {getWeekday(date)}
           </span>
-          <span className="text-lg sm:text-xl font-semibold">
+          <span className='text-lg sm:text-xl font-semibold'>
             {getDay(date)}
           </span>
           <span

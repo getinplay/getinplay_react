@@ -54,7 +54,7 @@ function FeedBackForm({ closeForm }) {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/Api's/rating.php`,
+        `${import.meta.env.VITE_API_URL}/Api/rating.php`,
         {
           method: "POST",
           headers: {

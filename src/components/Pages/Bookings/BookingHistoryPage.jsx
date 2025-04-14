@@ -42,7 +42,7 @@ function BookingHistoryPage() {
         }
 
         const response = await axios.post(
-          `${import.meta.env.VITE_API_URL}/Api's/history_user.php`,
+          `${import.meta.env.VITE_API_URL}/Api/history_user.php`,
           { token },
           { headers: { "Content-Type": "application/json" } }
         );

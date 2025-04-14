@@ -70,7 +70,7 @@ function UpdatePasswordPage() {
       }
 
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/Api's/change_password.php`,
+        `${import.meta.env.VITE_API_URL}/Api/change_password.php`,
         {
           token,
           old_password: oldPassword,
@@ -128,108 +128,108 @@ function UpdatePasswordPage() {
   }, []);
 
   return (
-    <div className="sm:w-lg max-sm:max-w-max w-full mt-5 rounded-lg p-4">
-      <h1 className="text-2xl sm:text-3xl font-semibold text-gray-700 pb-3 text-center">
+    <div className='sm:w-lg max-sm:max-w-max w-full mt-5 rounded-lg p-4'>
+      <h1 className='text-2xl sm:text-3xl font-semibold text-gray-700 pb-3 text-center'>
         Update Your Password
       </h1>
 
       <form onSubmit={handleSubmit}>
-        <div className="flex flex-col gap-1 items-center justify-center shadow-[0_2px_16px_rgba(0,0,0,0.4)] rounded-lg p-5 w-full sm:text-lg font-medium text-gray-600">
-          <div className="flex flex-col text-start w-full">
+        <div className='flex flex-col gap-1 items-center justify-center shadow-[0_2px_16px_rgba(0,0,0,0.4)] rounded-lg p-5 w-full sm:text-lg font-medium text-gray-600'>
+          <div className='flex flex-col text-start w-full'>
             <label
-              htmlFor="old-password"
-              className="text-gray-700 font-semibold required px-2">
+              htmlFor='old-password'
+              className='text-gray-700 font-semibold required px-2'>
               Old Password
             </label>
-            <div className="flex bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1">
+            <div className='flex bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1'>
               <input
                 type={showOldPassword ? "text" : "password"}
-                name="old-password"
-                id="old-password"
-                placeholder="Old Password"
-                className="grow min-w-0 outline-none border-none bg-transparent"
+                name='old-password'
+                id='old-password'
+                placeholder='Old Password'
+                className='grow min-w-0 outline-none border-none bg-transparent'
                 value={oldPassword}
                 onChange={(e) => setOldPassword(e.target.value)}
               />
               <div
                 onClick={() => setShowOldPassword(!showOldPassword)}
-                className="text-gray-500 focus:outline-none cursor-pointer">
+                className='text-gray-500 focus:outline-none cursor-pointer'>
                 <FontAwesomeIcon
-                  className="fa-fw"
+                  className='fa-fw'
                   icon={showOldPassword ? faEyeSlash : faEye}
-                  size="sm"
+                  size='sm'
                 />
               </div>
             </div>
-            <p className="select-none text-red-500 text-sm px-2">
+            <p className='select-none text-red-500 text-sm px-2'>
               {errors.oldPassword || "\u00A0"}
             </p>
           </div>
 
-          <div className="flex flex-col text-start w-full">
+          <div className='flex flex-col text-start w-full'>
             <label
-              htmlFor="new-password"
-              className="text-gray-700 font-semibold required px-2">
+              htmlFor='new-password'
+              className='text-gray-700 font-semibold required px-2'>
               New Password
             </label>
-            <div className="flex bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1">
+            <div className='flex bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1'>
               <input
                 type={showNewPassword ? "text" : "password"}
-                name="new-password"
-                id="new-password"
-                placeholder="New Password"
-                className="grow min-w-0 outline-none border-none bg-transparent"
+                name='new-password'
+                id='new-password'
+                placeholder='New Password'
+                className='grow min-w-0 outline-none border-none bg-transparent'
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
               />
               <div
                 onClick={() => setShowNewPassword(!showNewPassword)}
-                className="text-gray-500 focus:outline-none cursor-pointer">
+                className='text-gray-500 focus:outline-none cursor-pointer'>
                 <FontAwesomeIcon
-                  className="fa-fw"
+                  className='fa-fw'
                   icon={showNewPassword ? faEyeSlash : faEye}
-                  size="sm"
+                  size='sm'
                 />
               </div>
             </div>
-            <p className="select-none text-red-500 text-sm px-2">
+            <p className='select-none text-red-500 text-sm px-2'>
               {errors.newPassword || "\u00A0"}
             </p>
           </div>
 
-          <div className="flex flex-col text-start w-full">
+          <div className='flex flex-col text-start w-full'>
             <label
-              htmlFor="confirm-password"
-              className="text-gray-700 font-semibold required px-2">
+              htmlFor='confirm-password'
+              className='text-gray-700 font-semibold required px-2'>
               Confirm Password
             </label>
-            <div className="flex bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1">
+            <div className='flex bg-gray-200 w-full font-medium text-gray-600 border-none outline-none rounded-lg px-3 py-1'>
               <input
                 type={showConfirmPassword ? "text" : "password"}
-                name="confirm-password"
-                id="confirm-password"
-                placeholder="Confirm Password"
-                className="grow min-w-0 outline-none border-none bg-transparent"
+                name='confirm-password'
+                id='confirm-password'
+                placeholder='Confirm Password'
+                className='grow min-w-0 outline-none border-none bg-transparent'
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
               <div
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="text-gray-500 focus:outline-none cursor-pointer">
+                className='text-gray-500 focus:outline-none cursor-pointer'>
                 <FontAwesomeIcon
-                  className="fa-fw"
+                  className='fa-fw'
                   icon={showConfirmPassword ? faEyeSlash : faEye}
-                  size="sm"
+                  size='sm'
                 />
               </div>
             </div>
-            <p className="select-none text-red-500 text-sm px-2">
+            <p className='select-none text-red-500 text-sm px-2'>
               {errors.confirmPassword || "\u00A0"}
             </p>
           </div>
 
           <button
-            type="submit"
+            type='submit'
             disabled={loading}
             className={`select-none mt-2 bg-[#4A5BE6] p-3 py-1 rounded-lg tracking-wide font-normal text-white sm:text-lg active:translate-y-2 active:shadow-none duration-300 shadow-gray-400 w-full sm:w-[210px] ${
               loading

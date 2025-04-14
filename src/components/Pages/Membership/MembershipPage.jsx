@@ -51,11 +51,13 @@ function MembershipPage() {
   ];
 
   const fetchPlan = async () => {
-    if (!document.cookie) {
+    if (
+      !document.cookie.split("; ").find((row) => row.startsWith("authToken="))
+    ) {
       return;
     }
     const res = await axios.post(
-      `${import.meta.env.VITE_API_URL}/Api's/decode.php`,
+      `${import.meta.env.VITE_API_URL}/Api/decode.php`,
       {
         token: document.cookie
           .split("; ")
@@ -72,7 +74,9 @@ function MembershipPage() {
   };
 
   const handleUpgradeClick = (planId) => {
-    if (!document.cookie) {
+    if (
+      !document.cookie.split("; ").find((row) => row.startsWith("authToken="))
+    ) {
       ConfirmLogin();
       return;
     }
@@ -84,7 +88,7 @@ function MembershipPage() {
     setShowConfirmModal(false);
     if (!selectedPlan) return;
     const res = await axios.post(
-      `${import.meta.env.VITE_API_URL}/Api's/update_membership.php`,
+      `${import.meta.env.VITE_API_URL}/Api/update_membership.php`,
       {
         token: document.cookie
           .split("; ")
@@ -130,7 +134,10 @@ function MembershipPage() {
             {...plan}
             features={
               <>
-                <p className={`${currentPlan < plan.id ? "group-hover:text-white" : ""}`}>
+                <p
+                  className={`${
+                    currentPlan < plan.id ? "group-hover:text-white" : ""
+                  }`}>
                   <span
                     className={`${
                       currentPlan === plan.id
@@ -143,7 +150,10 @@ function MembershipPage() {
                   </span>{" "}
                   30min - 1hr Booking
                 </p>
-                <p className={`${currentPlan < plan.id ? "group-hover:text-white" : ""}`}>
+                <p
+                  className={`${
+                    currentPlan < plan.id ? "group-hover:text-white" : ""
+                  }`}>
                   <span
                     className={`${
                       currentPlan === plan.id
@@ -156,7 +166,10 @@ function MembershipPage() {
                   </span>{" "}
                   Cancellation {plan.cancellation}hrs before game
                 </p>
-                <p className={`${currentPlan < plan.id ? "group-hover:text-white" : ""}`}>
+                <p
+                  className={`${
+                    currentPlan < plan.id ? "group-hover:text-white" : ""
+                  }`}>
                   <span
                     className={`${
                       currentPlan === plan.id
@@ -169,7 +182,10 @@ function MembershipPage() {
                   </span>{" "}
                   Book before {plan.bookBefore}hrs
                 </p>
-                <p className={`${currentPlan < plan.id ? "group-hover:text-white" : ""}`}>
+                <p
+                  className={`${
+                    currentPlan < plan.id ? "group-hover:text-white" : ""
+                  }`}>
                   <span
                     className={`${
                       currentPlan === plan.id

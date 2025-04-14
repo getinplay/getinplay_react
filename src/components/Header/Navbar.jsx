@@ -56,7 +56,7 @@ function Navbar() {
   useEffect(() => {
     const getInfo = async () => {
       const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/Api's/decode.php`,
+        `${import.meta.env.VITE_API_URL}/Api/decode.php`,
         {
           token: document.cookie
             .split("; ")

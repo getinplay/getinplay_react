@@ -7,13 +7,15 @@ import TestimonialsSection from "./Sections/TestimonialsSection";
 import FeaturedGamesSection from "./Sections/FeaturedGamesSection";
 
 function HomePage() {
-  const [games, setGames] = useState([]);
+  const [games, setGames] = useState([
+    { id: 1, slot_image: "", name: "test", card_image: "" },
+  ]);
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     const getInfo = async () => {
       const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/Api's/decode.php`,
+        `${import.meta.env.VITE_API_URL}/Api/decode.php`,
         {
           token: document.cookie
             .split("; ")
@@ -32,7 +34,7 @@ function HomePage() {
 
     const fetchData = async () => {
       const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/Api's/game_data.php`
+        `${import.meta.env.VITE_API_URL}/Api/game_data.php`
       );
 
       setGames(res.data);

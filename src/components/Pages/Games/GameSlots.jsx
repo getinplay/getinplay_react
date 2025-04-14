@@ -73,7 +73,7 @@ function GameSlots() {
   useEffect(() => {
     const fetchTerms = async () => {
       const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/Api's/term_condition.php`
+        `${import.meta.env.VITE_API_URL}/Api/term_condition.php`
       );
       setTerms(res.data);
     };
@@ -83,7 +83,7 @@ function GameSlots() {
       let filter;
       const date = selectedDate.toJSON().slice(0, 10).replace(/-/g, "/");
       const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/Api's/filter_time.php`,
+        `${import.meta.env.VITE_API_URL}/Api/filter_time.php`,
         { id: id, date: date },
         {
           headers: {
@@ -95,7 +95,7 @@ function GameSlots() {
       filter = res.data.filter;
 
       const res2 = await axios.post(
-        `${import.meta.env.VITE_API_URL}/Api's/book_slots.php`,
+        `${import.meta.env.VITE_API_URL}/Api/book_slots.php`,
         { game_id: id, date: date },
         {
           headers: {
@@ -133,7 +133,7 @@ function GameSlots() {
     };
     const checkLogin = async () => {
       const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/Api's/decode.php`,
+        `${import.meta.env.VITE_API_URL}/Api/decode.php`,
         {
           token: document.cookie
             .split("; ")
@@ -150,7 +150,7 @@ function GameSlots() {
     };
     const fetchData = async () => {
       const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/Api's/game_data.php`
+        `${import.meta.env.VITE_API_URL}/Api/game_data.php`
       );
       setCurrentGame(res.data.find((ele) => ele.id == id));
     };

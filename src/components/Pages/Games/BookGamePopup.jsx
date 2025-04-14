@@ -52,7 +52,7 @@ function BookGamePopup({
     };
 
     const res = await axios.post(
-      `${import.meta.env.VITE_API_URL}/Api's/book_game.php`,
+      `${import.meta.env.VITE_API_URL}/Api/book_game.php`,
       data,
       {
         headers: {

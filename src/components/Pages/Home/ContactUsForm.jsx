@@ -40,7 +40,7 @@ function ContactUsForm() {
     setIsSending(true);
     return toast
       .promise(
-        axios.post(`${import.meta.env.VITE_API_URL}/Api's/contact.php`, data, {
+        axios.post(`${import.meta.env.VITE_API_URL}/Api/contact.php`, data, {
           headers: { "Content-Type": "application/json" },
         }),
         {
